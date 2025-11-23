@@ -1,0 +1,68 @@
+{
+    "base_models": {
+        "xgboost": {
+            "accuracy": 0.9990601503759399,
+            "precision": 0.9988262910798122,
+            "recall": 1.0,
+            "f1": 0.9994128009395185,
+            "roc_auc": 1.0,
+            "mcc": 0.9970641733457171,
+            "brier_score": 0.0010026990480440658,
+            "ece": 0.19901142715071846
+        },
+        "lightgbm": {
+            "accuracy": 0.9990601503759399,
+            "precision": 0.9988262910798122,
+            "recall": 1.0,
+            "f1": 0.9994128009395185,
+            "roc_auc": 1.0,
+            "mcc": 0.9970641733457171,
+            "brier_score": 0.0007022692689574109,
+            "ece": 0.2000883316947289
+        },
+        "catboost": {
+            "accuracy": 0.9962406015037594,
+            "precision": 0.9953216374269006,
+            "recall": 1.0,
+            "f1": 0.9976553341148886,
+            "roc_auc": 1.0,
+            "mcc": 0.9882459973498697,
+            "brier_score": 0.00304525303972896,
+            "ece": 0.19948631093692026
+        },
+        "gradboost": {
+            "accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "roc_auc": 1.0,
+            "mcc": 1.0,
+            "brier_score": 1.4387435931086172e-14,
+            "ece": 0.20018797111382278
+        }
+    },
+    "stacking": {
+        "val_auc": 1.0,
+        "val_f1": 1.0
+    },
+    "calibration": {
+        "brier_score": 4.235122801527077e-06,
+        "ece": 0.0018061828389702018
+    },
+    "thresholds": {
+        "f1_max": {
+            "threshold": 0.06,
+            "f1": 1.0
+        },
+        "youden": {
+            "threshold": 0.9849678573303288,
+            "j_score": 1.0
+        },
+        "sensitivity_first": {
+            "threshold": 0.06,
+            "sensitivity": 0.9,
+            "specificity": 1.0
+        }
+    },
+    "optimal_threshold": 0.06
+}

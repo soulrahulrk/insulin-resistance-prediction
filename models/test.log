@@ -1,0 +1,77 @@
+2025-11-23 14:38:41,214 - test_evaluation - INFO - =======================================
+2025-11-23 14:38:41,214 - test_evaluation - INFO - STARTING MODEL EVALUATION ON TEST SET
+2025-11-23 14:38:41,215 - test_evaluation - INFO - =======================================
+2025-11-23 14:38:41,215 - test_evaluation - INFO - [1/5] Loading saved model and artifacts...
+2025-11-23 14:38:41,604 - test_evaluation - INFO - ✓ Loaded calibrated model and feature transformer
+2025-11-23 14:38:41,605 - test_evaluation - INFO - ✓ Using 40 selected features
+2025-11-23 14:38:41,605 - test_evaluation - INFO - ✓ Applying optimal decision threshold: 0.0600
+2025-11-23 14:38:41,605 - test_evaluation - INFO - 
+[2/5] Preparing deterministic test split...
+2025-11-23 14:38:44,766 - test_evaluation - INFO - ✓ Test set ready: 1064 samples × 40 features
+2025-11-23 14:38:44,766 - test_evaluation - INFO - 
+[3/5] Making predictions on the test set...
+2025-11-23 14:38:44,768 - test_evaluation - ERROR - ✗ Evaluation failed: X has 40 features, but LogisticRegression is expecting 4 features as input.
+Traceback (most recent call last):
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\src\test_model.py", line 109, in evaluate_on_test_set
+    y_pred_proba = model.predict_proba(X_test)[:, 1]
+                   ~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\.venv\Lib\site-packages\sklearn\calibration.py", line 495, in predict_proba
+    proba = calibrated_classifier.predict_proba(X)
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\.venv\Lib\site-packages\sklearn\calibration.py", line 725, in predict_proba
+    predictions, _ = _get_response_values(
+                     ~~~~~~~~~~~~~~~~~~~~^
+        self.estimator,
+        ^^^^^^^^^^^^^^^
+        X,
+        ^^
+        response_method=["decision_function", "predict_proba"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\.venv\Lib\site-packages\sklearn\utils\_response.py", line 211, in _get_response_values
+    y_pred = prediction_method(X)
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\.venv\Lib\site-packages\sklearn\linear_model\_base.py", line 363, in decision_function
+    X = self._validate_data(X, accept_sparse="csr", reset=False)
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\.venv\Lib\site-packages\sklearn\base.py", line 654, in _validate_data
+    self._check_n_features(X, reset=reset)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\.venv\Lib\site-packages\sklearn\base.py", line 443, in _check_n_features
+    raise ValueError(
+    ...<2 lines>...
+    )
+ValueError: X has 40 features, but LogisticRegression is expecting 4 features as input.
+2025-11-23 14:44:47,484 - test_evaluation - INFO - =======================================
+2025-11-23 14:44:47,484 - test_evaluation - INFO - STARTING MODEL EVALUATION ON TEST SET
+2025-11-23 14:44:47,484 - test_evaluation - INFO - =======================================
+2025-11-23 14:44:47,484 - test_evaluation - INFO - [1/5] Loading saved model and artifacts...
+2025-11-23 14:44:47,958 - test_evaluation - INFO - ✓ Loaded calibrated stacker, base models, and feature transformer
+2025-11-23 14:44:47,958 - test_evaluation - INFO - ✓ Using 40 selected features
+2025-11-23 14:44:47,958 - test_evaluation - INFO - ✓ Applying optimal decision threshold: 0.0600
+2025-11-23 14:44:47,958 - test_evaluation - INFO - 
+[2/5] Preparing deterministic test split...
+2025-11-23 14:44:51,385 - test_evaluation - INFO - ✓ Test set ready: 1064 samples × 40 features
+2025-11-23 14:44:51,385 - test_evaluation - INFO - 
+[3/5] Making predictions on the test set...
+2025-11-23 14:44:51,410 - test_evaluation - INFO - ✓ Predictions generated
+2025-11-23 14:44:51,410 - test_evaluation - INFO - 
+[4/5] Evaluating performance metrics...
+2025-11-23 14:44:51,418 - test_evaluation - INFO - Test Set ROC AUC: 1.0000
+2025-11-23 14:44:51,418 - test_evaluation - INFO - Test Set Brier Score: 0.0002
+2025-11-23 14:44:51,418 - test_evaluation - INFO - 
+Classification Report:
+               precision    recall  f1-score   support
+
+Not Resistant       1.00      1.00      1.00       213
+    Resistant       1.00      1.00      1.00       851
+
+     accuracy                           1.00      1064
+    macro avg       1.00      1.00      1.00      1064
+ weighted avg       1.00      1.00      1.00      1064
+
+2025-11-23 14:44:51,418 - test_evaluation - INFO - 
+[5/5] Generating confusion matrix plot...
+2025-11-23 14:44:52,390 - test_evaluation - INFO - ✓ Confusion matrix saved to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\reports\test_confusion_matrix.png
+2025-11-23 14:44:52,391 - test_evaluation - INFO - 
+=======================================
+2025-11-23 14:44:52,391 - test_evaluation - INFO - EVALUATION COMPLETE
+2025-11-23 14:44:52,391 - test_evaluation - INFO - =======================================

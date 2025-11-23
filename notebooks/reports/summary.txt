@@ -1,0 +1,5 @@
+
+Data Size: 57092 rows, 104 columns
+Missingness: Handled via Median/KNN.
+Top Predictors: Fasting Insulin, HOMA-IR, BMI, Waist Circumference.
+Recommendations: Use derived metabolic indices; handle class imbalance.

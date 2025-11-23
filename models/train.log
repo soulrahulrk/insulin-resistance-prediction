@@ -1,0 +1,1214 @@
+2025-11-23 13:39:51,064 - __main__ - INFO - ================================================================================
+2025-11-23 13:39:51,064 - __main__ - INFO - STARTING INSULIN RESISTANCE PREDICTION PIPELINE
+2025-11-23 13:39:51,065 - __main__ - INFO - ================================================================================
+2025-11-23 13:39:51,065 - __main__ - INFO - 
+[1/8] LOADING DATA...
+2025-11-23 13:39:51,065 - src.data_loader - INFO - Loading data from C:\Users\rahul\Documents\code\projects\ir prediction\data\all_datasets_merged.csv
+2025-11-23 13:39:51,272 - src.data_loader - INFO - Loaded 57092 records with 61 columns
+2025-11-23 13:41:51,428 - __main__ - INFO - ================================================================================
+2025-11-23 13:41:51,429 - __main__ - INFO - STARTING INSULIN RESISTANCE PREDICTION PIPELINE
+2025-11-23 13:41:51,429 - __main__ - INFO - ================================================================================
+2025-11-23 13:41:51,429 - __main__ - INFO - 
+[1/8] LOADING DATA...
+2025-11-23 13:41:51,430 - src.data_loader - INFO - Loading data from C:\Users\rahul\Documents\code\projects\ir prediction\data\all_datasets_merged.csv
+2025-11-23 13:41:51,625 - src.data_loader - INFO - Loaded 57092 records with 61 columns
+2025-11-23 13:41:51,626 - src.data_loader - INFO - Creating 'ir_label' from glucose and insulin using HOMA-IR
+2025-11-23 13:41:51,636 - src.data_loader - WARNING - Dropped 50000 rows with missing glucose/insulin
+2025-11-23 13:41:51,637 - src.data_loader - INFO - Created 'ir_label' based on HOMA-IR threshold 2.5
+2025-11-23 13:41:51,639 - src.data_loader - INFO - Target variable 'ir_label' distribution:
+ir_label
+1    5670
+0    1422
+Name: count, dtype: int64
+2025-11-23 13:41:51,640 - src.data_loader - WARNING - Found 2 records with invalid age values
+2025-11-23 13:41:51,642 - src.data_loader - INFO - Data validation complete: 7090 records remaining
+2025-11-23 13:41:51,642 - __main__ - INFO - Loaded 7090 records with 63 columns
+2025-11-23 13:41:51,643 - __main__ - INFO - 
+[2/8] ENGINEERING FEATURES...
+2025-11-23 13:41:51,658 - __main__ - INFO - Total features after engineering: 72
+2025-11-23 13:41:51,658 - __main__ - INFO - 
+[3/8] PREPROCESSING...
+2025-11-23 13:41:51,661 - src.preprocessing - INFO - Fitting preprocessor...
+2025-11-23 13:41:51,665 - src.preprocessing - INFO - Numeric columns: 55
+2025-11-23 13:41:51,665 - src.preprocessing - INFO - Categorical columns: 16
+2025-11-23 13:41:51,671 - src.preprocessing - INFO - Fitted KNN imputer
+2025-11-23 13:42:36,940 - __main__ - INFO - ================================================================================
+2025-11-23 13:42:36,940 - __main__ - INFO - STARTING INSULIN RESISTANCE PREDICTION PIPELINE
+2025-11-23 13:42:36,940 - __main__ - INFO - ================================================================================
+2025-11-23 13:42:36,940 - __main__ - INFO - 
+[1/8] LOADING DATA...
+2025-11-23 13:42:36,941 - src.data_loader - INFO - Loading data from C:\Users\rahul\Documents\code\projects\ir prediction\data\all_datasets_merged.csv
+2025-11-23 13:42:37,137 - src.data_loader - INFO - Loaded 57092 records with 61 columns
+2025-11-23 13:42:37,138 - src.data_loader - INFO - Creating 'ir_label' from glucose and insulin using HOMA-IR
+2025-11-23 13:42:37,149 - src.data_loader - WARNING - Dropped 50000 rows with missing glucose/insulin
+2025-11-23 13:42:37,149 - src.data_loader - INFO - Created 'ir_label' based on HOMA-IR threshold 2.5
+2025-11-23 13:42:37,150 - src.data_loader - INFO - Target variable 'ir_label' distribution:
+ir_label
+1    5670
+0    1422
+Name: count, dtype: int64
+2025-11-23 13:42:37,151 - src.data_loader - WARNING - Found 2 records with invalid age values
+2025-11-23 13:42:37,153 - src.data_loader - INFO - Data validation complete: 7090 records remaining
+2025-11-23 13:42:37,154 - __main__ - INFO - Loaded 7090 records with 63 columns
+2025-11-23 13:42:37,154 - __main__ - INFO - 
+[2/8] ENGINEERING FEATURES...
+2025-11-23 13:42:37,168 - __main__ - INFO - Total features after engineering: 72
+2025-11-23 13:42:37,168 - __main__ - INFO - 
+[3/8] PREPROCESSING...
+2025-11-23 13:42:37,170 - src.preprocessing - INFO - Fitting preprocessor...
+2025-11-23 13:42:37,174 - src.preprocessing - INFO - Numeric columns: 55
+2025-11-23 13:42:37,175 - src.preprocessing - INFO - Categorical columns: 16
+2025-11-23 13:42:37,180 - src.preprocessing - INFO - Fitted KNN imputer
+2025-11-23 13:42:37,200 - src.preprocessing - INFO - Fitted 15 OneHot and 1 Ordinal encoders
+2025-11-23 13:44:17,827 - __main__ - INFO - ================================================================================
+2025-11-23 13:44:17,828 - __main__ - INFO - STARTING INSULIN RESISTANCE PREDICTION PIPELINE
+2025-11-23 13:44:17,828 - __main__ - INFO - ================================================================================
+2025-11-23 13:44:17,828 - __main__ - INFO - 
+[1/8] LOADING DATA...
+2025-11-23 13:44:17,828 - src.data_loader - INFO - Loading data from C:\Users\rahul\Documents\code\projects\ir prediction\data\all_datasets_merged.csv
+2025-11-23 13:44:18,012 - src.data_loader - INFO - Loaded 57092 records with 61 columns
+2025-11-23 13:44:18,013 - src.data_loader - INFO - Creating 'ir_label' from glucose and insulin using HOMA-IR
+2025-11-23 13:44:18,023 - src.data_loader - WARNING - Dropped 50000 rows with missing glucose/insulin
+2025-11-23 13:44:18,024 - src.data_loader - INFO - Created 'ir_label' based on HOMA-IR threshold 2.5
+2025-11-23 13:44:18,025 - src.data_loader - INFO - Target variable 'ir_label' distribution:
+ir_label
+1    5670
+0    1422
+Name: count, dtype: int64
+2025-11-23 13:44:18,025 - src.data_loader - WARNING - Found 2 records with invalid age values
+2025-11-23 13:44:18,028 - src.data_loader - INFO - Data validation complete: 7090 records remaining
+2025-11-23 13:44:18,028 - __main__ - INFO - Loaded 7090 records with 63 columns
+2025-11-23 13:44:18,028 - __main__ - INFO - 
+[2/8] ENGINEERING FEATURES...
+2025-11-23 13:44:18,043 - __main__ - INFO - Total features after engineering: 72
+2025-11-23 13:44:18,044 - __main__ - INFO - 
+[3/8] PREPROCESSING...
+2025-11-23 13:44:18,046 - src.preprocessing - INFO - Fitting preprocessor...
+2025-11-23 13:44:18,052 - src.preprocessing - WARNING - Removed 3 numeric columns with all NaN values
+2025-11-23 13:44:18,052 - src.preprocessing - INFO - Numeric columns: 52
+2025-11-23 13:44:18,052 - src.preprocessing - INFO - Categorical columns: 16
+2025-11-23 13:44:18,058 - src.preprocessing - INFO - Fitted KNN imputer
+2025-11-23 13:44:18,076 - src.preprocessing - INFO - Fitted 15 OneHot and 1 Ordinal encoders
+2025-11-23 13:44:21,784 - src.preprocessing - INFO - Selected 40 features (MI threshold=0.001)
+2025-11-23 13:45:10,908 - __main__ - INFO - ================================================================================
+2025-11-23 13:45:10,908 - __main__ - INFO - STARTING INSULIN RESISTANCE PREDICTION PIPELINE
+2025-11-23 13:45:10,908 - __main__ - INFO - ================================================================================
+2025-11-23 13:45:10,908 - __main__ - INFO - 
+[1/8] LOADING DATA...
+2025-11-23 13:45:10,908 - src.data_loader - INFO - Loading data from C:\Users\rahul\Documents\code\projects\ir prediction\data\all_datasets_merged.csv
+2025-11-23 13:45:11,086 - src.data_loader - INFO - Loaded 57092 records with 61 columns
+2025-11-23 13:45:11,086 - src.data_loader - INFO - Creating 'ir_label' from glucose and insulin using HOMA-IR
+2025-11-23 13:45:11,096 - src.data_loader - WARNING - Dropped 50000 rows with missing glucose/insulin
+2025-11-23 13:45:11,096 - src.data_loader - INFO - Created 'ir_label' based on HOMA-IR threshold 2.5
+2025-11-23 13:45:11,097 - src.data_loader - INFO - Target variable 'ir_label' distribution:
+ir_label
+1    5670
+0    1422
+Name: count, dtype: int64
+2025-11-23 13:45:11,097 - src.data_loader - WARNING - Found 2 records with invalid age values
+2025-11-23 13:45:11,099 - src.data_loader - INFO - Data validation complete: 7090 records remaining
+2025-11-23 13:45:11,099 - __main__ - INFO - Loaded 7090 records with 63 columns
+2025-11-23 13:45:11,099 - __main__ - INFO - 
+[2/8] ENGINEERING FEATURES...
+2025-11-23 13:45:11,108 - __main__ - INFO - Total features after engineering: 72
+2025-11-23 13:45:11,109 - __main__ - INFO - 
+[3/8] PREPROCESSING...
+2025-11-23 13:45:11,110 - src.preprocessing - INFO - Fitting preprocessor...
+2025-11-23 13:45:11,117 - src.preprocessing - WARNING - Removed 3 numeric columns with all NaN values
+2025-11-23 13:45:11,117 - src.preprocessing - INFO - Numeric columns: 52
+2025-11-23 13:45:11,117 - src.preprocessing - INFO - Categorical columns: 16
+2025-11-23 13:45:11,121 - src.preprocessing - INFO - Fitted KNN imputer
+2025-11-23 13:45:11,138 - src.preprocessing - INFO - Fitted 15 OneHot and 1 Ordinal encoders
+2025-11-23 13:45:14,862 - src.preprocessing - INFO - Selected 40 features (MI threshold=0.001)
+2025-11-23 13:45:17,722 - src.preprocessing - INFO - Saved preprocessor to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\feature_transformer.pkl
+2025-11-23 13:45:17,723 - src.preprocessing - INFO - Saved selected features to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\selected_features.json
+2025-11-23 13:45:17,723 - __main__ - INFO - Selected 40 features
+2025-11-23 13:45:17,723 - __main__ - INFO - 
+[4/8] SPLITTING DATA...
+2025-11-23 13:45:17,733 - __main__ - INFO - Train: 4962, Val: 1064, Test: 1064
+2025-11-23 13:45:17,733 - __main__ - INFO - 
+[5/8] TRAINING BASE LEARNERS...
+2025-11-23 13:45:17,733 - __main__ - INFO - Training XGBoost...
+2025-11-23 13:45:18,071 - __main__ - INFO - Training LightGBM...
+2025-11-23 13:45:18,350 - __main__ - INFO - Training CatBoost...
+2025-11-23 13:45:20,176 - __main__ - INFO - Training GradientBoosting...
+2025-11-23 13:45:25,221 - __main__ - INFO - xgboost - AUC: 1.0000, F1: 0.9994
+2025-11-23 13:45:25,235 - __main__ - INFO - lightgbm - AUC: 1.0000, F1: 0.9994
+2025-11-23 13:45:25,246 - __main__ - INFO - catboost - AUC: 1.0000, F1: 0.9977
+2025-11-23 13:45:25,257 - __main__ - INFO - gradboost - AUC: 1.0000, F1: 1.0000
+2025-11-23 13:45:25,261 - __main__ - INFO - Saved base model metrics to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\base_models_metrics.csv
+2025-11-23 13:45:25,261 - __main__ - INFO - 
+[6/8] BUILDING STACKING ENSEMBLE...
+2025-11-23 13:45:25,261 - src.ensemble - INFO - Generating OOF for model 1/4: xgboost
+2025-11-23 13:47:05,055 - __main__ - INFO - ================================================================================
+2025-11-23 13:47:05,055 - __main__ - INFO - STARTING INSULIN RESISTANCE PREDICTION PIPELINE
+2025-11-23 13:47:05,056 - __main__ - INFO - ================================================================================
+2025-11-23 13:47:05,056 - __main__ - INFO - 
+[1/8] LOADING DATA...
+2025-11-23 13:47:05,056 - src.data_loader - INFO - Loading data from C:\Users\rahul\Documents\code\projects\ir prediction\data\all_datasets_merged.csv
+2025-11-23 13:47:05,234 - src.data_loader - INFO - Loaded 57092 records with 61 columns
+2025-11-23 13:47:05,235 - src.data_loader - INFO - Creating 'ir_label' from glucose and insulin using HOMA-IR
+2025-11-23 13:47:05,244 - src.data_loader - WARNING - Dropped 50000 rows with missing glucose/insulin
+2025-11-23 13:47:05,245 - src.data_loader - INFO - Created 'ir_label' based on HOMA-IR threshold 2.5
+2025-11-23 13:47:05,246 - src.data_loader - INFO - Target variable 'ir_label' distribution:
+ir_label
+1    5670
+0    1422
+Name: count, dtype: int64
+2025-11-23 13:47:05,247 - src.data_loader - WARNING - Found 2 records with invalid age values
+2025-11-23 13:47:05,249 - src.data_loader - INFO - Data validation complete: 7090 records remaining
+2025-11-23 13:47:05,249 - __main__ - INFO - Loaded 7090 records with 63 columns
+2025-11-23 13:47:05,249 - __main__ - INFO - 
+[2/8] ENGINEERING FEATURES...
+2025-11-23 13:47:05,263 - __main__ - INFO - Total features after engineering: 72
+2025-11-23 13:47:05,264 - __main__ - INFO - 
+[3/8] PREPROCESSING...
+2025-11-23 13:47:05,266 - src.preprocessing - INFO - Fitting preprocessor...
+2025-11-23 13:47:05,273 - src.preprocessing - WARNING - Removed 3 numeric columns with all NaN values
+2025-11-23 13:47:05,273 - src.preprocessing - INFO - Numeric columns: 52
+2025-11-23 13:47:05,273 - src.preprocessing - INFO - Categorical columns: 16
+2025-11-23 13:47:05,278 - src.preprocessing - INFO - Fitted KNN imputer
+2025-11-23 13:47:05,296 - src.preprocessing - INFO - Fitted 15 OneHot and 1 Ordinal encoders
+2025-11-23 13:47:08,984 - src.preprocessing - INFO - Selected 40 features (MI threshold=0.001)
+2025-11-23 13:47:11,794 - src.preprocessing - INFO - Saved preprocessor to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\feature_transformer.pkl
+2025-11-23 13:47:11,795 - src.preprocessing - INFO - Saved selected features to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\selected_features.json
+2025-11-23 13:47:11,795 - __main__ - INFO - Selected 40 features
+2025-11-23 13:47:11,795 - __main__ - INFO - 
+[4/8] SPLITTING DATA...
+2025-11-23 13:47:11,803 - __main__ - INFO - Train: 4962, Val: 1064, Test: 1064
+2025-11-23 13:47:11,803 - __main__ - INFO - 
+[5/8] TRAINING BASE LEARNERS...
+2025-11-23 13:47:11,804 - __main__ - INFO - Training XGBoost...
+2025-11-23 13:47:12,141 - __main__ - INFO - Training LightGBM...
+2025-11-23 13:47:12,428 - __main__ - INFO - Training CatBoost...
+2025-11-23 13:47:14,203 - __main__ - INFO - Training GradientBoosting...
+2025-11-23 13:47:19,257 - __main__ - INFO - xgboost - AUC: 1.0000, F1: 0.9994
+2025-11-23 13:47:19,273 - __main__ - INFO - lightgbm - AUC: 1.0000, F1: 0.9994
+2025-11-23 13:47:19,284 - __main__ - INFO - catboost - AUC: 1.0000, F1: 0.9977
+2025-11-23 13:47:19,296 - __main__ - INFO - gradboost - AUC: 1.0000, F1: 1.0000
+2025-11-23 13:47:19,299 - __main__ - INFO - Saved base model metrics to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\base_models_metrics.csv
+2025-11-23 13:47:19,300 - __main__ - INFO - 
+[6/8] BUILDING STACKING ENSEMBLE...
+2025-11-23 13:47:19,300 - src.ensemble - INFO - Generating OOF for model 1/4: xgboost
+2025-11-23 13:47:20,476 - src.ensemble - INFO - Generating OOF for model 2/4: lightgbm
+2025-11-23 13:47:21,775 - src.ensemble - INFO - Generating OOF for model 3/4: catboost
+2025-11-23 13:47:29,532 - src.ensemble - INFO - Generating OOF for model 4/4: gradboost
+2025-11-23 13:47:49,393 - src.ensemble - INFO - OOF features shape: train=(4962, 4), val=(1064, 4)
+2025-11-23 13:47:49,393 - src.ensemble - INFO - Training meta-learner on (4962, 4) OOF features
+2025-11-23 13:47:49,415 - src.ensemble - INFO - C=0.01: CV AUC=1.0000
+2025-11-23 13:47:49,438 - src.ensemble - INFO - C=0.1: CV AUC=1.0000
+2025-11-23 13:47:49,461 - src.ensemble - INFO - C=1.0: CV AUC=1.0000
+2025-11-23 13:47:49,484 - src.ensemble - INFO - C=10.0: CV AUC=1.0000
+2025-11-23 13:47:49,500 - __main__ - INFO - Stacking - AUC: 1.0000, F1: 1.0000
+2025-11-23 13:47:49,500 - __main__ - INFO - 
+[7/8] CALIBRATING ENSEMBLE...
+2025-11-23 13:48:54,423 - __main__ - INFO - ================================================================================
+2025-11-23 13:48:54,424 - __main__ - INFO - STARTING INSULIN RESISTANCE PREDICTION PIPELINE
+2025-11-23 13:48:54,424 - __main__ - INFO - ================================================================================
+2025-11-23 13:48:54,424 - __main__ - INFO - 
+[1/8] LOADING DATA...
+2025-11-23 13:48:54,424 - src.data_loader - INFO - Loading data from C:\Users\rahul\Documents\code\projects\ir prediction\data\all_datasets_merged.csv
+2025-11-23 13:48:54,602 - src.data_loader - INFO - Loaded 57092 records with 61 columns
+2025-11-23 13:48:54,602 - src.data_loader - INFO - Creating 'ir_label' from glucose and insulin using HOMA-IR
+2025-11-23 13:48:54,612 - src.data_loader - WARNING - Dropped 50000 rows with missing glucose/insulin
+2025-11-23 13:48:54,612 - src.data_loader - INFO - Created 'ir_label' based on HOMA-IR threshold 2.5
+2025-11-23 13:48:54,613 - src.data_loader - INFO - Target variable 'ir_label' distribution:
+ir_label
+1    5670
+0    1422
+Name: count, dtype: int64
+2025-11-23 13:48:54,614 - src.data_loader - WARNING - Found 2 records with invalid age values
+2025-11-23 13:48:54,616 - src.data_loader - INFO - Data validation complete: 7090 records remaining
+2025-11-23 13:48:54,617 - __main__ - INFO - Loaded 7090 records with 63 columns
+2025-11-23 13:48:54,617 - __main__ - INFO - 
+[2/8] ENGINEERING FEATURES...
+2025-11-23 13:48:54,629 - __main__ - INFO - Total features after engineering: 72
+2025-11-23 13:48:54,629 - __main__ - INFO - 
+[3/8] PREPROCESSING...
+2025-11-23 13:48:54,631 - src.preprocessing - INFO - Fitting preprocessor...
+2025-11-23 13:48:54,638 - src.preprocessing - WARNING - Removed 3 numeric columns with all NaN values
+2025-11-23 13:48:54,639 - src.preprocessing - INFO - Numeric columns: 52
+2025-11-23 13:48:54,639 - src.preprocessing - INFO - Categorical columns: 16
+2025-11-23 13:48:54,644 - src.preprocessing - INFO - Fitted KNN imputer
+2025-11-23 13:48:54,661 - src.preprocessing - INFO - Fitted 15 OneHot and 1 Ordinal encoders
+2025-11-23 13:48:58,395 - src.preprocessing - INFO - Selected 40 features (MI threshold=0.001)
+2025-11-23 13:49:01,230 - src.preprocessing - INFO - Saved preprocessor to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\feature_transformer.pkl
+2025-11-23 13:49:01,231 - src.preprocessing - INFO - Saved selected features to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\selected_features.json
+2025-11-23 13:49:01,231 - __main__ - INFO - Selected 40 features
+2025-11-23 13:49:01,231 - __main__ - INFO - 
+[4/8] SPLITTING DATA...
+2025-11-23 13:49:01,239 - __main__ - INFO - Train: 4962, Val: 1064, Test: 1064
+2025-11-23 13:49:01,239 - __main__ - INFO - 
+[5/8] TRAINING BASE LEARNERS...
+2025-11-23 13:49:01,240 - __main__ - INFO - Training XGBoost...
+2025-11-23 13:49:01,574 - __main__ - INFO - Training LightGBM...
+2025-11-23 13:49:01,869 - __main__ - INFO - Training CatBoost...
+2025-11-23 13:49:03,734 - __main__ - INFO - Training GradientBoosting...
+2025-11-23 13:49:08,733 - __main__ - INFO - xgboost - AUC: 1.0000, F1: 0.9994
+2025-11-23 13:49:08,748 - __main__ - INFO - lightgbm - AUC: 1.0000, F1: 0.9994
+2025-11-23 13:49:08,758 - __main__ - INFO - catboost - AUC: 1.0000, F1: 0.9977
+2025-11-23 13:49:08,770 - __main__ - INFO - gradboost - AUC: 1.0000, F1: 1.0000
+2025-11-23 13:49:08,774 - __main__ - INFO - Saved base model metrics to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\base_models_metrics.csv
+2025-11-23 13:49:08,774 - __main__ - INFO - 
+[6/8] BUILDING STACKING ENSEMBLE...
+2025-11-23 13:49:08,774 - src.ensemble - INFO - Generating OOF for model 1/4: xgboost
+2025-11-23 13:49:09,947 - src.ensemble - INFO - Generating OOF for model 2/4: lightgbm
+2025-11-23 13:49:11,237 - src.ensemble - INFO - Generating OOF for model 3/4: catboost
+2025-11-23 13:49:18,932 - src.ensemble - INFO - Generating OOF for model 4/4: gradboost
+2025-11-23 13:49:38,425 - src.ensemble - INFO - OOF features shape: train=(4962, 4), val=(1064, 4)
+2025-11-23 13:49:38,425 - src.ensemble - INFO - Training meta-learner on (4962, 4) OOF features
+2025-11-23 13:49:38,445 - src.ensemble - INFO - C=0.01: CV AUC=1.0000
+2025-11-23 13:49:38,468 - src.ensemble - INFO - C=0.1: CV AUC=1.0000
+2025-11-23 13:49:38,492 - src.ensemble - INFO - C=1.0: CV AUC=1.0000
+2025-11-23 13:49:38,525 - src.ensemble - INFO - C=10.0: CV AUC=1.0000
+2025-11-23 13:49:38,550 - __main__ - INFO - Stacking - AUC: 1.0000, F1: 1.0000
+2025-11-23 13:49:38,550 - __main__ - INFO - 
+[7/8] CALIBRATING ENSEMBLE...
+2025-11-23 13:51:13,464 - __main__ - INFO - ================================================================================
+2025-11-23 13:51:13,465 - __main__ - INFO - STARTING INSULIN RESISTANCE PREDICTION PIPELINE
+2025-11-23 13:51:13,465 - __main__ - INFO - ================================================================================
+2025-11-23 13:51:13,465 - __main__ - INFO - 
+[1/8] LOADING DATA...
+2025-11-23 13:51:13,465 - src.data_loader - INFO - Loading data from C:\Users\rahul\Documents\code\projects\ir prediction\data\all_datasets_merged.csv
+2025-11-23 13:51:13,644 - src.data_loader - INFO - Loaded 57092 records with 61 columns
+2025-11-23 13:51:13,645 - src.data_loader - INFO - Creating 'ir_label' from glucose and insulin using HOMA-IR
+2025-11-23 13:51:13,654 - src.data_loader - WARNING - Dropped 50000 rows with missing glucose/insulin
+2025-11-23 13:51:13,654 - src.data_loader - INFO - Created 'ir_label' based on HOMA-IR threshold 2.5
+2025-11-23 13:51:13,656 - src.data_loader - INFO - Target variable 'ir_label' distribution:
+ir_label
+1    5670
+0    1422
+Name: count, dtype: int64
+2025-11-23 13:51:13,656 - src.data_loader - WARNING - Found 2 records with invalid age values
+2025-11-23 13:51:13,658 - src.data_loader - INFO - Data validation complete: 7090 records remaining
+2025-11-23 13:51:13,659 - __main__ - INFO - Loaded 7090 records with 63 columns
+2025-11-23 13:51:13,659 - __main__ - INFO - 
+[2/8] ENGINEERING FEATURES...
+2025-11-23 13:51:13,671 - __main__ - INFO - Total features after engineering: 72
+2025-11-23 13:51:13,672 - __main__ - INFO - 
+[3/8] PREPROCESSING...
+2025-11-23 13:51:13,674 - src.preprocessing - INFO - Fitting preprocessor...
+2025-11-23 13:51:13,681 - src.preprocessing - WARNING - Removed 3 numeric columns with all NaN values
+2025-11-23 13:51:13,681 - src.preprocessing - INFO - Numeric columns: 52
+2025-11-23 13:51:13,681 - src.preprocessing - INFO - Categorical columns: 16
+2025-11-23 13:51:13,685 - src.preprocessing - INFO - Fitted KNN imputer
+2025-11-23 13:51:13,703 - src.preprocessing - INFO - Fitted 15 OneHot and 1 Ordinal encoders
+2025-11-23 13:51:17,400 - src.preprocessing - INFO - Selected 40 features (MI threshold=0.001)
+2025-11-23 13:51:20,231 - src.preprocessing - INFO - Saved preprocessor to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\feature_transformer.pkl
+2025-11-23 13:51:20,232 - src.preprocessing - INFO - Saved selected features to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\selected_features.json
+2025-11-23 13:51:20,232 - __main__ - INFO - Selected 40 features
+2025-11-23 13:51:20,232 - __main__ - INFO - 
+[4/8] SPLITTING DATA...
+2025-11-23 13:51:20,240 - __main__ - INFO - Train: 4962, Val: 1064, Test: 1064
+2025-11-23 13:51:20,241 - __main__ - INFO - 
+[5/8] TRAINING BASE LEARNERS...
+2025-11-23 13:51:20,241 - __main__ - INFO - Training XGBoost...
+2025-11-23 13:51:20,575 - __main__ - INFO - Training LightGBM...
+2025-11-23 13:51:20,860 - __main__ - INFO - Training CatBoost...
+2025-11-23 13:51:22,766 - __main__ - INFO - Training GradientBoosting...
+2025-11-23 13:51:27,788 - __main__ - INFO - xgboost - AUC: 1.0000, F1: 0.9994
+2025-11-23 13:51:27,801 - __main__ - INFO - lightgbm - AUC: 1.0000, F1: 0.9994
+2025-11-23 13:51:27,813 - __main__ - INFO - catboost - AUC: 1.0000, F1: 0.9977
+2025-11-23 13:51:27,824 - __main__ - INFO - gradboost - AUC: 1.0000, F1: 1.0000
+2025-11-23 13:51:27,828 - __main__ - INFO - Saved base model metrics to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\base_models_metrics.csv
+2025-11-23 13:51:27,828 - __main__ - INFO - 
+[6/8] BUILDING STACKING ENSEMBLE...
+2025-11-23 13:51:27,828 - src.ensemble - INFO - Generating OOF for model 1/4: xgboost
+2025-11-23 13:51:28,991 - src.ensemble - INFO - Generating OOF for model 2/4: lightgbm
+2025-11-23 13:51:30,267 - src.ensemble - INFO - Generating OOF for model 3/4: catboost
+2025-11-23 13:51:37,985 - src.ensemble - INFO - Generating OOF for model 4/4: gradboost
+2025-11-23 13:51:57,653 - src.ensemble - INFO - OOF features shape: train=(4962, 4), val=(1064, 4)
+2025-11-23 13:51:57,653 - src.ensemble - INFO - Training meta-learner on (4962, 4) OOF features
+2025-11-23 13:51:57,672 - src.ensemble - INFO - C=0.01: CV AUC=1.0000
+2025-11-23 13:51:57,691 - src.ensemble - INFO - C=0.1: CV AUC=1.0000
+2025-11-23 13:51:57,712 - src.ensemble - INFO - C=1.0: CV AUC=1.0000
+2025-11-23 13:51:57,734 - src.ensemble - INFO - C=10.0: CV AUC=1.0000
+2025-11-23 13:51:57,748 - __main__ - INFO - Stacking - AUC: 1.0000, F1: 1.0000
+2025-11-23 13:51:57,749 - __main__ - INFO - 
+[7/8] CALIBRATING ENSEMBLE...
+2025-11-23 14:06:03,471 - __main__ - INFO - ================================================================================
+2025-11-23 14:06:03,472 - __main__ - INFO - STARTING INSULIN RESISTANCE PREDICTION PIPELINE
+2025-11-23 14:06:03,472 - __main__ - INFO - ================================================================================
+2025-11-23 14:06:03,472 - __main__ - INFO - 
+[1/8] LOADING DATA...
+2025-11-23 14:06:03,472 - src.data_loader - INFO - Loading data from C:\Users\rahul\Documents\code\projects\ir prediction\data\all_datasets_merged.csv
+2025-11-23 14:06:03,926 - src.data_loader - INFO - Loaded 57092 records with 61 columns
+2025-11-23 14:06:03,927 - src.data_loader - INFO - Creating 'ir_label' from glucose and insulin using HOMA-IR
+2025-11-23 14:06:03,950 - src.data_loader - WARNING - Dropped 50000 rows with missing glucose/insulin
+2025-11-23 14:06:03,950 - src.data_loader - INFO - Created 'ir_label' based on HOMA-IR threshold 2.5
+2025-11-23 14:06:03,952 - src.data_loader - INFO - Target variable 'ir_label' distribution:
+ir_label
+1    5670
+0    1422
+Name: count, dtype: int64
+2025-11-23 14:06:03,954 - src.data_loader - WARNING - Found 2 records with invalid age values
+2025-11-23 14:06:03,958 - src.data_loader - INFO - Data validation complete: 7090 records remaining
+2025-11-23 14:06:03,958 - __main__ - INFO - Loaded 7090 records with 63 columns
+2025-11-23 14:06:03,958 - __main__ - INFO - 
+[2/8] ENGINEERING FEATURES...
+2025-11-23 14:06:03,981 - __main__ - INFO - Total features after engineering: 72
+2025-11-23 14:06:03,982 - __main__ - INFO - 
+[3/8] PREPROCESSING...
+2025-11-23 14:06:03,986 - src.preprocessing - INFO - Fitting preprocessor...
+2025-11-23 14:06:04,000 - src.preprocessing - WARNING - Removed 3 numeric columns with all NaN values
+2025-11-23 14:06:04,001 - src.preprocessing - INFO - Numeric columns: 52
+2025-11-23 14:06:04,001 - src.preprocessing - INFO - Categorical columns: 16
+2025-11-23 14:06:04,008 - src.preprocessing - INFO - Fitted KNN imputer
+2025-11-23 14:06:04,044 - src.preprocessing - INFO - Fitted 15 OneHot and 1 Ordinal encoders
+2025-11-23 14:06:09,732 - src.preprocessing - INFO - Selected 40 features (MI threshold=0.001)
+2025-11-23 14:06:14,260 - src.preprocessing - INFO - Saved preprocessor to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\feature_transformer.pkl
+2025-11-23 14:06:14,262 - src.preprocessing - INFO - Saved selected features to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\selected_features.json
+2025-11-23 14:06:14,263 - __main__ - INFO - Selected 40 features
+2025-11-23 14:06:14,263 - __main__ - INFO - 
+[4/8] SPLITTING DATA...
+2025-11-23 14:06:14,273 - __main__ - INFO - Train: 4962, Val: 1064, Test: 1064
+2025-11-23 14:06:14,273 - __main__ - INFO - 
+[5/8] TRAINING BASE LEARNERS...
+2025-11-23 14:06:14,273 - __main__ - INFO - Training XGBoost...
+2025-11-23 14:06:14,866 - __main__ - INFO - Training LightGBM...
+2025-11-23 14:06:15,393 - __main__ - INFO - Training CatBoost...
+2025-11-23 14:06:18,254 - __main__ - INFO - Training GradientBoosting...
+2025-11-23 14:06:25,863 - __main__ - INFO - xgboost - AUC: 1.0000, F1: 0.9994
+2025-11-23 14:06:25,883 - __main__ - INFO - lightgbm - AUC: 1.0000, F1: 0.9994
+2025-11-23 14:06:25,898 - __main__ - INFO - catboost - AUC: 1.0000, F1: 0.9977
+2025-11-23 14:06:25,915 - __main__ - INFO - gradboost - AUC: 1.0000, F1: 1.0000
+2025-11-23 14:06:25,919 - __main__ - INFO - Saved base model metrics to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\base_models_metrics.csv
+2025-11-23 14:06:25,920 - __main__ - INFO - 
+[6/8] BUILDING STACKING ENSEMBLE...
+2025-11-23 14:06:25,920 - src.ensemble - INFO - Generating OOF for model 1/4: xgboost
+2025-11-23 14:06:27,770 - src.ensemble - INFO - Generating OOF for model 2/4: lightgbm
+2025-11-23 14:06:29,991 - src.ensemble - INFO - Generating OOF for model 3/4: catboost
+2025-11-23 14:06:38,043 - src.ensemble - INFO - Generating OOF for model 4/4: gradboost
+2025-11-23 14:06:57,720 - src.ensemble - INFO - OOF features shape: train=(4962, 4), val=(1064, 4)
+2025-11-23 14:06:57,721 - src.ensemble - INFO - Training meta-learner on (4962, 4) OOF features
+2025-11-23 14:06:57,740 - src.ensemble - INFO - C=0.01: CV AUC=1.0000
+2025-11-23 14:06:57,762 - src.ensemble - INFO - C=0.1: CV AUC=1.0000
+2025-11-23 14:06:57,783 - src.ensemble - INFO - C=1.0: CV AUC=1.0000
+2025-11-23 14:06:57,803 - src.ensemble - INFO - C=10.0: CV AUC=1.0000
+2025-11-23 14:06:57,818 - __main__ - INFO - Stacking - AUC: 1.0000, F1: 1.0000
+2025-11-23 14:06:57,818 - __main__ - INFO - 
+[7/8] CALIBRATING ENSEMBLE...
+2025-11-23 14:09:25,165 - __main__ - INFO - ================================================================================
+2025-11-23 14:09:25,165 - __main__ - INFO - STARTING INSULIN RESISTANCE PREDICTION PIPELINE
+2025-11-23 14:09:25,166 - __main__ - INFO - ================================================================================
+2025-11-23 14:09:25,166 - __main__ - INFO - 
+[1/8] LOADING DATA...
+2025-11-23 14:09:25,166 - src.data_loader - INFO - Loading data from C:\Users\rahul\Documents\code\projects\ir prediction\data\all_datasets_merged.csv
+2025-11-23 14:09:25,344 - src.data_loader - INFO - Loaded 57092 records with 61 columns
+2025-11-23 14:09:25,345 - src.data_loader - INFO - Creating 'ir_label' from glucose and insulin using HOMA-IR
+2025-11-23 14:09:25,354 - src.data_loader - WARNING - Dropped 50000 rows with missing glucose/insulin
+2025-11-23 14:09:25,354 - src.data_loader - INFO - Created 'ir_label' based on HOMA-IR threshold 2.5
+2025-11-23 14:09:25,355 - src.data_loader - INFO - Target variable 'ir_label' distribution:
+ir_label
+1    5670
+0    1422
+Name: count, dtype: int64
+2025-11-23 14:09:25,356 - src.data_loader - WARNING - Found 2 records with invalid age values
+2025-11-23 14:09:25,358 - src.data_loader - INFO - Data validation complete: 7090 records remaining
+2025-11-23 14:09:25,359 - __main__ - INFO - Loaded 7090 records with 63 columns
+2025-11-23 14:09:25,359 - __main__ - INFO - 
+[2/8] ENGINEERING FEATURES...
+2025-11-23 14:09:25,372 - __main__ - INFO - Total features after engineering: 72
+2025-11-23 14:09:25,372 - __main__ - INFO - 
+[3/8] PREPROCESSING...
+2025-11-23 14:09:25,374 - src.preprocessing - INFO - Fitting preprocessor...
+2025-11-23 14:09:25,381 - src.preprocessing - WARNING - Removed 3 numeric columns with all NaN values
+2025-11-23 14:09:25,382 - src.preprocessing - INFO - Numeric columns: 52
+2025-11-23 14:09:25,382 - src.preprocessing - INFO - Categorical columns: 16
+2025-11-23 14:09:25,386 - src.preprocessing - INFO - Fitted KNN imputer
+2025-11-23 14:09:25,405 - src.preprocessing - INFO - Fitted 15 OneHot and 1 Ordinal encoders
+2025-11-23 14:09:29,066 - src.preprocessing - INFO - Selected 40 features (MI threshold=0.001)
+2025-11-23 14:09:31,852 - src.preprocessing - INFO - Saved preprocessor to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\feature_transformer.pkl
+2025-11-23 14:09:31,854 - src.preprocessing - INFO - Saved selected features to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\selected_features.json
+2025-11-23 14:09:31,854 - __main__ - INFO - Selected 40 features
+2025-11-23 14:09:31,854 - __main__ - INFO - 
+[4/8] SPLITTING DATA...
+2025-11-23 14:09:31,862 - __main__ - INFO - Train: 4962, Val: 1064, Test: 1064
+2025-11-23 14:09:31,862 - __main__ - INFO - 
+[5/8] TRAINING BASE LEARNERS...
+2025-11-23 14:09:31,862 - __main__ - INFO - Training XGBoost...
+2025-11-23 14:09:32,219 - __main__ - INFO - Training LightGBM...
+2025-11-23 14:09:32,509 - __main__ - INFO - Training CatBoost...
+2025-11-23 14:09:34,421 - __main__ - INFO - Training GradientBoosting...
+2025-11-23 14:09:39,522 - __main__ - INFO - xgboost - AUC: 1.0000, F1: 0.9994
+2025-11-23 14:09:39,538 - __main__ - INFO - lightgbm - AUC: 1.0000, F1: 0.9994
+2025-11-23 14:09:39,548 - __main__ - INFO - catboost - AUC: 1.0000, F1: 0.9977
+2025-11-23 14:09:39,560 - __main__ - INFO - gradboost - AUC: 1.0000, F1: 1.0000
+2025-11-23 14:09:39,563 - __main__ - INFO - Saved base model metrics to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\base_models_metrics.csv
+2025-11-23 14:09:39,564 - __main__ - INFO - 
+[6/8] BUILDING STACKING ENSEMBLE...
+2025-11-23 14:10:37,872 - __main__ - INFO - ================================================================================
+2025-11-23 14:10:37,873 - __main__ - INFO - STARTING INSULIN RESISTANCE PREDICTION PIPELINE
+2025-11-23 14:10:37,873 - __main__ - INFO - ================================================================================
+2025-11-23 14:10:37,873 - __main__ - INFO - 
+[1/8] LOADING DATA...
+2025-11-23 14:10:37,873 - src.data_loader - INFO - Loading data from C:\Users\rahul\Documents\code\projects\ir prediction\data\all_datasets_merged.csv
+2025-11-23 14:10:38,050 - src.data_loader - INFO - Loaded 57092 records with 61 columns
+2025-11-23 14:10:38,050 - src.data_loader - INFO - Creating 'ir_label' from glucose and insulin using HOMA-IR
+2025-11-23 14:10:38,060 - src.data_loader - WARNING - Dropped 50000 rows with missing glucose/insulin
+2025-11-23 14:10:38,060 - src.data_loader - INFO - Created 'ir_label' based on HOMA-IR threshold 2.5
+2025-11-23 14:10:38,062 - src.data_loader - INFO - Target variable 'ir_label' distribution:
+ir_label
+1    5670
+0    1422
+Name: count, dtype: int64
+2025-11-23 14:10:38,062 - src.data_loader - WARNING - Found 2 records with invalid age values
+2025-11-23 14:10:38,064 - src.data_loader - INFO - Data validation complete: 7090 records remaining
+2025-11-23 14:10:38,064 - __main__ - INFO - Loaded 7090 records with 63 columns
+2025-11-23 14:10:38,065 - __main__ - INFO - 
+[2/8] ENGINEERING FEATURES...
+2025-11-23 14:10:38,078 - __main__ - INFO - Total features after engineering: 72
+2025-11-23 14:10:38,078 - __main__ - INFO - 
+[3/8] PREPROCESSING...
+2025-11-23 14:10:38,080 - src.preprocessing - INFO - Fitting preprocessor...
+2025-11-23 14:10:38,087 - src.preprocessing - WARNING - Removed 3 numeric columns with all NaN values
+2025-11-23 14:10:38,087 - src.preprocessing - INFO - Numeric columns: 52
+2025-11-23 14:10:38,088 - src.preprocessing - INFO - Categorical columns: 16
+2025-11-23 14:10:38,092 - src.preprocessing - INFO - Fitted KNN imputer
+2025-11-23 14:10:38,111 - src.preprocessing - INFO - Fitted 15 OneHot and 1 Ordinal encoders
+2025-11-23 14:10:41,887 - src.preprocessing - INFO - Selected 40 features (MI threshold=0.001)
+2025-11-23 14:10:45,012 - src.preprocessing - INFO - Saved preprocessor to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\feature_transformer.pkl
+2025-11-23 14:10:45,013 - src.preprocessing - INFO - Saved selected features to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\selected_features.json
+2025-11-23 14:10:45,013 - __main__ - INFO - Selected 40 features
+2025-11-23 14:10:45,014 - __main__ - INFO - 
+[4/8] SPLITTING DATA...
+2025-11-23 14:10:45,021 - __main__ - INFO - Train: 4962, Val: 1064, Test: 1064
+2025-11-23 14:10:45,021 - __main__ - INFO - 
+[5/8] TRAINING BASE LEARNERS...
+2025-11-23 14:10:45,022 - __main__ - INFO - Training XGBoost...
+2025-11-23 14:10:45,366 - __main__ - INFO - Training LightGBM...
+2025-11-23 14:10:45,647 - __main__ - INFO - Training CatBoost...
+2025-11-23 14:10:47,533 - __main__ - INFO - Training GradientBoosting...
+2025-11-23 14:10:52,609 - __main__ - INFO - xgboost - AUC: 1.0000, F1: 0.9994
+2025-11-23 14:10:52,621 - __main__ - INFO - lightgbm - AUC: 1.0000, F1: 0.9994
+2025-11-23 14:10:52,633 - __main__ - INFO - catboost - AUC: 1.0000, F1: 0.9977
+2025-11-23 14:10:52,645 - __main__ - INFO - gradboost - AUC: 1.0000, F1: 1.0000
+2025-11-23 14:10:52,648 - __main__ - INFO - Saved base model metrics to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\base_models_metrics.csv
+2025-11-23 14:10:52,649 - __main__ - INFO - 
+[6/8] BUILDING STACKING ENSEMBLE...
+2025-11-23 14:10:52,649 - src.ensemble - INFO - Generating OOF for model 1/4: xgboost
+2025-11-23 14:10:53,820 - src.ensemble - INFO - Generating OOF for model 2/4: lightgbm
+2025-11-23 14:10:55,105 - src.ensemble - INFO - Generating OOF for model 3/4: catboost
+2025-11-23 14:11:02,850 - src.ensemble - INFO - Generating OOF for model 4/4: gradboost
+2025-11-23 14:11:22,320 - src.ensemble - INFO - OOF features shape: train=(4962, 4), val=(1064, 4)
+2025-11-23 14:11:22,321 - src.ensemble - INFO - Training meta-learner on (4962, 4) OOF features
+2025-11-23 14:11:22,339 - src.ensemble - INFO - C=0.01: CV AUC=1.0000
+2025-11-23 14:11:22,360 - src.ensemble - INFO - C=0.1: CV AUC=1.0000
+2025-11-23 14:11:22,381 - src.ensemble - INFO - C=1.0: CV AUC=1.0000
+2025-11-23 14:11:22,401 - src.ensemble - INFO - C=10.0: CV AUC=1.0000
+2025-11-23 14:13:12,109 - __main__ - INFO - ================================================================================
+2025-11-23 14:13:12,110 - __main__ - INFO - STARTING INSULIN RESISTANCE PREDICTION PIPELINE
+2025-11-23 14:13:12,110 - __main__ - INFO - ================================================================================
+2025-11-23 14:13:12,110 - __main__ - INFO - 
+[1/8] LOADING DATA...
+2025-11-23 14:13:12,110 - src.data_loader - INFO - Loading data from C:\Users\rahul\Documents\code\projects\ir prediction\data\all_datasets_merged.csv
+2025-11-23 14:13:12,290 - src.data_loader - INFO - Loaded 57092 records with 61 columns
+2025-11-23 14:13:12,290 - src.data_loader - INFO - Creating 'ir_label' from glucose and insulin using HOMA-IR
+2025-11-23 14:13:12,300 - src.data_loader - WARNING - Dropped 50000 rows with missing glucose/insulin
+2025-11-23 14:13:12,301 - src.data_loader - INFO - Created 'ir_label' based on HOMA-IR threshold 2.5
+2025-11-23 14:13:12,302 - src.data_loader - INFO - Target variable 'ir_label' distribution:
+ir_label
+1    5670
+0    1422
+Name: count, dtype: int64
+2025-11-23 14:13:12,302 - src.data_loader - WARNING - Found 2 records with invalid age values
+2025-11-23 14:13:12,305 - src.data_loader - INFO - Data validation complete: 7090 records remaining
+2025-11-23 14:13:12,305 - __main__ - INFO - Loaded 7090 records with 63 columns
+2025-11-23 14:13:12,305 - __main__ - INFO - 
+[2/8] ENGINEERING FEATURES...
+2025-11-23 14:13:12,308 - src.features - INFO - ✓ Computed age × BMI interaction
+2025-11-23 14:13:12,310 - src.features - INFO - ✓ Computed BMI categories
+2025-11-23 14:13:12,311 - src.features - INFO - ✓ Computed age groups
+2025-11-23 14:13:12,311 - __main__ - INFO - Total features after engineering: 72
+2025-11-23 14:13:12,312 - __main__ - INFO - 
+[3/8] PREPROCESSING...
+2025-11-23 14:13:12,314 - src.preprocessing - INFO - Fitting preprocessor...
+2025-11-23 14:13:12,321 - src.preprocessing - WARNING - Removed 3 numeric columns with all NaN values
+2025-11-23 14:13:12,321 - src.preprocessing - INFO - Numeric columns: 52
+2025-11-23 14:13:12,321 - src.preprocessing - INFO - Categorical columns: 16
+2025-11-23 14:13:12,326 - src.preprocessing - INFO - Fitted KNN imputer
+2025-11-23 14:13:12,343 - src.preprocessing - INFO - Fitted 15 OneHot and 1 Ordinal encoders
+2025-11-23 14:13:16,020 - src.preprocessing - INFO - Selected 40 features (MI threshold=0.001)
+2025-11-23 14:13:18,814 - src.preprocessing - INFO - Saved preprocessor to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\feature_transformer.pkl
+2025-11-23 14:13:18,815 - src.preprocessing - INFO - Saved selected features to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\selected_features.json
+2025-11-23 14:13:18,816 - __main__ - INFO - Selected 40 features
+2025-11-23 14:13:18,816 - __main__ - INFO - 
+[4/8] SPLITTING DATA...
+2025-11-23 14:13:18,824 - __main__ - INFO - Train: 4962, Val: 1064, Test: 1064
+2025-11-23 14:13:18,824 - __main__ - INFO - 
+[5/8] TRAINING BASE LEARNERS...
+2025-11-23 14:13:18,824 - __main__ - INFO - Training XGBoost...
+2025-11-23 14:13:19,164 - __main__ - INFO - ✓ XGBoost trained in 0.34s
+2025-11-23 14:13:19,164 - __main__ - INFO - Training LightGBM...
+2025-11-23 14:13:19,457 - __main__ - INFO - ✓ LightGBM trained in 0.29s
+2025-11-23 14:13:19,457 - __main__ - INFO - Training CatBoost...
+2025-11-23 14:13:21,305 - __main__ - INFO - ✓ CatBoost trained in 1.85s
+2025-11-23 14:13:21,306 - __main__ - INFO - Training GradientBoosting...
+2025-11-23 14:13:26,304 - __main__ - INFO - ✓ GradientBoosting trained in 5.00s
+2025-11-23 14:13:26,304 - __main__ - INFO - ✓ All 4 base models trained
+2025-11-23 14:13:26,321 - __main__ - INFO - xgboost - AUC: 1.0000, F1: 0.9994
+2025-11-23 14:13:26,336 - __main__ - INFO - lightgbm - AUC: 1.0000, F1: 0.9994
+2025-11-23 14:13:26,347 - __main__ - INFO - catboost - AUC: 1.0000, F1: 0.9977
+2025-11-23 14:13:26,359 - __main__ - INFO - gradboost - AUC: 1.0000, F1: 1.0000
+2025-11-23 14:13:26,363 - __main__ - INFO - Saved base model metrics to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\base_models_metrics.csv
+2025-11-23 14:13:26,363 - __main__ - INFO - 
+[6/8] BUILDING STACKING ENSEMBLE...
+2025-11-23 14:13:26,363 - src.ensemble - INFO - Generating OOF for model 1/4: xgboost
+2025-11-23 14:13:27,551 - src.ensemble - INFO - ✓ Completed OOF for xgboost
+2025-11-23 14:13:27,551 - src.ensemble - INFO - Generating OOF for model 2/4: lightgbm
+2025-11-23 14:13:28,867 - src.ensemble - INFO - ✓ Completed OOF for lightgbm
+2025-11-23 14:13:28,867 - src.ensemble - INFO - Generating OOF for model 3/4: catboost
+2025-11-23 14:13:36,564 - src.ensemble - INFO - ✓ Completed OOF for catboost
+2025-11-23 14:13:36,564 - src.ensemble - INFO - Generating OOF for model 4/4: gradboost
+2025-11-23 14:13:56,361 - src.ensemble - INFO - ✓ Completed OOF for gradboost
+2025-11-23 14:13:56,362 - src.ensemble - INFO - OOF features shape: train=(4962, 4), val=(1064, 4)
+2025-11-23 14:13:56,363 - src.ensemble - INFO - Training meta-learner on (4962, 4) OOF features
+2025-11-23 14:13:56,382 - src.ensemble - INFO - C=0.01: CV AUC=1.0000
+2025-11-23 14:13:56,402 - src.ensemble - INFO - C=0.1: CV AUC=1.0000
+2025-11-23 14:13:56,423 - src.ensemble - INFO - C=1.0: CV AUC=1.0000
+2025-11-23 14:13:56,443 - src.ensemble - INFO - C=10.0: CV AUC=1.0000
+2025-11-23 14:13:56,444 - src.ensemble - INFO - ✓ Best C=0.01 (CV AUC=1.0000)
+2025-11-23 14:13:56,455 - src.ensemble - INFO - Stacking classifier validated - AUC: 1.0000, F1: 1.0000
+2025-11-23 14:13:56,455 - __main__ - INFO - Stacking - AUC: 1.0000, F1: 1.0000
+2025-11-23 14:13:56,455 - __main__ - INFO - 
+[7/8] CALIBRATING ENSEMBLE...
+2025-11-23 14:13:56,456 - __main__ - ERROR - ✗ Pipeline failed: 'StackerWrapper' object has no attribute 'classes_'
+Traceback (most recent call last):
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\src\train.py", line 220, in <module>
+    train_pipeline()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\src\train.py", line 178, in train_pipeline
+    cal_model, cal_stats = calibration_compare(
+                           ~~~~~~~~~~~~~~~~~~~^
+        StackerWrapper(stacker_model=stacker['meta_learner']), X_val.values, y_val.values
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\src\evaluate.py", line 60, in calibration_compare
+    cal_model.fit(X_val, y_val)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\.venv\Lib\site-packages\sklearn\base.py", line 1473, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\.venv\Lib\site-packages\sklearn\calibration.py", line 413, in fit
+    self.calibrated_classifiers_ = parallel(
+                                   ~~~~~~~~^
+        delayed(_fit_classifier_calibrator_pair)(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<10 lines>...
+        for train, test in cv.split(X, y, **routed_params.splitter.split)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\.venv\Lib\site-packages\sklearn\utils\parallel.py", line 74, in __call__
+    return super().__call__(iterable_with_config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\.venv\Lib\site-packages\joblib\parallel.py", line 1918, in __call__
+    return output if self.return_generator else list(output)
+                                                ~~~~^^^^^^^^
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\.venv\Lib\site-packages\joblib\parallel.py", line 1847, in _get_sequential_output
+    res = func(*args, **kwargs)
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\.venv\Lib\site-packages\sklearn\utils\parallel.py", line 136, in __call__
+    return self.function(*args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\.venv\Lib\site-packages\sklearn\calibration.py", line 616, in _fit_classifier_calibrator_pair
+    predictions, _ = _get_response_values(
+                     ~~~~~~~~~~~~~~~~~~~~^
+        estimator,
+        ^^^^^^^^^^
+        X_test,
+        ^^^^^^^
+        response_method=["decision_function", "predict_proba"],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\.venv\Lib\site-packages\sklearn\utils\_response.py", line 199, in _get_response_values
+    classes = estimator.classes_
+              ^^^^^^^^^^^^^^^^^^
+AttributeError: 'StackerWrapper' object has no attribute 'classes_'
+2025-11-23 14:14:29,167 - __main__ - INFO - ================================================================================
+2025-11-23 14:14:29,167 - __main__ - INFO - STARTING INSULIN RESISTANCE PREDICTION PIPELINE
+2025-11-23 14:14:29,167 - __main__ - INFO - ================================================================================
+2025-11-23 14:14:29,167 - __main__ - INFO - 
+[1/8] LOADING DATA...
+2025-11-23 14:14:29,168 - src.data_loader - INFO - Loading data from C:\Users\rahul\Documents\code\projects\ir prediction\data\all_datasets_merged.csv
+2025-11-23 14:14:29,345 - src.data_loader - INFO - Loaded 57092 records with 61 columns
+2025-11-23 14:14:29,346 - src.data_loader - INFO - Creating 'ir_label' from glucose and insulin using HOMA-IR
+2025-11-23 14:14:29,356 - src.data_loader - WARNING - Dropped 50000 rows with missing glucose/insulin
+2025-11-23 14:14:29,357 - src.data_loader - INFO - Created 'ir_label' based on HOMA-IR threshold 2.5
+2025-11-23 14:14:29,358 - src.data_loader - INFO - Target variable 'ir_label' distribution:
+ir_label
+1    5670
+0    1422
+Name: count, dtype: int64
+2025-11-23 14:14:29,358 - src.data_loader - WARNING - Found 2 records with invalid age values
+2025-11-23 14:14:29,360 - src.data_loader - INFO - Data validation complete: 7090 records remaining
+2025-11-23 14:14:29,360 - __main__ - INFO - Loaded 7090 records with 63 columns
+2025-11-23 14:14:29,361 - __main__ - INFO - 
+[2/8] ENGINEERING FEATURES...
+2025-11-23 14:14:29,364 - src.features - INFO - ✓ Computed age × BMI interaction
+2025-11-23 14:14:29,366 - src.features - INFO - ✓ Computed BMI categories
+2025-11-23 14:14:29,368 - src.features - INFO - ✓ Computed age groups
+2025-11-23 14:14:29,368 - __main__ - INFO - Total features after engineering: 72
+2025-11-23 14:14:29,368 - __main__ - INFO - 
+[3/8] PREPROCESSING...
+2025-11-23 14:14:29,371 - src.preprocessing - INFO - Fitting preprocessor...
+2025-11-23 14:14:29,377 - src.preprocessing - WARNING - Removed 3 numeric columns with all NaN values
+2025-11-23 14:14:29,377 - src.preprocessing - INFO - Numeric columns: 52
+2025-11-23 14:14:29,377 - src.preprocessing - INFO - Categorical columns: 16
+2025-11-23 14:14:29,383 - src.preprocessing - INFO - Fitted KNN imputer
+2025-11-23 14:14:29,401 - src.preprocessing - INFO - Fitted 15 OneHot and 1 Ordinal encoders
+2025-11-23 14:14:33,083 - src.preprocessing - INFO - Selected 40 features (MI threshold=0.001)
+2025-11-23 14:14:35,893 - src.preprocessing - INFO - Saved preprocessor to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\feature_transformer.pkl
+2025-11-23 14:14:35,894 - src.preprocessing - INFO - Saved selected features to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\selected_features.json
+2025-11-23 14:14:35,894 - __main__ - INFO - Selected 40 features
+2025-11-23 14:14:35,894 - __main__ - INFO - 
+[4/8] SPLITTING DATA...
+2025-11-23 14:14:35,901 - __main__ - INFO - Train: 4962, Val: 1064, Test: 1064
+2025-11-23 14:14:35,902 - __main__ - INFO - 
+[5/8] TRAINING BASE LEARNERS...
+2025-11-23 14:14:35,902 - __main__ - INFO - Training XGBoost...
+2025-11-23 14:14:36,244 - __main__ - INFO - ✓ XGBoost trained in 0.34s
+2025-11-23 14:14:36,244 - __main__ - INFO - Training LightGBM...
+2025-11-23 14:14:36,538 - __main__ - INFO - ✓ LightGBM trained in 0.29s
+2025-11-23 14:14:36,539 - __main__ - INFO - Training CatBoost...
+2025-11-23 14:14:38,371 - __main__ - INFO - ✓ CatBoost trained in 1.83s
+2025-11-23 14:14:38,371 - __main__ - INFO - Training GradientBoosting...
+2025-11-23 14:14:43,524 - __main__ - INFO - ✓ GradientBoosting trained in 5.15s
+2025-11-23 14:14:43,524 - __main__ - INFO - ✓ All 4 base models trained
+2025-11-23 14:14:43,541 - __main__ - INFO - xgboost - AUC: 1.0000, F1: 0.9994
+2025-11-23 14:14:43,554 - __main__ - INFO - lightgbm - AUC: 1.0000, F1: 0.9994
+2025-11-23 14:14:43,565 - __main__ - INFO - catboost - AUC: 1.0000, F1: 0.9977
+2025-11-23 14:14:43,577 - __main__ - INFO - gradboost - AUC: 1.0000, F1: 1.0000
+2025-11-23 14:14:43,580 - __main__ - INFO - Saved base model metrics to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\base_models_metrics.csv
+2025-11-23 14:14:43,580 - __main__ - INFO - 
+[6/8] BUILDING STACKING ENSEMBLE...
+2025-11-23 14:14:43,580 - src.ensemble - INFO - Generating OOF for model 1/4: xgboost
+2025-11-23 14:14:44,767 - src.ensemble - INFO - ✓ Completed OOF for xgboost
+2025-11-23 14:14:44,767 - src.ensemble - INFO - Generating OOF for model 2/4: lightgbm
+2025-11-23 14:14:46,069 - src.ensemble - INFO - ✓ Completed OOF for lightgbm
+2025-11-23 14:14:46,069 - src.ensemble - INFO - Generating OOF for model 3/4: catboost
+2025-11-23 14:14:53,948 - src.ensemble - INFO - ✓ Completed OOF for catboost
+2025-11-23 14:14:53,948 - src.ensemble - INFO - Generating OOF for model 4/4: gradboost
+2025-11-23 14:15:13,476 - src.ensemble - INFO - ✓ Completed OOF for gradboost
+2025-11-23 14:15:13,476 - src.ensemble - INFO - OOF features shape: train=(4962, 4), val=(1064, 4)
+2025-11-23 14:15:13,476 - src.ensemble - INFO - Training meta-learner on (4962, 4) OOF features
+2025-11-23 14:15:13,494 - src.ensemble - INFO - C=0.01: CV AUC=1.0000
+2025-11-23 14:15:13,515 - src.ensemble - INFO - C=0.1: CV AUC=1.0000
+2025-11-23 14:15:13,536 - src.ensemble - INFO - C=1.0: CV AUC=1.0000
+2025-11-23 14:15:13,556 - src.ensemble - INFO - C=10.0: CV AUC=1.0000
+2025-11-23 14:15:13,557 - src.ensemble - INFO - ✓ Best C=0.01 (CV AUC=1.0000)
+2025-11-23 14:15:13,568 - src.ensemble - INFO - Stacking classifier validated - AUC: 1.0000, F1: 1.0000
+2025-11-23 14:15:13,569 - __main__ - INFO - Stacking - AUC: 1.0000, F1: 1.0000
+2025-11-23 14:15:13,569 - __main__ - INFO - 
+[7/8] CALIBRATING ENSEMBLE...
+2025-11-23 14:15:13,570 - __main__ - ERROR - ✗ Pipeline failed: 'LogisticRegression' object has no attribute 'classes_'
+Traceback (most recent call last):
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\src\train.py", line 224, in <module>
+    train_pipeline()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\src\train.py", line 182, in train_pipeline
+    cal_model, cal_stats = calibration_compare(
+                           ~~~~~~~~~~~~~~~~~~~^
+        StackerWrapper(stacker_model=stacker['meta_learner']), X_val.values, y_val.values
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\src\evaluate.py", line 60, in calibration_compare
+    cal_model.fit(X_val, y_val)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\.venv\Lib\site-packages\sklearn\base.py", line 1473, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\.venv\Lib\site-packages\sklearn\calibration.py", line 413, in fit
+    self.calibrated_classifiers_ = parallel(
+                                   ~~~~~~~~^
+        delayed(_fit_classifier_calibrator_pair)(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<10 lines>...
+        for train, test in cv.split(X, y, **routed_params.splitter.split)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\.venv\Lib\site-packages\sklearn\utils\parallel.py", line 74, in __call__
+    return super().__call__(iterable_with_config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\.venv\Lib\site-packages\joblib\parallel.py", line 1918, in __call__
+    return output if self.return_generator else list(output)
+                                                ~~~~^^^^^^^^
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\.venv\Lib\site-packages\joblib\parallel.py", line 1844, in _get_sequential_output
+    for func, args, kwargs in iterable:
+                              ^^^^^^^^
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\.venv\Lib\site-packages\sklearn\utils\parallel.py", line 72, in <genexpr>
+    for delayed_func, args, kwargs in iterable
+                                      ^^^^^^^^
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\.venv\Lib\site-packages\sklearn\calibration.py", line 415, in <genexpr>
+    clone(estimator),
+    ~~~~~^^^^^^^^^^^
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\.venv\Lib\site-packages\sklearn\base.py", line 90, in clone
+    return estimator.__sklearn_clone__()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\.venv\Lib\site-packages\sklearn\base.py", line 296, in __sklearn_clone__
+    return _clone_parametrized(self)
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\.venv\Lib\site-packages\sklearn\base.py", line 125, in _clone_parametrized
+    new_object = klass(**new_object_params)
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\src\train.py", line 40, in __init__
+    self.classes_ = stacker_model.classes_
+                    ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'LogisticRegression' object has no attribute 'classes_'
+2025-11-23 14:17:47,914 - __main__ - INFO - ================================================================================
+2025-11-23 14:17:47,915 - __main__ - INFO - STARTING INSULIN RESISTANCE PREDICTION PIPELINE
+2025-11-23 14:17:47,915 - __main__ - INFO - ================================================================================
+2025-11-23 14:17:47,915 - __main__ - INFO - 
+[1/8] LOADING DATA...
+2025-11-23 14:17:47,915 - src.data_loader - INFO - Loading data from C:\Users\rahul\Documents\code\projects\ir prediction\data\all_datasets_merged.csv
+2025-11-23 14:17:48,122 - src.data_loader - INFO - Loaded 57092 records with 61 columns
+2025-11-23 14:17:48,123 - src.data_loader - INFO - Creating 'ir_label' from glucose and insulin using HOMA-IR
+2025-11-23 14:17:48,134 - src.data_loader - WARNING - Dropped 50000 rows with missing glucose/insulin
+2025-11-23 14:17:48,134 - src.data_loader - INFO - Created 'ir_label' based on HOMA-IR threshold 2.5
+2025-11-23 14:17:48,136 - src.data_loader - INFO - Target variable 'ir_label' distribution:
+ir_label
+1    5670
+0    1422
+Name: count, dtype: int64
+2025-11-23 14:17:48,136 - src.data_loader - WARNING - Found 2 records with invalid age values
+2025-11-23 14:17:48,139 - src.data_loader - INFO - Data validation complete: 7090 records remaining
+2025-11-23 14:17:48,139 - __main__ - INFO - Loaded 7090 records with 63 columns
+2025-11-23 14:17:48,139 - __main__ - INFO - 
+[2/8] ENGINEERING FEATURES...
+2025-11-23 14:17:48,144 - src.features - INFO - ✓ Computed age × BMI interaction
+2025-11-23 14:17:48,146 - src.features - INFO - ✓ Computed BMI categories
+2025-11-23 14:17:48,147 - src.features - INFO - ✓ Computed age groups
+2025-11-23 14:17:48,148 - __main__ - INFO - Total features after engineering: 72
+2025-11-23 14:17:48,148 - __main__ - INFO - 
+[3/8] PREPROCESSING...
+2025-11-23 14:17:48,151 - src.preprocessing - INFO - Fitting preprocessor...
+2025-11-23 14:17:48,159 - src.preprocessing - WARNING - Removed 3 numeric columns with all NaN values
+2025-11-23 14:17:48,159 - src.preprocessing - INFO - Numeric columns: 52
+2025-11-23 14:17:48,159 - src.preprocessing - INFO - Categorical columns: 16
+2025-11-23 14:17:48,165 - src.preprocessing - INFO - Fitted KNN imputer
+2025-11-23 14:17:48,185 - src.preprocessing - INFO - Fitted 15 OneHot and 1 Ordinal encoders
+2025-11-23 14:17:52,221 - src.preprocessing - INFO - Selected 40 features (MI threshold=0.001)
+2025-11-23 14:17:55,159 - src.preprocessing - INFO - Saved preprocessor to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\feature_transformer.pkl
+2025-11-23 14:17:55,160 - src.preprocessing - INFO - Saved selected features to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\selected_features.json
+2025-11-23 14:17:55,160 - __main__ - INFO - Selected 40 features
+2025-11-23 14:17:55,160 - __main__ - INFO - 
+[4/8] SPLITTING DATA...
+2025-11-23 14:17:55,168 - __main__ - INFO - Train: 4962, Val: 1064, Test: 1064
+2025-11-23 14:17:55,169 - __main__ - INFO - 
+[5/8] TRAINING BASE LEARNERS...
+2025-11-23 14:17:55,169 - __main__ - INFO - Training XGBoost...
+2025-11-23 14:17:55,506 - __main__ - INFO - ✓ XGBoost trained in 0.34s
+2025-11-23 14:17:55,507 - __main__ - INFO - Training LightGBM...
+2025-11-23 14:17:55,795 - __main__ - INFO - ✓ LightGBM trained in 0.29s
+2025-11-23 14:17:55,795 - __main__ - INFO - Training CatBoost...
+2025-11-23 14:17:57,616 - __main__ - INFO - ✓ CatBoost trained in 1.82s
+2025-11-23 14:17:57,617 - __main__ - INFO - Training GradientBoosting...
+2025-11-23 14:18:02,653 - __main__ - INFO - ✓ GradientBoosting trained in 5.04s
+2025-11-23 14:18:02,653 - __main__ - INFO - ✓ All 4 base models trained
+2025-11-23 14:18:02,669 - __main__ - INFO - xgboost - AUC: 1.0000, F1: 0.9994
+2025-11-23 14:18:02,682 - __main__ - INFO - lightgbm - AUC: 1.0000, F1: 0.9994
+2025-11-23 14:18:02,692 - __main__ - INFO - catboost - AUC: 1.0000, F1: 0.9977
+2025-11-23 14:18:02,704 - __main__ - INFO - gradboost - AUC: 1.0000, F1: 1.0000
+2025-11-23 14:18:02,707 - __main__ - INFO - Saved base model metrics to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\base_models_metrics.csv
+2025-11-23 14:18:02,707 - __main__ - INFO - 
+[6/8] BUILDING STACKING ENSEMBLE...
+2025-11-23 14:18:02,708 - src.ensemble - INFO - Generating OOF for model 1/4: xgboost
+2025-11-23 14:18:03,878 - src.ensemble - INFO - ✓ Completed OOF for xgboost
+2025-11-23 14:18:03,878 - src.ensemble - INFO - Generating OOF for model 2/4: lightgbm
+2025-11-23 14:18:05,199 - src.ensemble - INFO - ✓ Completed OOF for lightgbm
+2025-11-23 14:18:05,199 - src.ensemble - INFO - Generating OOF for model 3/4: catboost
+2025-11-23 14:18:13,041 - src.ensemble - INFO - ✓ Completed OOF for catboost
+2025-11-23 14:18:13,042 - src.ensemble - INFO - Generating OOF for model 4/4: gradboost
+2025-11-23 14:18:32,619 - src.ensemble - INFO - ✓ Completed OOF for gradboost
+2025-11-23 14:18:32,620 - src.ensemble - INFO - OOF features shape: train=(4962, 4), val=(1064, 4)
+2025-11-23 14:18:32,620 - src.ensemble - INFO - Training meta-learner on (4962, 4) OOF features
+2025-11-23 14:18:32,638 - src.ensemble - INFO - C=0.01: CV AUC=1.0000
+2025-11-23 14:18:32,663 - src.ensemble - INFO - C=0.1: CV AUC=1.0000
+2025-11-23 14:18:32,685 - src.ensemble - INFO - C=1.0: CV AUC=1.0000
+2025-11-23 14:18:32,705 - src.ensemble - INFO - C=10.0: CV AUC=1.0000
+2025-11-23 14:18:32,705 - src.ensemble - INFO - ✓ Best C=0.01 (CV AUC=1.0000)
+2025-11-23 14:18:32,717 - src.ensemble - INFO - Stacking classifier validated - AUC: 1.0000, F1: 1.0000
+2025-11-23 14:18:32,717 - __main__ - INFO - Stacking - AUC: 1.0000, F1: 1.0000
+2025-11-23 14:18:32,717 - __main__ - INFO - 
+[7/8] CALIBRATING ENSEMBLE...
+2025-11-23 14:18:32,735 - src.evaluate - INFO - sigmoid: Brier=0.0001, ECE=0.2002
+2025-11-23 14:18:32,749 - src.evaluate - INFO - isotonic: Brier=0.0000, ECE=0.0018
+2025-11-23 14:18:32,750 - src.evaluate - INFO - ✓ Selected calibration method: isotonic
+2025-11-23 14:18:32,750 - __main__ - INFO - Calibration - Brier: 0.0000, ECE: 0.0018
+2025-11-23 14:18:32,750 - __main__ - INFO - 
+[8/8] OPTIMIZING THRESHOLDS...
+2025-11-23 14:18:32,934 - src.evaluate - INFO - Optimal thresholds: F1=0.06, Youden=0.98, SensFirst=0.06
+2025-11-23 14:18:32,936 - __main__ - INFO - Saved optimal threshold: 0.0600
+2025-11-23 14:18:32,974 - __main__ - INFO - Saved ensemble model to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\ir_ensemble_best.pkl
+2025-11-23 14:18:32,975 - __main__ - INFO - 
+================================================================================
+2025-11-23 14:18:32,976 - __main__ - INFO - TRAINING COMPLETE in 45.06s
+2025-11-23 14:18:32,976 - __main__ - INFO - ================================================================================
+
+2025-11-23 14:18:32,982 - __main__ - INFO - ✓ Training pipeline completed successfully
+2025-11-23 14:26:28,440 - __main__ - INFO - ================================================================================
+2025-11-23 14:26:28,441 - __main__ - INFO - STARTING INSULIN RESISTANCE PREDICTION PIPELINE
+2025-11-23 14:26:28,441 - __main__ - INFO - ================================================================================
+2025-11-23 14:26:28,441 - __main__ - INFO - 
+[1/8] LOADING DATA...
+2025-11-23 14:26:28,441 - src.data_loader - INFO - Loading data from C:\Users\rahul\Documents\code\projects\ir prediction\data\all_datasets_merged.csv
+2025-11-23 14:26:28,623 - src.data_loader - INFO - Loaded 57092 records with 61 columns
+2025-11-23 14:26:28,624 - src.data_loader - INFO - Creating 'ir_label' from glucose and insulin using HOMA-IR
+2025-11-23 14:26:28,634 - src.data_loader - WARNING - Dropped 50000 rows with missing glucose/insulin
+2025-11-23 14:26:28,634 - src.data_loader - INFO - Created 'ir_label' based on HOMA-IR threshold 2.5
+2025-11-23 14:26:28,635 - src.data_loader - INFO - Target variable 'ir_label' distribution:
+ir_label
+1    5670
+0    1422
+Name: count, dtype: int64
+2025-11-23 14:26:28,636 - src.data_loader - WARNING - Found 2 records with invalid age values
+2025-11-23 14:26:28,638 - src.data_loader - INFO - Data validation complete: 7090 records remaining
+2025-11-23 14:26:28,638 - __main__ - INFO - Loaded 7090 records with 63 columns
+2025-11-23 14:26:28,638 - __main__ - INFO - 
+[2/8] ENGINEERING FEATURES...
+2025-11-23 14:26:28,641 - src.features - INFO - ✓ Computed age × BMI interaction
+2025-11-23 14:26:28,644 - src.features - INFO - ✓ Computed BMI categories
+2025-11-23 14:26:28,645 - src.features - INFO - ✓ Computed age groups
+2025-11-23 14:26:28,646 - __main__ - INFO - Total features after engineering: 72
+2025-11-23 14:26:28,646 - __main__ - INFO - 
+[3/8] PREPROCESSING...
+2025-11-23 14:26:28,648 - src.preprocessing - INFO - Fitting preprocessor...
+2025-11-23 14:26:28,655 - src.preprocessing - WARNING - Removed 3 numeric columns with all NaN values
+2025-11-23 14:26:28,655 - src.preprocessing - INFO - Numeric columns: 52
+2025-11-23 14:26:28,655 - src.preprocessing - INFO - Categorical columns: 16
+2025-11-23 14:26:28,661 - src.preprocessing - INFO - Fitted KNN imputer
+2025-11-23 14:26:28,680 - src.preprocessing - INFO - Fitted 15 OneHot and 1 Ordinal encoders
+2025-11-23 14:26:32,594 - src.preprocessing - INFO - Selected 40 features (MI threshold=0.001)
+2025-11-23 14:26:37,073 - src.preprocessing - INFO - Saved preprocessor to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\feature_transformer.pkl
+2025-11-23 14:26:37,074 - src.preprocessing - INFO - Saved selected features to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\selected_features.json
+2025-11-23 14:26:37,074 - __main__ - INFO - Selected 40 features
+2025-11-23 14:26:37,074 - __main__ - INFO - 
+[4/8] SPLITTING DATA...
+2025-11-23 14:26:37,086 - __main__ - INFO - Train: 4962, Val: 1064, Test: 1064
+2025-11-23 14:26:37,087 - __main__ - INFO - 
+[5/8] TRAINING BASE LEARNERS...
+2025-11-23 14:26:37,087 - __main__ - INFO - Training XGBoost...
+2025-11-23 14:26:37,614 - __main__ - INFO - ✓ XGBoost trained in 0.53s
+2025-11-23 14:26:37,614 - __main__ - INFO - Training LightGBM...
+2025-11-23 14:26:38,255 - __main__ - INFO - ✓ LightGBM trained in 0.64s
+2025-11-23 14:26:38,256 - __main__ - INFO - Training CatBoost...
+2025-11-23 14:26:40,846 - __main__ - INFO - ✓ CatBoost trained in 2.59s
+2025-11-23 14:26:40,847 - __main__ - INFO - Training GradientBoosting...
+2025-11-23 14:26:48,534 - __main__ - INFO - ✓ GradientBoosting trained in 7.69s
+2025-11-23 14:26:48,535 - __main__ - INFO - ✓ All 4 base models trained
+2025-11-23 14:26:48,555 - __main__ - INFO - xgboost - AUC: 1.0000, F1: 0.9994
+2025-11-23 14:26:48,574 - __main__ - INFO - lightgbm - AUC: 1.0000, F1: 0.9994
+2025-11-23 14:26:48,591 - __main__ - INFO - catboost - AUC: 1.0000, F1: 0.9977
+2025-11-23 14:26:48,607 - __main__ - INFO - gradboost - AUC: 1.0000, F1: 1.0000
+2025-11-23 14:26:48,611 - __main__ - INFO - Saved base model metrics to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\base_models_metrics.csv
+2025-11-23 14:26:48,612 - __main__ - INFO - 
+[6/8] BUILDING STACKING ENSEMBLE...
+2025-11-23 14:26:48,612 - src.ensemble - INFO - Generating OOF for model 1/4: xgboost
+2025-11-23 14:26:50,482 - src.ensemble - INFO - ✓ Completed OOF for xgboost
+2025-11-23 14:26:50,483 - src.ensemble - INFO - Generating OOF for model 2/4: lightgbm
+2025-11-23 14:26:53,393 - src.ensemble - INFO - ✓ Completed OOF for lightgbm
+2025-11-23 14:26:53,393 - src.ensemble - INFO - Generating OOF for model 3/4: catboost
+2025-11-23 14:27:04,804 - src.ensemble - INFO - ✓ Completed OOF for catboost
+2025-11-23 14:27:04,804 - src.ensemble - INFO - Generating OOF for model 4/4: gradboost
+2025-11-23 14:27:32,241 - src.ensemble - INFO - ✓ Completed OOF for gradboost
+2025-11-23 14:27:32,241 - src.ensemble - INFO - OOF features shape: train=(4962, 4), val=(1064, 4)
+2025-11-23 14:27:32,241 - src.ensemble - INFO - Training meta-learner on (4962, 4) OOF features
+2025-11-23 14:27:32,260 - src.ensemble - INFO - C=0.01: CV AUC=1.0000
+2025-11-23 14:27:32,281 - src.ensemble - INFO - C=0.1: CV AUC=1.0000
+2025-11-23 14:27:32,302 - src.ensemble - INFO - C=1.0: CV AUC=1.0000
+2025-11-23 14:27:32,325 - src.ensemble - INFO - C=10.0: CV AUC=1.0000
+2025-11-23 14:27:32,325 - src.ensemble - INFO - ✓ Best C=0.01 (CV AUC=1.0000)
+2025-11-23 14:27:32,338 - src.ensemble - INFO - Stacking classifier validated - AUC: 1.0000, F1: 1.0000
+2025-11-23 14:27:32,338 - __main__ - INFO - Stacking - AUC: 1.0000, F1: 1.0000
+2025-11-23 14:27:32,338 - __main__ - INFO - 
+[7/8] CALIBRATING ENSEMBLE...
+2025-11-23 14:27:32,356 - src.evaluate - INFO - sigmoid: Brier=0.0001, ECE=0.2002
+2025-11-23 14:27:32,369 - src.evaluate - INFO - isotonic: Brier=0.0000, ECE=0.0018
+2025-11-23 14:27:32,369 - src.evaluate - INFO - ✓ Selected calibration method: isotonic
+2025-11-23 14:27:32,370 - __main__ - INFO - Calibration - Brier: 0.0000, ECE: 0.0018
+2025-11-23 14:27:32,370 - __main__ - INFO - 
+[8/8] OPTIMIZING THRESHOLDS...
+2025-11-23 14:27:32,568 - src.evaluate - INFO - Optimal thresholds: F1=0.06, Youden=0.98, SensFirst=0.06
+2025-11-23 14:27:32,569 - __main__ - INFO - Saved optimal threshold: 0.0600
+2025-11-23 14:27:32,611 - __main__ - INFO - Saved ensemble model to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\ir_ensemble_best.pkl
+2025-11-23 14:27:32,613 - __main__ - INFO - 
+================================================================================
+2025-11-23 14:27:32,613 - __main__ - INFO - TRAINING COMPLETE in 64.17s
+2025-11-23 14:27:32,613 - __main__ - INFO - ================================================================================
+
+2025-11-23 14:27:32,619 - __main__ - INFO - ✓ Training pipeline completed successfully
+2025-11-23 14:27:54,372 - __main__ - INFO - ================================================================================
+2025-11-23 14:27:54,372 - __main__ - INFO - STARTING INSULIN RESISTANCE PREDICTION PIPELINE
+2025-11-23 14:27:54,373 - __main__ - INFO - ================================================================================
+2025-11-23 14:27:54,373 - __main__ - INFO - 
+[1/8] LOADING DATA...
+2025-11-23 14:27:54,373 - src.data_loader - INFO - Loading data from C:\Users\rahul\Documents\code\projects\ir prediction\data\all_datasets_merged.csv
+2025-11-23 14:27:54,566 - src.data_loader - INFO - Loaded 57092 records with 61 columns
+2025-11-23 14:27:54,567 - src.data_loader - INFO - Creating 'ir_label' from glucose and insulin using HOMA-IR
+2025-11-23 14:27:54,577 - src.data_loader - WARNING - Dropped 50000 rows with missing glucose/insulin
+2025-11-23 14:27:54,577 - src.data_loader - INFO - Created 'ir_label' based on HOMA-IR threshold 2.5
+2025-11-23 14:27:54,579 - src.data_loader - INFO - Target variable 'ir_label' distribution:
+ir_label
+1    5670
+0    1422
+Name: count, dtype: int64
+2025-11-23 14:27:54,579 - src.data_loader - WARNING - Found 2 records with invalid age values
+2025-11-23 14:27:54,581 - src.data_loader - INFO - Data validation complete: 7090 records remaining
+2025-11-23 14:27:54,582 - __main__ - INFO - Loaded 7090 records with 63 columns
+2025-11-23 14:27:54,582 - __main__ - INFO - 
+[2/8] ENGINEERING FEATURES...
+2025-11-23 14:27:54,586 - src.features - INFO - ✓ Computed age × BMI interaction
+2025-11-23 14:27:54,587 - src.features - INFO - ✓ Computed BMI categories
+2025-11-23 14:27:54,589 - src.features - INFO - ✓ Computed age groups
+2025-11-23 14:27:54,589 - __main__ - INFO - Total features after engineering: 72
+2025-11-23 14:27:54,590 - __main__ - INFO - 
+[3/8] PREPROCESSING...
+2025-11-23 14:27:54,592 - src.preprocessing - INFO - Fitting preprocessor...
+2025-11-23 14:27:54,599 - src.preprocessing - WARNING - Removed 3 numeric columns with all NaN values
+2025-11-23 14:27:54,600 - src.preprocessing - INFO - Numeric columns: 52
+2025-11-23 14:27:54,600 - src.preprocessing - INFO - Categorical columns: 16
+2025-11-23 14:27:54,604 - src.preprocessing - INFO - Fitted KNN imputer
+2025-11-23 14:27:54,624 - src.preprocessing - INFO - Fitted 15 OneHot and 1 Ordinal encoders
+2025-11-23 14:27:58,717 - src.preprocessing - INFO - Selected 40 features (MI threshold=0.001)
+2025-11-23 14:28:01,640 - src.preprocessing - INFO - Saved preprocessor to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\feature_transformer.pkl
+2025-11-23 14:28:01,641 - src.preprocessing - INFO - Saved selected features to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\selected_features.json
+2025-11-23 14:28:01,641 - __main__ - INFO - Selected 40 features
+2025-11-23 14:28:01,641 - __main__ - INFO - 
+[4/8] SPLITTING DATA...
+2025-11-23 14:28:01,650 - __main__ - INFO - Train: 4962, Val: 1064, Test: 1064
+2025-11-23 14:28:01,650 - __main__ - INFO - 
+[5/8] TRAINING BASE LEARNERS...
+2025-11-23 14:28:01,651 - __main__ - INFO - Training XGBoost...
+2025-11-23 14:28:02,045 - __main__ - INFO - ✓ XGBoost trained in 0.39s
+2025-11-23 14:28:02,045 - __main__ - INFO - Training LightGBM...
+2025-11-23 14:28:02,518 - __main__ - INFO - ✓ LightGBM trained in 0.47s
+2025-11-23 14:28:02,518 - __main__ - INFO - Training CatBoost...
+2025-11-23 14:28:04,462 - __main__ - INFO - ✓ CatBoost trained in 1.94s
+2025-11-23 14:28:04,463 - __main__ - INFO - Training GradientBoosting...
+2025-11-23 14:28:09,575 - __main__ - INFO - ✓ GradientBoosting trained in 5.11s
+2025-11-23 14:28:09,575 - __main__ - INFO - ✓ All 4 base models trained
+2025-11-23 14:28:09,639 - __main__ - INFO - xgboost - AUC: 1.0000, F1: 0.9994
+2025-11-23 14:28:09,655 - __main__ - INFO - lightgbm - AUC: 1.0000, F1: 0.9994
+2025-11-23 14:28:09,667 - __main__ - INFO - catboost - AUC: 1.0000, F1: 0.9977
+2025-11-23 14:28:09,679 - __main__ - INFO - gradboost - AUC: 1.0000, F1: 1.0000
+2025-11-23 14:28:09,683 - __main__ - INFO - Saved base model metrics to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\base_models_metrics.csv
+2025-11-23 14:28:09,683 - __main__ - INFO - 
+[6/8] BUILDING STACKING ENSEMBLE...
+2025-11-23 14:28:09,683 - src.ensemble - INFO - Generating OOF for model 1/4: xgboost
+2025-11-23 14:28:11,028 - src.ensemble - INFO - ✓ Completed OOF for xgboost
+2025-11-23 14:28:11,028 - src.ensemble - INFO - Generating OOF for model 2/4: lightgbm
+2025-11-23 14:28:13,294 - src.ensemble - INFO - ✓ Completed OOF for lightgbm
+2025-11-23 14:28:13,295 - src.ensemble - INFO - Generating OOF for model 3/4: catboost
+2025-11-23 14:28:21,920 - src.ensemble - INFO - ✓ Completed OOF for catboost
+2025-11-23 14:28:21,920 - src.ensemble - INFO - Generating OOF for model 4/4: gradboost
+2025-11-23 14:28:42,351 - src.ensemble - INFO - ✓ Completed OOF for gradboost
+2025-11-23 14:28:42,351 - src.ensemble - INFO - OOF features shape: train=(4962, 4), val=(1064, 4)
+2025-11-23 14:28:42,352 - src.ensemble - INFO - Training meta-learner on (4962, 4) OOF features
+2025-11-23 14:28:42,371 - src.ensemble - INFO - C=0.01: CV AUC=1.0000
+2025-11-23 14:28:42,393 - src.ensemble - INFO - C=0.1: CV AUC=1.0000
+2025-11-23 14:28:42,414 - src.ensemble - INFO - C=1.0: CV AUC=1.0000
+2025-11-23 14:28:42,436 - src.ensemble - INFO - C=10.0: CV AUC=1.0000
+2025-11-23 14:28:42,436 - src.ensemble - INFO - ✓ Best C=0.01 (CV AUC=1.0000)
+2025-11-23 14:28:42,448 - src.ensemble - INFO - Stacking classifier validated - AUC: 1.0000, F1: 1.0000
+2025-11-23 14:28:42,449 - __main__ - INFO - Stacking - AUC: 1.0000, F1: 1.0000
+2025-11-23 14:28:42,449 - __main__ - INFO - 
+[7/8] CALIBRATING ENSEMBLE...
+2025-11-23 14:28:42,467 - src.evaluate - INFO - sigmoid: Brier=0.0001, ECE=0.2002
+2025-11-23 14:28:42,479 - src.evaluate - INFO - isotonic: Brier=0.0000, ECE=0.0018
+2025-11-23 14:28:42,479 - src.evaluate - INFO - ✓ Selected calibration method: isotonic
+2025-11-23 14:28:42,479 - __main__ - INFO - Calibration - Brier: 0.0000, ECE: 0.0018
+2025-11-23 14:28:42,479 - __main__ - INFO - 
+[8/8] OPTIMIZING THRESHOLDS...
+2025-11-23 14:28:42,667 - src.evaluate - INFO - Optimal thresholds: F1=0.06, Youden=0.98, SensFirst=0.06
+2025-11-23 14:28:42,668 - __main__ - INFO - Saved optimal threshold: 0.0600
+2025-11-23 14:28:42,710 - __main__ - INFO - Saved ensemble model to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\ir_ensemble_best.pkl
+2025-11-23 14:28:42,711 - __main__ - INFO - 
+================================================================================
+2025-11-23 14:28:42,711 - __main__ - INFO - TRAINING COMPLETE in 48.34s
+2025-11-23 14:28:42,711 - __main__ - INFO - ================================================================================
+
+2025-11-23 14:28:42,718 - __main__ - INFO - ✓ Training pipeline completed successfully
+2025-11-23 14:31:12,244 - __main__ - INFO - ================================================================================
+2025-11-23 14:31:12,244 - __main__ - INFO - STARTING INSULIN RESISTANCE PREDICTION PIPELINE
+2025-11-23 14:31:12,245 - __main__ - INFO - ================================================================================
+2025-11-23 14:31:12,245 - __main__ - INFO - 
+[1/8] LOADING DATA...
+2025-11-23 14:31:12,245 - src.data_loader - INFO - Loading data from C:\Users\rahul\Documents\code\projects\ir prediction\data\all_datasets_merged.csv
+2025-11-23 14:31:12,440 - src.data_loader - INFO - Loaded 57092 records with 61 columns
+2025-11-23 14:31:12,441 - src.data_loader - INFO - Creating 'ir_label' from glucose and insulin using HOMA-IR
+2025-11-23 14:31:12,451 - src.data_loader - WARNING - Dropped 50000 rows with missing glucose/insulin
+2025-11-23 14:31:12,451 - src.data_loader - INFO - Created 'ir_label' based on HOMA-IR threshold 2.5
+2025-11-23 14:31:12,452 - src.data_loader - INFO - Target variable 'ir_label' distribution:
+ir_label
+1    5670
+0    1422
+Name: count, dtype: int64
+2025-11-23 14:31:12,453 - src.data_loader - WARNING - Found 2 records with invalid age values
+2025-11-23 14:31:12,456 - src.data_loader - INFO - Data validation complete: 7090 records remaining
+2025-11-23 14:31:12,456 - __main__ - INFO - Loaded 7090 records with 63 columns
+2025-11-23 14:31:12,456 - __main__ - INFO - 
+[2/8] ENGINEERING FEATURES...
+2025-11-23 14:31:12,459 - src.features - INFO - ✓ Computed age × BMI interaction
+2025-11-23 14:31:12,461 - src.features - INFO - ✓ Computed BMI categories
+2025-11-23 14:31:12,462 - src.features - INFO - ✓ Computed age groups
+2025-11-23 14:31:12,463 - __main__ - INFO - Total features after engineering: 72
+2025-11-23 14:31:12,463 - __main__ - INFO - 
+[3/8] PREPROCESSING...
+2025-11-23 14:31:12,465 - src.preprocessing - INFO - Fitting preprocessor...
+2025-11-23 14:31:12,473 - src.preprocessing - WARNING - Removed 3 numeric columns with all NaN values
+2025-11-23 14:31:12,473 - src.preprocessing - INFO - Numeric columns: 52
+2025-11-23 14:31:12,473 - src.preprocessing - INFO - Categorical columns: 16
+2025-11-23 14:31:12,478 - src.preprocessing - INFO - Fitted KNN imputer
+2025-11-23 14:31:12,497 - src.preprocessing - INFO - Fitted 15 OneHot and 1 Ordinal encoders
+2025-11-23 14:31:16,282 - src.preprocessing - INFO - Selected 40 features (MI threshold=0.001)
+2025-11-23 14:31:19,148 - src.preprocessing - INFO - Saved preprocessor to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\feature_transformer.pkl
+2025-11-23 14:31:19,149 - src.preprocessing - INFO - Saved selected features to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\selected_features.json
+2025-11-23 14:31:19,149 - __main__ - INFO - Selected 40 features
+2025-11-23 14:31:19,150 - __main__ - INFO - 
+[4/8] SPLITTING DATA...
+2025-11-23 14:31:19,158 - __main__ - INFO - Train: 4962, Val: 1064, Test: 1064
+2025-11-23 14:31:19,158 - __main__ - INFO - 
+[5/8] TRAINING BASE LEARNERS...
+2025-11-23 14:31:19,158 - __main__ - INFO - Training XGBoost...
+2025-11-23 14:31:19,493 - __main__ - INFO - ✓ XGBoost trained in 0.33s
+2025-11-23 14:31:19,493 - __main__ - INFO - Training LightGBM...
+2025-11-23 14:31:19,785 - __main__ - INFO - ✓ LightGBM trained in 0.29s
+2025-11-23 14:31:19,786 - __main__ - INFO - Training CatBoost...
+2025-11-23 14:31:21,623 - __main__ - INFO - ✓ CatBoost trained in 1.84s
+2025-11-23 14:31:21,624 - __main__ - INFO - Training GradientBoosting...
+2025-11-23 14:31:26,680 - __main__ - INFO - ✓ GradientBoosting trained in 5.06s
+2025-11-23 14:31:26,680 - __main__ - INFO - ✓ All 4 base models trained
+2025-11-23 14:31:26,698 - __main__ - INFO - xgboost - AUC: 1.0000, F1: 0.9994
+2025-11-23 14:31:26,713 - __main__ - INFO - lightgbm - AUC: 1.0000, F1: 0.9994
+2025-11-23 14:31:26,725 - __main__ - INFO - catboost - AUC: 1.0000, F1: 0.9977
+2025-11-23 14:31:26,736 - __main__ - INFO - gradboost - AUC: 1.0000, F1: 1.0000
+2025-11-23 14:31:26,740 - __main__ - INFO - Saved base model metrics to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\base_models_metrics.csv
+2025-11-23 14:31:26,740 - __main__ - INFO - 
+[6/8] BUILDING STACKING ENSEMBLE...
+2025-11-23 14:31:26,740 - src.ensemble - INFO - Generating OOF for model 1/4: xgboost
+2025-11-23 14:31:27,966 - src.ensemble - INFO - ✓ Completed OOF for xgboost
+2025-11-23 14:31:27,966 - src.ensemble - INFO - Generating OOF for model 2/4: lightgbm
+2025-11-23 14:31:29,353 - src.ensemble - INFO - ✓ Completed OOF for lightgbm
+2025-11-23 14:31:29,353 - src.ensemble - INFO - Generating OOF for model 3/4: catboost
+2025-11-23 14:31:37,293 - src.ensemble - INFO - ✓ Completed OOF for catboost
+2025-11-23 14:31:37,294 - src.ensemble - INFO - Generating OOF for model 4/4: gradboost
+2025-11-23 14:38:41,605 - src.data_loader - INFO - Loading data from C:\Users\rahul\Documents\code\projects\ir prediction\data\all_datasets_merged.csv
+2025-11-23 14:38:41,794 - src.data_loader - INFO - Loaded 57092 records with 61 columns
+2025-11-23 14:38:41,795 - src.data_loader - INFO - Creating 'ir_label' from glucose and insulin using HOMA-IR
+2025-11-23 14:38:41,809 - src.data_loader - WARNING - Dropped 50000 rows with missing glucose/insulin
+2025-11-23 14:38:41,809 - src.data_loader - INFO - Created 'ir_label' based on HOMA-IR threshold 2.5
+2025-11-23 14:38:41,810 - src.data_loader - INFO - Target variable 'ir_label' distribution:
+ir_label
+1    5670
+0    1422
+Name: count, dtype: int64
+2025-11-23 14:38:41,811 - src.data_loader - WARNING - Found 2 records with invalid age values
+2025-11-23 14:38:41,815 - src.data_loader - INFO - Data validation complete: 7090 records remaining
+2025-11-23 14:38:41,820 - src.features - INFO - ✓ Computed age × BMI interaction
+2025-11-23 14:38:41,824 - src.features - INFO - ✓ Computed BMI categories
+2025-11-23 14:38:41,826 - src.features - INFO - ✓ Computed age groups
+2025-11-23 14:40:19,738 - __main__ - INFO - ================================================================================
+2025-11-23 14:40:19,738 - __main__ - INFO - STARTING INSULIN RESISTANCE PREDICTION PIPELINE
+2025-11-23 14:40:19,738 - __main__ - INFO - ================================================================================
+2025-11-23 14:40:19,738 - __main__ - INFO - 
+[1/8] LOADING DATA...
+2025-11-23 14:40:19,739 - src.data_loader - INFO - Loading data from C:\Users\rahul\Documents\code\projects\ir prediction\data\all_datasets_merged.csv
+2025-11-23 14:40:19,919 - src.data_loader - INFO - Loaded 57092 records with 61 columns
+2025-11-23 14:40:19,919 - src.data_loader - INFO - Creating 'ir_label' from glucose and insulin using HOMA-IR
+2025-11-23 14:40:19,929 - src.data_loader - WARNING - Dropped 50000 rows with missing glucose/insulin
+2025-11-23 14:40:19,930 - src.data_loader - INFO - Created 'ir_label' based on HOMA-IR threshold 2.5
+2025-11-23 14:40:19,931 - src.data_loader - INFO - Target variable 'ir_label' distribution:
+ir_label
+1    5670
+0    1422
+Name: count, dtype: int64
+2025-11-23 14:40:19,931 - src.data_loader - WARNING - Found 2 records with invalid age values
+2025-11-23 14:40:19,933 - src.data_loader - INFO - Data validation complete: 7090 records remaining
+2025-11-23 14:40:19,934 - __main__ - INFO - Loaded 7090 records with 63 columns
+2025-11-23 14:40:19,934 - __main__ - INFO - 
+[2/8] ENGINEERING FEATURES...
+2025-11-23 14:40:19,938 - src.features - INFO - ✓ Computed age × BMI interaction
+2025-11-23 14:40:19,940 - src.features - INFO - ✓ Computed BMI categories
+2025-11-23 14:40:19,941 - src.features - INFO - ✓ Computed age groups
+2025-11-23 14:40:19,941 - __main__ - INFO - Total features after engineering: 72
+2025-11-23 14:40:19,941 - __main__ - INFO - 
+[3/8] PREPROCESSING...
+2025-11-23 14:40:19,943 - src.preprocessing - INFO - Fitting preprocessor...
+2025-11-23 14:40:19,950 - src.preprocessing - WARNING - Removed 3 numeric columns with all NaN values
+2025-11-23 14:40:19,950 - src.preprocessing - INFO - Numeric columns: 52
+2025-11-23 14:40:19,950 - src.preprocessing - INFO - Categorical columns: 16
+2025-11-23 14:40:19,955 - src.preprocessing - INFO - Fitted KNN imputer
+2025-11-23 14:40:19,972 - src.preprocessing - INFO - Fitted 15 OneHot and 1 Ordinal encoders
+2025-11-23 14:40:23,685 - src.preprocessing - INFO - Selected 40 features (MI threshold=0.001)
+2025-11-23 14:40:26,525 - src.preprocessing - INFO - Saved preprocessor to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\feature_transformer.pkl
+2025-11-23 14:40:26,527 - src.preprocessing - INFO - Saved selected features to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\selected_features.json
+2025-11-23 14:40:26,527 - __main__ - INFO - Selected 40 features
+2025-11-23 14:40:26,527 - __main__ - INFO - 
+[4/8] SPLITTING DATA...
+2025-11-23 14:40:26,535 - __main__ - INFO - Train: 4962, Val: 1064, Test: 1064
+2025-11-23 14:40:26,535 - __main__ - INFO - 
+[5/8] TRAINING BASE LEARNERS...
+2025-11-23 14:40:26,536 - __main__ - INFO - Training XGBoost...
+2025-11-23 14:40:26,870 - __main__ - INFO - ✓ XGBoost trained in 0.33s
+2025-11-23 14:40:26,871 - __main__ - INFO - Training LightGBM...
+2025-11-23 14:40:27,237 - __main__ - INFO - ✓ LightGBM trained in 0.37s
+2025-11-23 14:40:27,237 - __main__ - INFO - Training CatBoost...
+2025-11-23 14:40:29,062 - __main__ - INFO - ✓ CatBoost trained in 1.82s
+2025-11-23 14:40:29,062 - __main__ - INFO - Training GradientBoosting...
+2025-11-23 14:40:34,073 - __main__ - INFO - ✓ GradientBoosting trained in 5.01s
+2025-11-23 14:40:34,073 - __main__ - INFO - ✓ All 4 base models trained
+2025-11-23 14:40:34,090 - __main__ - INFO - xgboost - AUC: 1.0000, F1: 0.9994
+2025-11-23 14:40:34,104 - __main__ - INFO - lightgbm - AUC: 1.0000, F1: 0.9994
+2025-11-23 14:40:34,116 - __main__ - INFO - catboost - AUC: 1.0000, F1: 0.9977
+2025-11-23 14:40:34,128 - __main__ - INFO - gradboost - AUC: 1.0000, F1: 1.0000
+2025-11-23 14:40:34,138 - __main__ - INFO - Saved base model metrics to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\base_models_metrics.csv
+2025-11-23 14:40:34,138 - __main__ - INFO - 
+[6/8] BUILDING STACKING ENSEMBLE...
+2025-11-23 14:40:34,139 - src.ensemble - INFO - Generating OOF for model 1/4: xgboost
+2025-11-23 14:40:35,324 - src.ensemble - INFO - ✓ Completed OOF for xgboost
+2025-11-23 14:40:35,324 - src.ensemble - INFO - Generating OOF for model 2/4: lightgbm
+2025-11-23 14:40:36,668 - src.ensemble - INFO - ✓ Completed OOF for lightgbm
+2025-11-23 14:40:36,668 - src.ensemble - INFO - Generating OOF for model 3/4: catboost
+2025-11-23 14:40:44,478 - src.ensemble - INFO - ✓ Completed OOF for catboost
+2025-11-23 14:40:44,478 - src.ensemble - INFO - Generating OOF for model 4/4: gradboost
+2025-11-23 14:41:04,301 - src.ensemble - INFO - ✓ Completed OOF for gradboost
+2025-11-23 14:41:04,302 - src.ensemble - INFO - OOF features shape: train=(4962, 4), val=(1064, 4)
+2025-11-23 14:41:04,302 - src.ensemble - INFO - Training meta-learner on (4962, 4) OOF features
+2025-11-23 14:41:04,320 - src.ensemble - INFO - C=0.01: CV AUC=1.0000
+2025-11-23 14:41:04,341 - src.ensemble - INFO - C=0.1: CV AUC=1.0000
+2025-11-23 14:41:04,362 - src.ensemble - INFO - C=1.0: CV AUC=1.0000
+2025-11-23 14:41:04,382 - src.ensemble - INFO - C=10.0: CV AUC=1.0000
+2025-11-23 14:41:04,382 - src.ensemble - INFO - ✓ Best C=0.01 (CV AUC=1.0000)
+2025-11-23 14:41:04,393 - src.ensemble - INFO - Stacking classifier validated - AUC: 1.0000, F1: 1.0000
+2025-11-23 14:41:04,394 - __main__ - INFO - Stacking - AUC: 1.0000, F1: 1.0000
+2025-11-23 14:41:04,394 - __main__ - INFO - 
+[7/8] CALIBRATING ENSEMBLE...
+2025-11-23 14:41:04,411 - src.evaluate - INFO - sigmoid: Brier=0.0001, ECE=0.2002
+2025-11-23 14:41:04,424 - src.evaluate - INFO - isotonic: Brier=0.0000, ECE=0.0018
+2025-11-23 14:41:04,425 - src.evaluate - INFO - ✓ Selected calibration method: isotonic
+2025-11-23 14:41:04,425 - __main__ - INFO - Calibration - Brier: 0.0000, ECE: 0.0018
+2025-11-23 14:41:04,425 - __main__ - INFO - 
+[8/8] OPTIMIZING THRESHOLDS...
+2025-11-23 14:41:04,609 - src.evaluate - INFO - Optimal thresholds: F1=0.06, Youden=0.98, SensFirst=0.06
+2025-11-23 14:41:04,610 - __main__ - INFO - Saved optimal threshold: 0.0600
+2025-11-23 14:41:04,648 - __main__ - INFO - Saved ensemble model to C:\Users\rahul\Documents\code\projects\ir prediction\ml_project\models\ir_ensemble_best.pkl
+2025-11-23 14:41:04,651 - __main__ - INFO - 
+================================================================================
+2025-11-23 14:41:04,651 - __main__ - INFO - TRAINING COMPLETE in 44.91s
+2025-11-23 14:41:04,651 - __main__ - INFO - ================================================================================
+
+2025-11-23 14:41:04,657 - __main__ - INFO - ✓ Training pipeline completed successfully
+2025-11-23 14:44:47,959 - src.data_loader - INFO - Loading data from C:\Users\rahul\Documents\code\projects\ir prediction\data\all_datasets_merged.csv
+2025-11-23 14:44:48,145 - src.data_loader - INFO - Loaded 57092 records with 61 columns
+2025-11-23 14:44:48,146 - src.data_loader - INFO - Creating 'ir_label' from glucose and insulin using HOMA-IR
+2025-11-23 14:44:48,157 - src.data_loader - WARNING - Dropped 50000 rows with missing glucose/insulin
+2025-11-23 14:44:48,157 - src.data_loader - INFO - Created 'ir_label' based on HOMA-IR threshold 2.5
+2025-11-23 14:44:48,158 - src.data_loader - INFO - Target variable 'ir_label' distribution:
+ir_label
+1    5670
+0    1422
+Name: count, dtype: int64
+2025-11-23 14:44:48,159 - src.data_loader - WARNING - Found 2 records with invalid age values
+2025-11-23 14:44:48,162 - src.data_loader - INFO - Data validation complete: 7090 records remaining
+2025-11-23 14:44:48,166 - src.features - INFO - ✓ Computed age × BMI interaction
+2025-11-23 14:44:48,168 - src.features - INFO - ✓ Computed BMI categories
+2025-11-23 14:44:48,169 - src.features - INFO - ✓ Computed age groups
