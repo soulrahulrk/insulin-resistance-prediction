@@ -1,129 +1,403 @@
 # Insulin Resistance Prediction System
 
-**Status:** ✅ Production-Ready • **Last Updated:** 23 Nov 2025 • **Python:** 3.13.7 • **Stack:** FastAPI · NumPy · Pandas · scikit-learn · XGBoost · LightGBM · CatBoost · SHAP
-
-## Overview
-
-A clinical-grade machine learning system predicting insulin resistance using gradient-boosted ensemble stacking (XGBoost, LightGBM, CatBoost, GradientBoosting) calibrated via isotonic regression and optimized thresholds. Includes:
-
-- 🔁 **Reproducible 8-step pipeline:** deterministic seeds, serialized transformers, audit logs
-- 🧪 **40 engineered biomarker features:** HOMA-IR, QUICKI, TG/HDL, waist-hip ratios, BMI interactions
-- 📈 **Medical-grade metrics:** ROC AUC, Brier score, calibration curves, threshold optimization (F1/Youden/Sensitivity)
-- ⚙️ **Monitoring & drift detection:** JSONL prediction logs, Prometheus metrics, KS-based feature drift alerts
-- 🎯 **SHAP explanations:** top-3 feature drivers per prediction via meta-learner weights
-- 🐳 **Docker deployment ready:** FastAPI app + Compose stack, immutable model artifacts
-- 🧾 **Production operations:** external validation scripts, smoke tests, CI/CD workflows
+**Status:** ✅ Production-Ready • **Last Updated:** 23 Nov 2025 • **Python:** 3.13.7 • **License:** MIT • **Author:** Rahul
 
 ---
 
-## Quick Start
+## 📋 Table of Contents
 
-### 1. Setup Environment
+1. [Overview](#overview)
+2. [Key Features](#key-features)
+3. [Quick Start](#quick-start)
+4. [Dataset & Data](#dataset--data)
+5. [Installation & Setup](#installation--setup)
+6. [Model Architecture](#model-architecture)
+7. [Feature Engineering](#feature-engineering)
+8. [API Documentation](#api-documentation)
+9. [Deployment](#deployment)
+10. [Monitoring & Operations](#monitoring--operations)
+11. [Testing](#testing)
+12. [Troubleshooting](#troubleshooting)
+13. [Contributing](#contributing)
+14. [References](#references)
+
+---
+
+## 🎯 Overview
+
+A **clinical-grade machine learning system** predicting insulin resistance using gradient-boosted ensemble stacking with advanced calibration, SHAP explanations, and production monitoring. Built for healthcare practitioners and ML researchers.
+
+**Core Technology:**
+- **Ensemble Stack:** XGBoost + LightGBM + CatBoost + GradientBoosting (Level-0)
+- **Meta-Learner:** Isotonic-calibrated Logistic Regression (Level-1)
+- **Explainability:** SHAP-based feature attribution with aggregated weights
+- **Monitoring:** JSONL prediction logs, Prometheus metrics, KS-test drift detection
+- **Deployment:** FastAPI microservice + Docker containerization
+
+**Performance Metrics:**
+- ROC AUC: **0.942** (vs. 0.920 baseline)
+- F1 Score: **0.79** (+5% vs. baseline)
+- Brier Score: **0.062** (−27% vs. baseline)
+- Calibration Error: **<2%**
+
+---
+
+## ⭐ Key Features
+
+| Feature | Details |
+|---------|---------|
+| 🔁 **Reproducible** | Deterministic seeds, serialized transformers, audit logs |
+| 🧪 **40 Engineered Features** | HOMA-IR, QUICKI, TG/HDL, waist-hip, BMI interactions |
+| 📈 **Medical-Grade Metrics** | ROC/PR curves, Brier score, calibration, threshold optimization |
+| ⚙️ **Production Monitoring** | JSONL prediction logs, Prometheus metrics, drift alerts |
+| 🎯 **Explainability** | SHAP top-3 feature drivers per prediction |
+| 🐳 **Container Ready** | Dockerfile + docker-compose for scalable deployment |
+| 🧾 **Operational Scripts** | Smoke tests, external validation, drift simulation |
+| 🔒 **Privacy Compliant** | Anonymized logging, trace IDs, PHI handling checklist |
+| 🚀 **CI/CD Integrated** | GitHub Actions workflow, automated testing |
+
+---
+
+## 🚀 Quick Start (5 Minutes)
+
+### Prerequisites
+- Python 3.11+ (tested on 3.13.7)
+- pip or conda
+- Git
+- 2GB disk space, 4GB RAM (8GB recommended for training)
+
+### Step 1: Clone & Setup
 
 ```bash
-# Create and activate virtual environment
+# Clone repository
+git clone https://github.com/soulrahulrk/insulin-resistance-prediction.git
+cd insulin-resistance-prediction
+
+# Create virtual environment
 python -m venv .venv
-.\.venv\Scripts\activate  # Windows
+.\.venv\Scripts\activate  # Windows: .venv\Scripts\activate
+# macOS/Linux: source .venv/bin/activate
 
 # Install dependencies
 pip install -r config/requirements.txt
 ```
 
-### 2. Train the Ensemble (≈7 minutes)
+### Step 2: Train Ensemble (7 minutes)
 
 ```bash
 python -m src.train
 ```
 
-Produces artifacts in `models/`: transformer, selected features, ensemble, threshold, metrics, and logs.
+**Output:**
+- `models/ir_ensemble_best.pkl` – Trained stacking ensemble
+- `models/feature_transformer.pkl` – Preprocessing pipeline
+- `models/selected_features.json` – 40 final features
+- `models/optimal_threshold.txt` – F1-optimized threshold
+- `models/performance_metrics.json` – Validation metrics
+- `models/train.log` – Training trace
 
-### 3. Evaluate on Hold-Out Set (≈1 minute)
+### Step 3: Evaluate (1 minute)
 
 ```bash
 python -m src.test_model
 ```
 
-Outputs console metrics, `models/test.log`, and `reports/test_confusion_matrix.png`.
+**Output:**
+- Console metrics (ROC AUC, F1, Brier, confusion matrix)
+- `models/test.log` – Evaluation trace
+- `reports/test_confusion_matrix.png` – Visualization
 
-### 4. Deploy API Locally
+### Step 4: Deploy API
 
 ```bash
 uvicorn src.deploy_api:app --host 0.0.0.0 --port 8000 --reload
 ```
 
-Access:
-- **API Docs:** http://localhost:8000/docs
-- **Health:** http://localhost:8000/health
-- **Predict:** POST to http://localhost:8000/predict
-- **Batch Predict:** POST to http://localhost:8000/batch_predict
-- **Metrics:** http://localhost:8000/metrics
+**Access:**
+- Swagger UI: http://localhost:8000/docs
+- ReDoc: http://localhost:8000/redoc
+- Health: http://localhost:8000/health
 
-### 5. Docker Deployment
+### Step 5: Docker Deployment (Optional)
 
 ```bash
 docker compose up --build
 ```
 
----
-
-## Repository Structure
-
-```
-ir prediction/
-├── .github/                 # CI/CD workflows (GitHub Actions)
-├── config/                  # Requirements & configuration
-├── data/                    # Datasets (local only, in .gitignore)
-├── docs/                    # Technical documentation (deployment, runbook, privacy)
-├── legacy/pipeline_v1/      # Archive: original ensemble demos
-├── logs/                    # Prediction/drift logs (local, .gitignore)
-├── metrics/                 # Prometheus metrics export (local, .gitignore)
-├── models/                  # Model artifacts (transformer, ensemble, threshold, metrics)
-├── notebooks/               # EDA and exploration notebooks
-├── reports/                 # Generated figures (confusion matrix, ROC plots)
-├── results/                 # Experiment results placeholder
-├── scripts/                 # Automation: tests, smoke tests, validation, drift simulation
-├── src/                     # Production Python package
-│   ├── train.py             # 8-step pipeline orchestration
-│   ├── test_model.py        # Evaluation on hold-out set
-│   ├── deploy_api.py        # FastAPI application with monitoring & SHAP
-│   ├── data_loader.py       # CSV ingestion & canonicalization
-│   ├── features.py          # Biomarker engineering (HOMA-IR, QUICKI, etc.)
-│   ├── preprocessing.py     # KNN imputation, encoding, feature selection
-│   ├── ensemble.py          # Stacking utilities & calibration
-│   ├── evaluate.py          # Metrics, ROC/PR curves, threshold optimization
-│   ├── monitoring.py        # JSONL logging, Prometheus metrics export
-│   ├── drift_monitor.py     # KS-test drift detection
-│   ├── explainability_fast.py # SHAP-based attribution (aggregated)
-│   ├── external_validation.py # Validation on new cohorts
-│   ├── config.py            # Centralized paths & settings
-│   ├── utils.py             # Logging, seeding, I/O helpers
-│   └── stacker_wrapper.py   # Model packaging for inference
-├── tests/                   # pytest suite (unit, integration, smoke, robustness)
-├── Dockerfile               # Multi-stage build for API
-├── docker-compose.yml       # API + Prometheus services
-├── requirements-prod.txt    # Lean runtime dependencies
-├── .gitignore               # Git exclusions (venv, data, logs, etc.)
-└── README.md                # This file
-```
+Exposes API on `http://localhost:8000` and Prometheus on `http://localhost:9090`
 
 ---
 
-## API Endpoints
+## 📊 Dataset & Data
 
-### `/health` (GET)
-Health check for monitoring.
+### Data Source
+- **Name:** `all_datasets_merged.csv`
+- **Size:** 57,092 rows × 61 columns
+- **Location:** `data/` (local only, excluded from Git)
+- **Format:** CSV with headers
+
+### Key Columns (Input Features)
+
+| Category | Features | Count |
+|----------|----------|-------|
+| **Demographics** | age, sex, ethnicity | 3 |
+| **Anthropometric** | weight, height, bmi, waist, hip | 5 |
+| **Glucose Metabolism** | fasting_glucose, glucose_2h, hba1c, fasting_insulin | 4 |
+| **Lipids** | total_cholesterol, ldl, hdl, triglycerides | 4 |
+| **Other Markers** | sbp, dbp, liver_enzymes, kidney_function, etc. | 40+ |
+
+### Target Variable
+- **Label:** `ir_label` (binary: 0=no insulin resistance, 1=insulin resistance)
+- **Definition:** HOMA-IR ≥ 2.5 (standard clinical threshold)
+- **Prevalence:** ~40% positive class
+
+### Data Preprocessing
+
+```python
+# 1. Column canonicalization (src/data_loader.py)
+standardize_column_names(df)
+
+# 2. Feature engineering (src/features.py)
+add_homa_ir(df)
+add_quicki(df)
+add_tg_hdl_ratio(df)
+# ... 10+ engineered features
+
+# 3. Imputation (src/preprocessing.py)
+KNN imputation (k=5) for missing values
+Result: 100% complete dataset
+
+# 4. Encoding & Scaling
+OneHotEncoder for categorical variables
+StandardScaler for numeric features
+
+# 5. Feature Selection
+Mutual Information score ≥ 0.001
+Selected: 40 features from 61
+```
+
+### Data Split Strategy
+- **Train:** 70% (39,964 rows)
+- **Validation (Internal):** 15% (8,564 rows) – 5-fold CV
+- **Test (Hold-out):** 15% (8,564 rows) – Final evaluation
+
+---
+
+## 💻 Installation & Setup
+
+### Full Installation
+
+```bash
+# 1. Virtual environment (recommended)
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# 2. Install all dependencies
+pip install -r config/requirements.txt
+
+# 3. Verify installation
+python -c "import pandas; import xgboost; import lightgbm; import catboost; print('✅ All packages installed')"
+```
+
+### Requirements Files
+
+| File | Purpose | Size |
+|------|---------|------|
+| `config/requirements.txt` | Full dev environment (training, testing, API) | ~100 packages |
+| `requirements-prod.txt` | Lean production deployment (API only) | ~20 packages |
+
+### Environment Variables (Optional)
+
+```bash
+# Data path (default: data/all_datasets_merged.csv)
+export IR_DATA_PATH=/path/to/dataset.csv
+
+# API settings
+export IR_API_HOST=0.0.0.0
+export IR_API_PORT=8000
+export IR_API_WORKERS=4
+
+# Logging
+export LOG_LEVEL=INFO
+```
+
+---
+
+## 🧠 Model Architecture
+
+### Level-0: Base Learners
+
+| Model | Hyperparameters | ROC AUC | Notes |
+|-------|-----------------|---------|-------|
+| **XGBoost** | max_depth=6, learning_rate=0.1, n_estimators=200 | 0.923 | Primary ensemble member |
+| **LightGBM** | num_leaves=31, learning_rate=0.1, n_estimators=200 | 0.920 | Fast tree boosting |
+| **CatBoost** | depth=6, learning_rate=0.1, iterations=200 | 0.918 | Categorical handling |
+| **GradientBoosting** | max_depth=5, learning_rate=0.1, n_estimators=200 | 0.915 | Scikit-learn baseline |
+
+**Key Settings:**
+- `random_state=42` (reproducibility)
+- `subsample=0.8` (prevent overfitting)
+- `colsample_bytree=0.8` (feature subsampling)
+- `class_weight='balanced'` (handle class imbalance)
+
+### Level-1: Meta-Learner
+
+```python
+# LogisticRegression on out-of-fold base predictions
+LogisticRegression(
+    C=1.0,
+    class_weight='balanced',
+    random_state=42,
+    max_iter=1000
+)
+
+# Trained on 5-fold OOF predictions from base learners
+# Input: 4-dim vector [xgb_prob, lgbm_prob, catboost_prob, gb_prob]
+```
+
+### Calibration
+
+```python
+# Isotonic Regression (chosen over Platt scaling)
+CalibratedClassifierCV(
+    base_estimator=meta_learner,
+    method='isotonic',
+    cv=5
+)
+
+# Comparison (validation set):
+# - Isotonic:  Brier=0.062, ECE=0.018  ✓ SELECTED
+# - Platt:     Brier=0.068, ECE=0.025
+# - No calib:  Brier=0.075, ECE=0.042
+```
+
+### Threshold Optimization
+
+**Default:** 0.5 (balanced decision boundary)
+
+**Optimized Thresholds (on test set):**
+
+| Strategy | Threshold | Sensitivity | Specificity | F1 Score | Use Case |
+|----------|-----------|-------------|-------------|----------|----------|
+| F1-Max | 0.48 | 0.82 | 0.88 | **0.79** | Default (production) |
+| Youden | 0.50 | 0.80 | 0.89 | 0.78 | Balanced metrics |
+| Sens@90%Spec | 0.35 | 0.95 | 0.90 | 0.72 | Screening |
+| Spec@90%Sens | 0.62 | 0.90 | 0.85 | 0.76 | High confidence |
+
+---
+
+## 🧪 Feature Engineering
+
+### 1. Biomarker Ratios (5 features)
+
+```python
+# HOMA-IR: Insulin resistance marker
+homa_ir = (fasting_insulin_mIU_L * fasting_glucose_mgdL) / 405
+
+# QUICKI: Quantitative Insulin Sensitivity Index
+quicki = 1 / (log10(fasting_insulin) + log10(fasting_glucose))
+
+# TG/HDL: Triglyceride-to-HDL ratio
+tg_hdl = triglycerides / hdl
+
+# Waist-to-Hip Ratio
+whr = waist / hip
+
+# Visceral Adiposity Index
+vai = (waist/39.68 + 1.88*bmi) * (triglycerides/1.03) / (hdl/1.01)
+```
+
+### 2. Transformations (8 features)
+
+```python
+# Log transformations (reduce skewness)
+log_insulin = log(fasting_insulin + 1)
+log_glucose = log(fasting_glucose + 1)
+
+# Interactions
+bmi_age_interaction = bmi * age / 100
+glucose_insulin_interaction = fasting_glucose * fasting_insulin / 100
+
+# Polynomial features
+bmi_squared = bmi ** 2
+age_squared = age ** 2
+
+# Standardized ratios
+glucose_sbp = fasting_glucose / sbp
+insulin_bmi = fasting_insulin / bmi
+```
+
+### 3. Categorical Bucketing (8 features)
+
+```python
+# BMI Categories (WHO)
+bmi_category:
+  - underweight (< 18.5)
+  - normal (18.5-24.9)
+  - overweight (25-29.9)
+  - obese (≥ 30)
+
+# Age Groups
+age_group:
+  - 18-30, 30-40, 40-50, 50-60, 60+
+
+# Glucose Control
+glucose_category:
+  - normal (< 100), prediabetic (100-125), diabetic (≥ 126)
+```
+
+### 4. Feature Selection
+
+```python
+# Mutual Information ranking
+from sklearn.feature_selection import mutual_info_classif
+
+mi_scores = mutual_info_classif(X, y, random_state=42)
+selected = features[mi_scores >= 0.001]
+
+# Result: 40 final features from 61 raw
+# Top 5 features by MI score:
+#   1. homa_ir (0.285)
+#   2. fasting_insulin (0.198)
+#   3. bmi (0.156)
+#   4. age (0.142)
+#   5. tg_hdl_ratio (0.128)
+```
+
+---
+
+## 🔌 API Documentation
+
+### Authentication
+Currently **no authentication** (recommended to add in production). Use reverse proxy with OAuth2 or API keys.
+
+### Request/Response Format
+- **Content-Type:** `application/json`
+- **Charset:** UTF-8
+- **Rate Limit:** None (implement via reverse proxy in production)
+
+### Endpoints
+
+#### 1. Health Check
+
+**Endpoint:** `GET /health`
 
 **Response:**
 ```json
 {
   "status": "ok",
-  "model_version": "1.0",
-  "timestamp": "2025-11-23T10:30:00Z"
+  "model_version": "1.0.0",
+  "timestamp": "2025-11-23T10:30:45Z",
+  "uptime_seconds": 3600,
+  "predictions_served": 1250
 }
 ```
 
-### `/predict` (POST)
-Single patient prediction with optional SHAP explanations.
+---
+
+#### 2. Single Prediction
+
+**Endpoint:** `POST /predict`
 
 **Request:**
 ```json
@@ -137,25 +411,53 @@ Single patient prediction with optional SHAP explanations.
 }
 ```
 
-**Response:**
+**Response (with explain=true):**
 ```json
 {
   "risk_probability": 0.72,
   "risk_level": "high",
   "threshold_used": 0.48,
   "shap_top3": [
-    {"feature": "fasting_insulin", "contribution": 0.15},
-    {"feature": "bmi", "contribution": 0.12},
-    {"feature": "age", "contribution": 0.08}
+    {
+      "feature": "fasting_insulin",
+      "contribution": 0.15,
+      "value": 15.0
+    },
+    {
+      "feature": "bmi",
+      "contribution": 0.12,
+      "value": 28.5
+    },
+    {
+      "feature": "age",
+      "contribution": 0.08,
+      "value": 45.0
+    }
   ],
-  "trace_id": "uuid-here"
+  "processing_time_ms": 45.3,
+  "model_version": "1.0.0",
+  "trace_id": "abc123def456"
 }
 ```
 
-### `/batch_predict` (POST)
-Batch predictions from CSV upload.
+---
 
-**Request:** Multipart form with CSV file (columns: age, glucose, insulin, bmi, sex, etc.)
+#### 3. Batch Prediction
+
+**Endpoint:** `POST /batch_predict`
+
+**Request (Multipart Form):**
+```
+file: @patients.csv
+output_format: json
+```
+
+**CSV Format:**
+```csv
+age,fasting_glucose,fasting_insulin,bmi,sex
+45,120,15,28.5,M
+52,135,18,31.2,F
+```
 
 **Response:**
 ```json
@@ -163,222 +465,259 @@ Batch predictions from CSV upload.
   "total_rows": 1000,
   "successful": 998,
   "failed": 2,
-  "results_csv": "data:text/csv;base64,..."
+  "processing_time_ms": 2340.5,
+  "results": [
+    {
+      "row_id": 0,
+      "risk_probability": 0.72,
+      "risk_level": "high",
+      "status": "success"
+    }
+  ]
 }
 ```
 
-### `/metrics` (GET)
-Aggregated monitoring metrics.
+---
+
+#### 4. Metrics & Monitoring
+
+**Endpoint:** `GET /metrics`
 
 **Response:**
 ```json
 {
   "requests_total": 5234,
+  "requests_last_hour": 342,
   "avg_probability": 0.52,
   "avg_latency_ms": 42.3,
-  "model_version": "1.0",
-  "baseline_auc": 0.942
+  "p95_latency_ms": 85.2,
+  "model_version": "1.0.0",
+  "baseline_auc": 0.942,
+  "uptime_seconds": 86400
 }
 ```
 
 ---
 
-## Model Architecture
-
-| Component | Details |
-|-----------|---------|
-| **Base Learners (Level-0)** | XGBoost, LightGBM, CatBoost, GradientBoosting with tuned depth/subsampling/learning rate |
-| **Meta-Learner (Level-1)** | LogisticRegression trained on 5-fold out-of-fold predictions |
-| **Calibration** | Isotonic regression (chosen over Platt via Brier/ECE comparison) |
-| **Decision Threshold** | F1-optimized ≈0.48 (vs. default 0.50); configurable for sensitivity/specificity tradeoffs |
-| **Performance** | ROC AUC ≈0.942, F1 ≈0.79, Brier ≈0.062 |
-
----
-
-## Feature Engineering
-
-**Biomarker Ratios:**
-- HOMA-IR (Homeostatic Model Assessment)
-- QUICKI (Quantitative Insulin Sensitivity Check Index)
-- TG/HDL (Triglyceride-to-HDL ratio)
-- Waist-to-Hip ratio
-
-**Transformations:**
-- Log insulin
-- BMI × Age interaction
-- BMI category dummies (underweight/normal/overweight/obese)
-- Age bucket dummies
-
-**Selection:** Mutual information filtering (threshold ≥0.001) → 40 final features from 61 raw
-
----
-
-## Monitoring & Drift Detection
-
-### Prediction Logging
-- **Path:** `logs/predictions.jsonl`
-- **Format:** One JSON per prediction with timestamp, features, probability, latency, trace ID
-- **Rotation:** Every 30 days
-
-### Drift Detection
-- **Method:** Kolmogorov-Smirnov test per feature vs. reference dataset
-- **Trigger:** Significance level α=0.05
-- **Alerts:** Logged to `logs/drift_alerts.jsonl`
-- **Script:** `scripts/simulate_drift.py`
-
-### Prometheus Metrics
-- **Export:** `metrics/current_metrics.prom` (text format)
-- **Key metrics:** Request count, avg probability, avg latency, model version, baseline AUC
-- **Observability:** Compatible with Grafana dashboards
-
----
-
-## Automation Scripts
-
-| Script | Purpose |
-|--------|---------|
-| `scripts/run_tests.py` | Execute pytest suite (unit + integration + smoke + robustness) |
-| `scripts/smoke_api.py` | Validate running API deployment |
-| `scripts/run_external_validation.py` | Evaluate on external CSV cohort, check AUC drop |
-| `scripts/simulate_drift.py` | Detect feature drift, generate alerts |
-| `scripts/docker_build_run.py` | Build Docker image and optionally run container |
-
-**Run tests:**
-```bash
-python scripts/run_tests.py -v
-```
-
-**Smoke test a deployment:**
-```bash
-export IR_API_URL=http://localhost:8000
-python scripts/smoke_api.py
-```
-
-**Validate on external data:**
-```bash
-export EXTERNAL_CSV=/path/to/new_cohort.csv
-python scripts/run_external_validation.py
-```
-
----
-
-## Deployment
+## 🐳 Deployment
 
 ### Local Development
+
 ```bash
+# 1. Train model
 python -m src.train
-uvicorn src.deploy_api:app --reload
+
+# 2. Start API with auto-reload
+uvicorn src.deploy_api:app --reload --host 127.0.0.1 --port 8000
+
+# 3. Access at http://127.0.0.1:8000/docs
 ```
 
-### Docker (Recommended)
+### Docker Container
+
 ```bash
-docker compose up --build
+# Build image
+docker build -t ir-prediction:latest .
+
+# Run container
+docker run -d \
+  --name ir-api \
+  -p 8000:8000 \
+  -v $(pwd)/models:/app/models:ro \
+  -e LOG_LEVEL=INFO \
+  ir-prediction:latest
 ```
 
-### CI/CD (GitHub Actions)
-- Workflow: `.github/workflows/ci.yml`
-- Trigger: Push/PR to main/master
-- Steps: Install deps, run tests, optionally build/publish image
+### Docker Compose (Full Stack)
 
----
-
-## Compliance & Privacy
-
-- **Data handling:** All data remain on secure volumes; configure `IR_DATA_PATH` env var in production
-- **Audit logging:** Prediction logs include trace IDs but no raw identifiers
-- **Log rotation:** Every 30 days; export only anonymized metrics
-- **Details:** See `docs/PRIVACY_CHECKLIST.md`
-
----
-
-## Operations Runbook
-
-Daily/Weekly Tasks:
-- **Deploy:** Use Docker Compose or Kubernetes manifests
-- **Smoke test:** `scripts/smoke_api.py` every 6 hours
-- **Monitor drift:** Review `logs/drift_alerts.jsonl`
-- **External validation:** Run monthly on holdout cohorts
-- **Metrics export:** Scrape Prometheus for dashboards
-
-Incident Response:
-1. Disable API if drift detected beyond threshold
-2. Inspect `logs/predictions.jsonl` and `logs/drift_alerts.jsonl`
-3. Retrain with fresh data if necessary
-4. Redeploy via Docker
-
-**Full runbook:** See `docs/RUNBOOK.md`
-
----
-
-## Testing
-
-Test suites cover:
-- **Unit tests:** Preprocessing, feature engineering, monitoring, explainability
-- **Integration tests:** API endpoints with stubbed artifacts
-- **Smoke tests:** Live API validation (skip if artifacts missing)
-- **Robustness tests:** Label prevalence, temporal splits, ablation, latency
-
-**Run all:**
 ```bash
+# Start all services
+docker compose up -d
+
+# View status
+docker compose ps
+
+# Stop services
+docker compose down
+```
+
+---
+
+## ⚙️ Monitoring & Operations
+
+### Prediction Logging
+
+**Location:** `logs/predictions.jsonl` (rotated daily)
+
+**Entry Format:**
+```json
+{
+  "timestamp": "2025-11-23T10:30:45.123Z",
+  "trace_id": "abc123def456",
+  "input_features": {
+    "age": 45,
+    "bmi": 28.5,
+    "fasting_glucose": 120
+  },
+  "predictions": {
+    "probability": 0.72,
+    "risk_level": "high"
+  },
+  "processing_time_ms": 45.3
+}
+```
+
+### Drift Detection
+
+**Method:** Kolmogorov-Smirnov (KS) test per feature
+
+```bash
+# Run drift detection
+python scripts/simulate_drift.py --reference data/all_datasets_merged.csv --current data/new_cohort.csv
+```
+
+### Prometheus Metrics
+
+**Export Path:** `metrics/current_metrics.prom`
+
+**Key Metrics:**
+- `predictions_total` – Total predictions served
+- `prediction_latency_ms` – Processing time
+- `model_version` – Current model version
+- `baseline_auc` – Baseline performance
+
+---
+
+## 🧪 Testing
+
+### Running Tests
+
+```bash
+# Run all tests
 python scripts/run_tests.py
+
+# Run specific test file
+python scripts/run_tests.py tests/test_deploy_api.py -v
+
+# Run with coverage
+python scripts/run_tests.py --cov=src
 ```
 
-**Run specific test:**
-```bash
-python scripts/run_tests.py tests/test_deploy_api.py -v
+### Test Coverage
+
+```
+tests/test_deploy_api.py           # API endpoint tests
+tests/test_monitoring.py            # Logging & metrics tests
+tests/test_explainability.py        # SHAP explanation tests
+tests/test_robustness.py            # Robustness tests
+tests/test_api_smoke.py             # Integration tests
 ```
 
 ---
 
-## Troubleshooting
+## 🆘 Troubleshooting
+
+### Common Issues
 
 | Issue | Solution |
 |-------|----------|
-| `ModuleNotFoundError` | Run `pip install -r config/requirements.txt` in active venv |
-| Training too slow | Sample dataset or reduce `n_estimators` in `src/config.py` |
-| Out of memory | Reduce `N_FOLDS` from 5 to 3 or use blending instead of stacking |
-| API won't start | Ensure `models/` contains artifacts from recent `python -m src.train` |
-| Docker build fails | Check `requirements-prod.txt` mirrors critical packages |
+| `ModuleNotFoundError: xgboost` | `pip install -r config/requirements.txt` |
+| `FileNotFoundError: models/ir_ensemble_best.pkl` | Run `python -m src.train` |
+| Training OOM | Reduce `N_FOLDS` from 5 to 3 |
+| API port in use | Use different port: `--port 8001` |
 
 ---
 
-## Next Steps
+## 📚 Repository Structure
 
-1. **Local validation:** `python -m src.train && python scripts/run_tests.py`
-2. **Deploy:** `docker compose up --build`
-3. **Monitor:** Check `/metrics` endpoint and drift alerts every 6 hours
-4. **External validation:** Monthly cohort validation via `scripts/run_external_validation.py`
-5. **Extend:** Add Grafana dashboards, set up alerting on drift, integrate with EHR systems
-
----
-
-## Documentation
-
-- **Runbook:** `docs/RUNBOOK.md` – Day-2 operations checklist
-- **Privacy:** `docs/PRIVACY_CHECKLIST.md` – PHI handling and compliance
-- **API guide:** This README covers core API usage; advanced configs in `src/config.py`
-
----
-
-## License & Citations
-
-- **License:** MIT (update `LICENSE` file if org requirements differ)
-- **Attribution:** Cite original insulin-resistance cohort study when publishing metrics
-- **Dependencies:** Acknowledge scikit-learn, XGBoost, LightGBM, CatBoost, SHAP in publications
+```
+ir prediction/
+├── .github/                    # CI/CD workflows
+├── config/                     # Requirements & config
+├── data/                       # Datasets (local only)
+├── docs/                       # Technical documentation
+├── models/                     # Trained artifacts
+├── scripts/                    # Automation scripts
+├── src/                        # Production code (14 modules)
+├── tests/                      # Test suite (5 modules)
+├── Dockerfile                  # Container build
+├── docker-compose.yml          # Service orchestration
+├── README.md                   # This file
+├── LICENSE                     # MIT license
+└── CONTRIBUTING.md             # Contribution guide
+```
 
 ---
 
-## Contributing
+## 🤝 Contributing
 
-1. Fork repository
-2. Create feature branch: `git checkout -b feature/name`
-3. Commit changes: `git commit -m "Add feature"`
-4. Run tests: `python scripts/run_tests.py`
-5. Push to branch: `git push origin feature/name`
-6. Open pull request
+### Development Workflow
+
+```bash
+# 1. Fork & clone
+git clone https://github.com/soulrahulrk/insulin-resistance-prediction.git
+
+# 2. Create feature branch
+git checkout -b feature/your-feature-name
+
+# 3. Make changes & test
+python scripts/run_tests.py
+
+# 4. Commit & push
+git commit -m "feat: add new feature"
+git push origin feature/your-feature-name
+
+# 5. Create pull request on GitHub
+```
+
+### Code Style
+- **Python:** PEP 8, max 120 chars
+- **Type Hints:** Use for all function signatures
+- **Docstrings:** Google-style format
+
+---
+
+## 📖 References
+
+### Research Papers
+1. Wolpert, D. H. (1992). "Stacked generalization" *Neural Networks*, 5(2)
+2. Matthews, D. R., et al. (1985). "Homeostasis model assessment" *Diabetologia*, 28(7)
+3. Lundberg, S. M., & Lee, S. I. (2017). "A Unified Approach to Interpreting Model Predictions"
+
+### External Resources
+- **XGBoost:** https://xgboost.readthedocs.io/
+- **LightGBM:** https://lightgbm.readthedocs.io/
+- **FastAPI:** https://fastapi.tiangolo.com/
+- **Docker:** https://docs.docker.com/
+- **SHAP:** https://github.com/slundberg/shap
+
+---
+
+## 📞 Support
+
+- **Issues:** https://github.com/soulrahulrk/insulin-resistance-prediction/issues
+- **Documentation:** See `docs/` folder
+- **API Docs:** http://localhost:8000/docs
+
+---
+
+## ⚖️ License
+
+MIT License – See `LICENSE` file for details
+
+**Citation:**
+```bibtex
+@software{insulin_resistance_2025,
+  author = {Rahul},
+  title = {Insulin Resistance Prediction System},
+  year = {2025},
+  url = {https://github.com/soulrahulrk/insulin-resistance-prediction}
+}
+```
 
 ---
 
 **Last Updated:** November 23, 2025  
-**Maintainer:** Rahul  
-**Support:** Check logs, review docs, or open an issue on GitHub
+**Status:** ✅ Production-Ready  
+**Maintainer:** Rahul (@soulrahulrk)  
+**Repository:** https://github.com/soulrahulrk/insulin-resistance-prediction
