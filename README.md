@@ -42,6 +42,36 @@ A **clinical-grade machine learning system** predicting insulin resistance using
 
 ---
 
+## 🩺 Background & Motivation
+
+Insulin resistance is a metabolic state in which peripheral tissues (muscle, liver, adipose) respond poorly to circulating insulin. To maintain normal blood glucose, the pancreas compensates by secreting more insulin. Over time, this compensation can fail, leading to type 2 diabetes, cardiovascular disease, and non-alcoholic fatty liver disease.
+
+### Limitations of current diagnostic methods
+
+- **Gold-standard tests** such as the hyperinsulinemic–euglycemic clamp and frequently sampled IVGTT are accurate but invasive, expensive, and impractical for routine screening.
+- **Simple surrogate indices** (fasting glucose, fasting insulin, HOMA-IR) rely on fixed thresholds and can:
+  - Miss borderline or early insulin resistance.
+  - Be sensitive to assay variability and population differences.
+- In typical clinical workflows, rich information from **lipid profiles, anthropometrics, blood pressure, and demographics** is rarely combined into a single, quantitative risk score.
+
+### Why machine learning is useful here
+
+This project applies ML to leverage routinely collected clinical data:
+
+- Learns **non-linear interactions** between biomarkers (e.g., BMI × age, triglyceride-to-HDL ratio with glucose control) that are hard to capture with rule-based scores.
+- Produces **calibrated risk probabilities** instead of yes/no cut-offs, allowing clinicians to choose operating points (high-sensitivity for screening vs higher-specificity for confirmatory decisions).
+- Aggregates dozens of features into a single **insulin resistance risk score** that can sit alongside existing indices like HOMA-IR rather than replace them.
+
+### Importance of early detection
+
+Identifying insulin resistance before overt hyperglycaemia or diabetes enables:
+
+- Earlier lifestyle and pharmacologic interventions while β-cell function is still preserved.
+- Better stratification of cardiometabolic risk in populations already undergoing routine blood work.
+- Use of existing labs (glucose, insulin, lipids) and measurements (BMI, waist, blood pressure) without requiring new tests, making this approach practical for real-world screening.
+
+---
+
 ## ⭐ Key Features
 
 | Feature | Details |
@@ -180,6 +210,47 @@ Selected: 40 features from 61
 - **Train:** 70% (39,964 rows)
 - **Validation (Internal):** 15% (8,564 rows) – 5-fold CV
 - **Test (Hold-out):** 15% (8,564 rows) – Final evaluation
+
+---
+
+## 🔍 Exploratory Data Analysis
+
+This section summarizes the main data patterns observed during EDA. (Full notebooks and figures live under `docs/eda/`.)
+
+### Distributions & class balance
+
+- The derived target `ir_label` is **moderately imbalanced**, with a higher proportion of insulin-resistant cases than non-resistant, which motivated use of class weighting and explicit threshold tuning.
+- Histograms and KDE plots for **fasting glucose** and **fasting insulin** show noticeably **right-skewed distributions**, especially in the insulin-resistant group; log-transformations used in feature engineering help stabilize these.
+- **BMI** is shifted upward in the insulin-resistant group, with a clear enrichment of overweight and obese categories.
+
+### Group differences (boxplots / violins)
+
+Comparing `ir_label = 0` vs `ir_label = 1`:
+
+- **Fasting insulin, fasting glucose, HOMA-IR, BMI, and TG/HDL ratio** all have higher medians and wider upper tails in the insulin-resistant group.
+- The lipid profile in insulin-resistant individuals tends to show **higher triglycerides and lower HDL**, consistent with an atherogenic pattern.
+- Age distributions indicate that insulin resistance prevalence increases with age, but younger individuals with high adiposity and adverse lipids also appear in the high-risk tail.
+
+### Correlation structure (heatmap)
+
+- Strong positive correlations are seen between **HOMA-IR**, fasting insulin, and fasting glucose (by construction).
+- Anthropometric measures (BMI, waist, hip, waist–hip ratio) form a correlated cluster, justifying downstream feature selection to reduce redundancy.
+- Moderate correlations exist between adiposity markers and triglycerides, reflecting the expected link between visceral fat and dyslipidaemia.
+
+### SHAP feature importance & interpretation
+
+Global SHAP analysis on the final stacking ensemble highlights:
+
+- **Top global contributors**: HOMA-IR, fasting insulin, BMI, waist–hip ratio, TG/HDL ratio, age, and engineered interactions such as age × BMI.
+- Higher values of HOMA-IR, TG/HDL, and BMI consistently push predictions toward **higher risk**, while more favourable lipid profiles and normal BMI push toward **lower risk**.
+- For each individual prediction, the API can return the **top 3 SHAP features** (`shap_top3` field), explaining which measurements most increased or decreased that patient’s estimated risk.
+
+Example plots are stored in the repository and can be linked into downstream reports or dashboards:
+
+- Histograms and KDEs of glucose, insulin, BMI (e.g. `docs/eda/glucose_distribution.png`).
+- Boxplots comparing key features by `ir_label` (e.g. `docs/eda/bmi_by_ir_label.png`).
+- Correlation heatmap (e.g. `docs/eda/correlation_heatmap.png`).
+- SHAP summary and dependence plots (e.g. `docs/shap/shap_summary.png`).
 
 ---
 
@@ -646,6 +717,19 @@ ir prediction/
 ├── LICENSE                     # MIT license
 └── CONTRIBUTING.md             # Contribution guide
 ```
+
+### Ephemeral Markdown Cleanup
+
+The repository previously contained transient markdown files used during setup and local execution (e.g., `LOCAL_EXECUTION_REPORT.md`, `LOCAL_EXECUTION_REPORT_V2.md`, `CLEANUP_SUMMARY.md`, `GITHUB_UPLOAD_GUIDE.md`). These have been removed to reduce clutter.
+
+Retained documentation:
+
+- `README.md` – Comprehensive project overview
+- `CONTRIBUTING.md` – Contribution workflow
+- `docs/RUNBOOK.md` – Operational deployment/runbook
+- `docs/PRIVACY_CHECKLIST.md` – PHI & privacy guidance
+
+All removed files were informational snapshots and can be regenerated on demand (e.g., rerun `python -m src.train` for a fresh execution log). Core artifacts and source remain intact.
 
 ---
 
