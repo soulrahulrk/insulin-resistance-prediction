@@ -47,7 +47,7 @@ RANDOM_STATE = 42
 TEST_SIZE = 0.15  # 15% test
 VAL_SIZE = 0.15   # 15% validation from remaining
 TRAIN_SIZE = 0.70  # 70% training
-N_FOLDS = 5  # 5-fold cross-validation for stacking
+N_FOLDS = 2  # 2-fold cross-validation for stacking (Reduced for local run)
 
 # ============================================================================
 # PREPROCESSING
@@ -60,7 +60,7 @@ MAX_CATEGORICAL_CARDINALITY = 50
 # BASE LEARNER HYPERPARAMETERS
 # ============================================================================
 XGBOOST_PARAMS = {
-    "n_estimators": 600,
+    "n_estimators": 50,  # Reduced for local run
     "learning_rate": 0.03,
     "max_depth": 6,
     "subsample": 0.85,
@@ -72,7 +72,7 @@ XGBOOST_PARAMS = {
 }
 
 LIGHTGBM_PARAMS = {
-    "n_estimators": 600,
+    "n_estimators": 50,  # Reduced for local run
     "num_leaves": 31,
     "learning_rate": 0.03,
     "feature_fraction": 0.8,
@@ -83,7 +83,7 @@ LIGHTGBM_PARAMS = {
 }
 
 CATBOOST_PARAMS = {
-    "iterations": 600,
+    "iterations": 50,  # Reduced for local run
     "depth": 6,
     "learning_rate": 0.03,
     "loss_function": "Logloss",
@@ -92,7 +92,7 @@ CATBOOST_PARAMS = {
 }
 
 GRADBOOST_PARAMS = {
-    "n_estimators": 500,
+    "n_estimators": 50,  # Reduced for local run
     "learning_rate": 0.03,
     "max_depth": 4,
     "subsample": 0.8,
