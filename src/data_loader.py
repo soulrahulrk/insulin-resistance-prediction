@@ -1,7 +1,6 @@
 """Data loading module."""
 
 import pandas as pd
-import numpy as np
 from src.config import DATA_PATH
 from src.utils import configure_logger
 
@@ -22,7 +21,7 @@ def canonicalize_columns(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def load_data(data_path: str = DATA_PATH) -> pd.DataFrame:
+def load_data(data_path: str = DATA_PATH, drop_label_leak_features: bool = True) -> pd.DataFrame:
     """Load and validate insulin resistance dataset.
     
     Args:
@@ -47,29 +46,30 @@ def load_data(data_path: str = DATA_PATH) -> pd.DataFrame:
     df = canonicalize_columns(df)
     logger.info(f"Loaded {len(df)} records with {len(df.columns)} columns")
     
+    # Harmonize glucose/insulin naming to fasting_glucose/fasting_insulin
+    if "glucose" in df.columns and "fasting_glucose" not in df.columns:
+        df = df.rename(columns={"glucose": "fasting_glucose"})
+    if "insulin" in df.columns and "fasting_insulin" not in df.columns:
+        df = df.rename(columns={"insulin": "fasting_insulin"})
+
     # Create IR label if not present
     if "ir_label" not in df.columns:
-        logger.info("Creating 'ir_label' from glucose and insulin using HOMA-IR")
+        logger.info("Creating 'ir_label' from fasting_glucose and fasting_insulin using HOMA-IR")
         
-        # Check for required columns
-        if "glucose" not in df.columns or "insulin" not in df.columns:
-            raise ValueError("Cannot create ir_label: 'glucose' and 'insulin' columns required. "
-                           f"Available columns: {df.columns.tolist()}")
+        # We need both columns to create the label
+        df = df.dropna(subset=["fasting_glucose", "fasting_insulin"])
         
-        # Calculate HOMA-IR: (glucose * insulin) / 405
-        # HOMA-IR > 2.5 typically indicates insulin resistance
-        df["homa_ir"] = (df["glucose"] * df["insulin"]) / 405.0
-        df["ir_label"] = (df["homa_ir"] > 2.5).astype(int)
+        homa_ir = (df["fasting_glucose"] * df["fasting_insulin"]) / 405.0
+        df["ir_label"] = (homa_ir > 2.5).astype(int)
         
-        # Remove rows with missing values in glucose or insulin
-        initial_len = len(df)
-        df = df.dropna(subset=["glucose", "insulin", "ir_label"])
-        if len(df) < initial_len:
-            logger.warning(f"Dropped {initial_len - len(df)} rows with missing glucose/insulin")
-        
-        logger.info(f"Created 'ir_label' based on HOMA-IR threshold 2.5")
+        if drop_label_leak_features:
+            # Remove direct label-construction artifact to reduce trivial leakage
+            if "homa_ir" in df.columns:
+                df = df.drop(columns=["homa_ir"])
+        logger.info(f"Created 'ir_label'. Rows remaining: {len(df)}")
     
-    logger.info(f"Target variable 'ir_label' distribution:\n{df['ir_label'].value_counts()}")
+    if "ir_label" in df.columns:
+        logger.info(f"Target variable 'ir_label' distribution:\n{df['ir_label'].value_counts()}")
     
     # Basic sanity checks
     if "age" in df.columns:
@@ -79,10 +79,9 @@ def load_data(data_path: str = DATA_PATH) -> pd.DataFrame:
             df = df[~invalid_ages]
     
     if "fasting_glucose" in df.columns:
-        invalid_glucose = (df["fasting_glucose"] < 40) | (df["fasting_glucose"] > 600)
-        if invalid_glucose.sum() > 0:
-            logger.warning(f"Found {invalid_glucose.sum()} records with glucose outside [40, 600]")
-            df = df[~invalid_glucose]
+        df["fasting_glucose"] = df["fasting_glucose"].clip(lower=40, upper=600)
+    if "fasting_insulin" in df.columns:
+        df["fasting_insulin"] = df["fasting_insulin"].clip(lower=0.1)
     
     logger.info(f"Data validation complete: {len(df)} records remaining")
     return df

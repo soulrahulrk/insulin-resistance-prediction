@@ -3,6 +3,7 @@
 import numpy as np
 import pandas as pd
 from pathlib import Path
+from typing import Optional, List, Tuple
 from sklearn.impute import KNNImputer
 from sklearn.preprocessing import StandardScaler, OrdinalEncoder, OneHotEncoder
 from sklearn.feature_selection import mutual_info_classif
@@ -22,17 +23,18 @@ class Preprocessor:
     
     def __init__(self):
         """Initialize preprocessor."""
-        self.knn_imputer = None
-        self.ordinal_encoders = {}
-        self.onehot_encoders = {}
+        self.knn_imputer: Optional[KNNImputer] = None  # Only for fasting_insulin
+        self.medians: dict[str, float] = {}
+        self.ordinal_encoders: dict[str, OrdinalEncoder] = {}
+        self.onehot_encoders: dict[str, OneHotEncoder] = {}
         self.scaler = StandardScaler()
-        self.selected_features = None
-        self.feature_names = None
-        self.numeric_cols = None
-        self.categorical_cols = None
-        self.target_col = None
+        self.selected_features: List[str] | None = None
+        self.feature_names: List[str] | None = None
+        self.numeric_cols: List[str] | None = None
+        self.categorical_cols: List[str] | None = None
+        self.target_col: Optional[str] = None
         
-    def fit(self, df: pd.DataFrame, y: pd.Series = None) -> "Preprocessor":
+    def fit(self, df: pd.DataFrame, y: Optional[pd.Series] = None) -> "Preprocessor":
         """Fit preprocessor on data.
         
         Args:
@@ -59,11 +61,21 @@ class Preprocessor:
         logger.info(f"Numeric columns: {len(self.numeric_cols)}")
         logger.info(f"Categorical columns: {len(self.categorical_cols)}")
         
-        # Fit KNN imputer for numeric columns
-        if self.numeric_cols:
+        # Selective imputation strategy:
+        # - fasting_insulin via KNN
+        # - other numeric via median
+        if "fasting_insulin" in self.numeric_cols:
             self.knn_imputer = KNNImputer(n_neighbors=KNN_NEIGHBORS)
-            self.knn_imputer.fit(df[self.numeric_cols])
-            logger.info("Fitted KNN imputer")
+            self.knn_imputer.fit(df[["fasting_insulin"]])
+            logger.info("Fitted KNN imputer for fasting_insulin")
+
+        for col in self.numeric_cols:
+            if col == "fasting_insulin":
+                continue
+            series = df[col]
+            if not series.isna().all():
+                self.medians[col] = float(series.median())
+        logger.info(f"Stored medians for {len(self.medians)} numeric columns")
         
         # Fit categorical encoders
         for col in self.categorical_cols:
@@ -78,26 +90,25 @@ class Preprocessor:
         
         logger.info(f"Fitted {len(self.onehot_encoders)} OneHot and {len(self.ordinal_encoders)} Ordinal encoders")
         
-        # Feature selection using mutual information
+        # Feature selection after applying selective imputation
         if y is not None:
-            X_imputed = df[self.numeric_cols].copy()
-            if self.knn_imputer:
-                X_imputed = pd.DataFrame(
-                    self.knn_imputer.transform(X_imputed),
-                    columns=self.numeric_cols,
-                    index=df.index
-                )
-            
-            mi_scores = mutual_info_classif(X_imputed, y, random_state=RANDOM_STATE)
+            temp = df[self.numeric_cols].copy()
+            if self.knn_imputer and "fasting_insulin" in temp.columns:
+                temp["fasting_insulin"] = self.knn_imputer.transform(temp[["fasting_insulin"]]).ravel()
+            for col in self.numeric_cols:
+                if col == "fasting_insulin":
+                    continue
+                temp[col] = temp[col].fillna(self.medians.get(col, 0.0))
+            mi_scores = mutual_info_classif(temp[self.numeric_cols], y, random_state=RANDOM_STATE)
             self.selected_features = [col for col, score in zip(self.numeric_cols, mi_scores)
-                                     if score >= FEATURE_SELECTION_THRESHOLD]
+                                      if score >= FEATURE_SELECTION_THRESHOLD]
             logger.info(f"Selected {len(self.selected_features)} features (MI threshold={FEATURE_SELECTION_THRESHOLD})")
         else:
             self.selected_features = self.numeric_cols
         
         return self
     
-    def transform(self, df: pd.DataFrame) -> tuple:
+    def transform(self, df: pd.DataFrame) -> Tuple[pd.DataFrame, List[str]]:
         """Transform data.
         
         Args:
@@ -116,9 +127,15 @@ class Preprocessor:
             if col not in X.columns:
                 X[col] = "__missing__"
         
-        # Impute numeric columns
-        if self.numeric_cols and self.knn_imputer:
-            X[self.numeric_cols] = self.knn_imputer.transform(X[self.numeric_cols])
+        # Impute fasting_insulin via KNN
+        if self.knn_imputer and "fasting_insulin" in self.numeric_cols and "fasting_insulin" in X.columns:
+            X["fasting_insulin"] = self.knn_imputer.transform(X[["fasting_insulin"]]).ravel()
+        # Median impute remaining numeric columns
+        for col in self.numeric_cols:
+            if col == "fasting_insulin":
+                continue
+            if col in X.columns:
+                X[col] = X[col].fillna(self.medians.get(col, 0.0))
         
         # Encode categorical columns (if any) BEFORE feature selection
         categorical_parts = []
@@ -144,7 +161,7 @@ class Preprocessor:
         
         return X, X.columns.tolist()
     
-    def fit_transform(self, df: pd.DataFrame, y: pd.Series = None) -> tuple:
+    def fit_transform(self, df: pd.DataFrame, y: Optional[pd.Series] = None) -> Tuple[pd.DataFrame, List[str]]:
         """Fit and transform data in one step.
         
         Args:
@@ -173,49 +190,40 @@ class Preprocessor:
 
 
 def add_engineered_features(df: pd.DataFrame) -> pd.DataFrame:
-    """Add engineered features based on EDA findings.
-    
-    Args:
-        df: Input DataFrame.
-        
-    Returns:
-        DataFrame with additional engineered features.
+    """Add engineered features per specification.
+
+    Creates: homa_ir, homa_ir_log, quicki, tg_hdl_ratio, waist_hip_ratio,
+    age_bmi, fasting_insulin_log, fasting_glucose_log, triglycerides_log.
     """
     df = df.copy()
-    
-    # HOMA-IR: (glucose * insulin) / 405
+
     if "fasting_glucose" in df.columns and "fasting_insulin" in df.columns:
-        df["homa_ir"] = (df["fasting_glucose"] * df["fasting_insulin"]) / 405.0
-        df["homa_ir"] = np.log1p(df["homa_ir"])  # Log transform
-        logger.info("Computed HOMA-IR")
-    
-    # QUICKI: 1 / (log(insulin) + log(glucose))
-    if "fasting_glucose" in df.columns and "fasting_insulin" in df.columns:
+        # homa_ir and homa_ir_log removed to prevent leakage
         safe_glucose = df["fasting_glucose"].clip(lower=1)
         safe_insulin = df["fasting_insulin"].clip(lower=1)
         df["quicki"] = 1.0 / (np.log(safe_insulin) + np.log(safe_glucose))
-        logger.info("Computed QUICKI")
-    
-    # TG/HDL ratio
+        logger.info("Computed QUICKI (HOMA-IR excluded for leakage prevention)")
+
     if "triglycerides" in df.columns and "hdl_cholesterol" in df.columns:
         hdl_safe = df["hdl_cholesterol"].clip(lower=0.1)
         df["tg_hdl_ratio"] = df["triglycerides"] / hdl_safe
-        logger.info("Computed TG/HDL ratio")
-    
-    # Waist-to-hip ratio
+        logger.info("Computed tg_hdl_ratio")
+
     if "waist_circumference" in df.columns and "hip_circumference" in df.columns:
         hip_safe = df["hip_circumference"].clip(lower=0.1)
         df["waist_hip_ratio"] = df["waist_circumference"] / hip_safe
-        logger.info("Computed waist-to-hip ratio")
-    
-    # Age × BMI interaction
+        logger.info("Computed waist_hip_ratio")
+
     if "age" in df.columns and "bmi" in df.columns:
         df["age_bmi"] = df["age"] * df["bmi"]
-        logger.info("Computed age × BMI interaction")
-    
-    # Log transform fasting_insulin
+        logger.info("Computed age_bmi interaction")
+
     if "fasting_insulin" in df.columns:
         df["fasting_insulin_log"] = np.log1p(df["fasting_insulin"])
-    
+    if "fasting_glucose" in df.columns:
+        df["fasting_glucose_log"] = np.log1p(df["fasting_glucose"])
+    if "triglycerides" in df.columns:
+        df["triglycerides_log"] = np.log1p(df["triglycerides"])
+
     logger.info(f"Added engineered features. Total columns now: {len(df.columns)}")
     return df

@@ -1,6 +1,6 @@
 # Insulin Resistance Prediction System
 
-**Status:** ✅ Production-Ready • **Last Updated:** 23 Nov 2025 • **Python:** 3.13.7 • **License:** MIT • **Author:** Rahul
+**Status:** ✅ Production-Ready • **Last Updated:** 28 Nov 2025 • **Python:** 3.13.7 • **License:** MIT • **Author:** Rahul
 
 ---
 
@@ -32,13 +32,25 @@ A **clinical-grade machine learning system** predicting insulin resistance using
 - **Meta-Learner:** Isotonic-calibrated Logistic Regression (Level-1)
 - **Explainability:** SHAP-based feature attribution with aggregated weights
 - **Monitoring:** JSONL prediction logs, Prometheus metrics, KS-test drift detection
-- **Deployment:** FastAPI microservice + Docker containerization
+- **Deployment:** FastAPI microservice
 
-**Performance Metrics:**
-- ROC AUC: **0.942** (vs. 0.920 baseline)
-- F1 Score: **0.79** (+5% vs. baseline)
-- Brier Score: **0.062** (−27% vs. baseline)
-- Calibration Error: **<2%**
+**Performance Metrics (Target):**
+- ROC AUC: **> 0.90** (Rigorous CV)
+- F1 Score: **> 0.75**
+- Brier Score: **< 0.10**
+- Calibration Error: **< 5%**
+
+---
+
+## 🛡️ Quality Assurance & Leakage Prevention
+
+To ensure realistic generalization and prevent "too good to be true" results, the system implements:
+
+1.  **Leakage Guard:** Automatic detection and removal of features with >0.995 correlation to the label (excluding raw inputs).
+2.  **Data Retention:** Revised loader retains rows with partial missingness for imputation, preventing artificial dataset simplification (previously dropped 50k rows).
+3.  **Feature Exclusion:** Direct label proxies (HOMA-IR) are excluded from the feature set to force the model to learn from raw biomarkers.
+4.  **Generalization Gap:** Monitoring of Train vs Validation AUC to detect overfitting.
+5.  **Capacity Control:** Reduced model complexity (n_estimators=200, max_depth=4) to prevent memorization.
 
 ---
 
@@ -81,7 +93,6 @@ Identifying insulin resistance before overt hyperglycaemia or diabetes enables:
 | 📈 **Medical-Grade Metrics** | ROC/PR curves, Brier score, calibration, threshold optimization |
 | ⚙️ **Production Monitoring** | JSONL prediction logs, Prometheus metrics, drift alerts |
 | 🎯 **Explainability** | SHAP top-3 feature drivers per prediction |
-| 🐳 **Container Ready** | Dockerfile + docker-compose for scalable deployment |
 | 🧾 **Operational Scripts** | Smoke tests, external validation, drift simulation |
 | 🔒 **Privacy Compliant** | Anonymized logging, trace IDs, PHI handling checklist |
 | 🚀 **CI/CD Integrated** | GitHub Actions workflow, automated testing |
@@ -147,14 +158,6 @@ uvicorn src.deploy_api:app --host 0.0.0.0 --port 8000 --reload
 - Swagger UI: http://localhost:8000/docs
 - ReDoc: http://localhost:8000/redoc
 - Health: http://localhost:8000/health
-
-### Step 5: Docker Deployment (Optional)
-
-```bash
-docker compose up --build
-```
-
-Exposes API on `http://localhost:8000` and Prometheus on `http://localhost:9090`
 
 ---
 
@@ -584,34 +587,6 @@ uvicorn src.deploy_api:app --reload --host 127.0.0.1 --port 8000
 # 3. Access at http://127.0.0.1:8000/docs
 ```
 
-### Docker Container
-
-```bash
-# Build image
-docker build -t ir-prediction:latest .
-
-# Run container
-docker run -d \
-  --name ir-api \
-  -p 8000:8000 \
-  -v $(pwd)/models:/app/models:ro \
-  -e LOG_LEVEL=INFO \
-  ir-prediction:latest
-```
-
-### Docker Compose (Full Stack)
-
-```bash
-# Start all services
-docker compose up -d
-
-# View status
-docker compose ps
-
-# Stop services
-docker compose down
-```
-
 ---
 
 ## ⚙️ Monitoring & Operations
@@ -711,8 +686,6 @@ ir prediction/
 ├── scripts/                    # Automation scripts
 ├── src/                        # Production code (14 modules)
 ├── tests/                      # Test suite (5 modules)
-├── Dockerfile                  # Container build
-├── docker-compose.yml          # Service orchestration
 ├── README.md                   # This file
 ├── LICENSE                     # MIT license
 └── CONTRIBUTING.md             # Contribution guide
@@ -772,7 +745,6 @@ git push origin feature/your-feature-name
 - **XGBoost:** https://xgboost.readthedocs.io/
 - **LightGBM:** https://lightgbm.readthedocs.io/
 - **FastAPI:** https://fastapi.tiangolo.com/
-- **Docker:** https://docs.docker.com/
 - **SHAP:** https://github.com/slundberg/shap
 
 ---

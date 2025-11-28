@@ -28,7 +28,7 @@ from src.config import (
     SELECTED_FEATURES_PATH,
 )
 from src.explainability_fast import explain_single
-from src.features import compute_engineered_features
+from src.preprocessing import add_engineered_features
 from src.monitoring import compute_aggregate_metrics, export_prometheus, record_prediction
 from src.drift_monitor import alert_if_drift, compute_feature_drift
 from src.utils import configure_logger, load_json
@@ -115,7 +115,7 @@ def load_artifacts():
         reference_df = pd.read_csv(DATA_PATH)
         if 'ir_label' in reference_df.columns:
             reference_df = reference_df.drop(columns=['ir_label'])
-        reference_df = compute_engineered_features(reference_df)
+        reference_df = add_engineered_features(reference_df)
         transformed, feature_names = PREPROCESSOR.transform(reference_df)
         ref_frame = pd.DataFrame(transformed, columns=feature_names)
         if len(ref_frame) > 2000:
@@ -199,7 +199,7 @@ def preprocess_features(features_dict: Dict) -> pd.DataFrame:
         Preprocessed feature dataframe.
     """
     df = pd.DataFrame([features_dict])
-    df = compute_engineered_features(df)
+    df = add_engineered_features(df)
 
     # Ensure all expected columns exist before transformation
     for col in getattr(PREPROCESSOR, "numeric_cols", []):

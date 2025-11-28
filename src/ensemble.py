@@ -108,20 +108,13 @@ def train_meta_learner(meta_X_train: np.ndarray, meta_y_train: np.ndarray) -> Tu
     return (scaler, meta_model), best_C
 
 
-def build_stacking_classifier(base_models: Dict, meta_learner_pipeline: Tuple, 
-                             meta_X_train: np.ndarray, meta_X_val: np.ndarray,
-                             y_val: np.ndarray) -> Tuple[Dict, np.ndarray]:
+def build_stacking_classifier(base_models: Dict, meta_learner_pipeline: Tuple,
+                              meta_X_train: np.ndarray, meta_X_val: np.ndarray,
+                              y_val: np.ndarray) -> Tuple[Dict, np.ndarray]:
     """Build and validate stacking classifier.
-    
-    Args:
-        base_models: Dict of trained base models.
-        meta_learner_pipeline: Tuple of (scaler, meta_model).
-        meta_X_train: OOF training features for meta-learner.
-        meta_X_val: OOF validation features for prediction.
-        y_val: Validation target.
-        
-    Returns:
-        Tuple of (stacker_dict, validation_predictions).
+
+    Adds meta feature name tracking for downstream explainability & artifact
+    serialization. Calibration handled separately.
     """
     scaler, meta_model = meta_learner_pipeline
     
@@ -137,6 +130,7 @@ def build_stacking_classifier(base_models: Dict, meta_learner_pipeline: Tuple,
         'base_models': base_models,
         'scaler': scaler,
         'meta_learner': meta_model,
+        'meta_feature_names': list(base_models.keys()),
         'val_auc': metrics['roc_auc'],
         'val_f1': metrics['f1']
     }

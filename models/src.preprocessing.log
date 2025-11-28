@@ -1,0 +1,54 @@
+2025-11-23 22:46:01,419 - src.preprocessing - INFO - Fitting preprocessor...
+2025-11-23 22:46:01,432 - src.preprocessing - WARNING - Removed 3 numeric columns with all NaN values
+2025-11-23 22:46:01,433 - src.preprocessing - INFO - Numeric columns: 48
+2025-11-23 22:46:01,433 - src.preprocessing - INFO - Categorical columns: 16
+2025-11-23 22:46:01,437 - src.preprocessing - INFO - Fitted KNN imputer for fasting_insulin
+2025-11-23 22:46:01,456 - src.preprocessing - INFO - Stored medians for 47 numeric columns
+2025-11-23 22:46:01,506 - src.preprocessing - INFO - Fitted 15 OneHot and 1 Ordinal encoders
+2025-11-23 22:46:03,404 - src.preprocessing - INFO - Selected 46 features (MI threshold=0.001)
+2025-11-23 22:46:03,612 - src.preprocessing - INFO - Saved preprocessor to C:\Users\rahul\Documents\code\projects\ir prediction\models\feature_transformer.pkl
+2025-11-23 22:46:03,614 - src.preprocessing - INFO - Saved selected features to C:\Users\rahul\Documents\code\projects\ir prediction\models\selected_features.json
+2025-11-23 22:51:29,070 - src.preprocessing - INFO - Computed HOMA-IR (raw & log) and QUICKI
+2025-11-23 22:51:29,073 - src.preprocessing - INFO - Computed tg_hdl_ratio
+2025-11-23 22:51:29,076 - src.preprocessing - INFO - Computed waist_hip_ratio
+2025-11-23 22:51:29,078 - src.preprocessing - INFO - Computed age_bmi interaction
+2025-11-23 22:51:29,081 - src.preprocessing - INFO - Added engineered features. Total columns now: 18
+2025-11-23 22:51:51,207 - src.preprocessing - INFO - Computed HOMA-IR (raw & log) and QUICKI
+2025-11-23 22:51:51,209 - src.preprocessing - INFO - Computed tg_hdl_ratio
+2025-11-23 22:51:51,210 - src.preprocessing - INFO - Computed waist_hip_ratio
+2025-11-23 22:51:51,211 - src.preprocessing - INFO - Computed age_bmi interaction
+2025-11-23 22:51:51,213 - src.preprocessing - INFO - Added engineered features. Total columns now: 18
+2025-11-24 18:25:04,561 - src.preprocessing - INFO - Computed QUICKI (HOMA-IR excluded for leakage prevention)
+2025-11-24 18:25:04,571 - src.preprocessing - INFO - Computed age_bmi interaction
+2025-11-24 18:25:04,574 - src.preprocessing - INFO - Added engineered features. Total columns now: 66
+2025-11-24 18:25:53,327 - src.preprocessing - INFO - Computed QUICKI (HOMA-IR excluded for leakage prevention)
+2025-11-24 18:25:53,328 - src.preprocessing - INFO - Computed age_bmi interaction
+2025-11-24 18:25:53,330 - src.preprocessing - INFO - Added engineered features. Total columns now: 66
+2025-11-24 22:30:37,093 - src.preprocessing - INFO - Computed QUICKI (HOMA-IR excluded for leakage prevention)
+2025-11-24 22:30:37,096 - src.preprocessing - INFO - Computed age_bmi interaction
+2025-11-24 22:30:37,098 - src.preprocessing - INFO - Added engineered features. Total columns now: 66
+2025-11-25 00:17:38,720 - src.preprocessing - INFO - Computed QUICKI (HOMA-IR excluded for leakage prevention)
+2025-11-25 00:17:38,724 - src.preprocessing - INFO - Computed age_bmi interaction
+2025-11-25 00:17:38,728 - src.preprocessing - INFO - Added engineered features. Total columns now: 66
+2025-11-25 00:17:46,569 - src.preprocessing - INFO - Fitting preprocessor...
+2025-11-25 00:17:46,582 - src.preprocessing - WARNING - Removed 3 numeric columns with all NaN values
+2025-11-25 00:17:46,584 - src.preprocessing - INFO - Numeric columns: 41
+2025-11-25 00:17:46,584 - src.preprocessing - INFO - Categorical columns: 16
+2025-11-25 00:17:46,604 - src.preprocessing - INFO - Stored medians for 41 numeric columns
+2025-11-25 00:17:46,650 - src.preprocessing - INFO - Fitted 15 OneHot and 1 Ordinal encoders
+2025-11-25 00:17:48,334 - src.preprocessing - INFO - Selected 33 features (MI threshold=0.001)
+2025-11-27 22:07:37,404 - src.preprocessing - INFO - Computed QUICKI (HOMA-IR excluded for leakage prevention)
+2025-11-27 22:07:37,407 - src.preprocessing - INFO - Computed tg_hdl_ratio
+2025-11-27 22:07:37,408 - src.preprocessing - INFO - Computed waist_hip_ratio
+2025-11-27 22:07:37,409 - src.preprocessing - INFO - Computed age_bmi interaction
+2025-11-27 22:07:37,411 - src.preprocessing - INFO - Added engineered features. Total columns now: 16
+2025-11-27 22:29:49,854 - src.preprocessing - INFO - Computed QUICKI (HOMA-IR excluded for leakage prevention)
+2025-11-27 22:29:49,856 - src.preprocessing - INFO - Computed age_bmi interaction
+2025-11-27 22:29:49,859 - src.preprocessing - INFO - Added engineered features. Total columns now: 66
+2025-11-27 22:29:51,068 - src.preprocessing - INFO - Fitting preprocessor...
+2025-11-27 22:29:51,076 - src.preprocessing - WARNING - Removed 3 numeric columns with all NaN values
+2025-11-27 22:29:51,077 - src.preprocessing - INFO - Numeric columns: 41
+2025-11-27 22:29:51,078 - src.preprocessing - INFO - Categorical columns: 16
+2025-11-27 22:29:51,086 - src.preprocessing - INFO - Stored medians for 41 numeric columns
+2025-11-27 22:29:51,108 - src.preprocessing - INFO - Fitted 15 OneHot and 1 Ordinal encoders
+2025-11-27 22:29:51,945 - src.preprocessing - INFO - Selected 33 features (MI threshold=0.001)

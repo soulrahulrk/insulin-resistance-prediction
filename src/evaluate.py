@@ -5,7 +5,7 @@ import pandas as pd
 from sklearn.metrics import (
     accuracy_score, precision_score, recall_score, f1_score,
     roc_auc_score, roc_curve, precision_recall_curve, auc, matthews_corrcoef,
-    brier_score_loss
+    brier_score_loss, average_precision_score
 )
 from sklearn.calibration import CalibratedClassifierCV
 import json
@@ -28,12 +28,18 @@ def evaluate_model(y_true: np.ndarray, y_prob: np.ndarray) -> dict:
     """
     y_pred = (y_prob >= 0.5).astype(int)
     
+    prec, rec, _ = precision_recall_curve(y_true, y_prob)
+    pr_auc = auc(rec, prec)
+    avg_prec = average_precision_score(y_true, y_prob)
+
     metrics = {
         'accuracy': float(accuracy_score(y_true, y_pred)),
         'precision': float(precision_score(y_true, y_pred, zero_division=0)),
         'recall': float(recall_score(y_true, y_pred, zero_division=0)),
         'f1': float(f1_score(y_true, y_pred, zero_division=0)),
         'roc_auc': float(roc_auc_score(y_true, y_prob)),
+        'pr_auc': float(pr_auc),
+        'average_precision': float(avg_prec),
         'mcc': float(matthews_corrcoef(y_true, y_pred)),
         'brier_score': float(brier_score_loss(y_true, y_prob)),
         'ece': float(compute_ece(y_true, y_prob)),
