@@ -52,3 +52,12 @@
 2025-11-27 22:29:51,086 - src.preprocessing - INFO - Stored medians for 41 numeric columns
 2025-11-27 22:29:51,108 - src.preprocessing - INFO - Fitted 15 OneHot and 1 Ordinal encoders
 2025-11-27 22:29:51,945 - src.preprocessing - INFO - Selected 33 features (MI threshold=0.001)
+2025-11-28 11:07:08,404 - src.preprocessing - INFO - Fitting preprocessor...
+2025-11-28 11:07:08,416 - src.preprocessing - WARNING - Removed 3 numeric columns with all NaN values
+2025-11-28 11:07:08,416 - src.preprocessing - INFO - Numeric columns: 41
+2025-11-28 11:07:08,416 - src.preprocessing - INFO - Categorical columns: 16
+2025-11-28 11:07:08,428 - src.preprocessing - INFO - Stored medians for 41 numeric columns
+2025-11-28 11:07:08,477 - src.preprocessing - INFO - Fitted 15 OneHot and 1 Ordinal encoders
+2025-11-28 11:07:10,131 - src.preprocessing - INFO - Selected 33 features (MI threshold=0.001)
+2025-11-28 11:07:10,365 - src.preprocessing - INFO - Saved preprocessor to C:\Users\rahul\Documents\code\projects\ir prediction\models\feature_transformer.pkl
+2025-11-28 11:07:10,366 - src.preprocessing - INFO - Saved selected features to C:\Users\rahul\Documents\code\projects\ir prediction\models\selected_features.json

@@ -46,3 +46,19 @@
 2025-11-27 22:30:08,907 - src.ensemble - INFO - C=10.0: CV AUC=0.7726
 2025-11-27 22:30:08,908 - src.ensemble - INFO - ✓ Best C=0.01 (CV AUC=0.7730)
 2025-11-27 22:30:08,922 - src.ensemble - INFO - Stacking classifier validated - AUC: 0.7637, F1: 0.8713
+2025-11-28 11:07:44,614 - src.ensemble - INFO - Generating OOF for model 1/4: xgboost
+2025-11-28 11:07:46,045 - src.ensemble - INFO - ✓ Completed OOF for xgboost
+2025-11-28 11:07:46,045 - src.ensemble - INFO - Generating OOF for model 2/4: lightgbm
+2025-11-28 11:07:47,788 - src.ensemble - INFO - ✓ Completed OOF for lightgbm
+2025-11-28 11:07:47,789 - src.ensemble - INFO - Generating OOF for model 3/4: catboost
+2025-11-28 11:07:52,487 - src.ensemble - INFO - ✓ Completed OOF for catboost
+2025-11-28 11:07:52,488 - src.ensemble - INFO - Generating OOF for model 4/4: gradboost
+2025-11-28 11:08:11,795 - src.ensemble - INFO - ✓ Completed OOF for gradboost
+2025-11-28 11:08:11,796 - src.ensemble - INFO - OOF features shape: train=(4962, 4), val=(1064, 4)
+2025-11-28 11:08:11,797 - src.ensemble - INFO - Training meta-learner on (4962, 4) OOF features
+2025-11-28 11:08:11,900 - src.ensemble - INFO - C=0.01: CV AUC=0.7730
+2025-11-28 11:08:11,988 - src.ensemble - INFO - C=0.1: CV AUC=0.7728
+2025-11-28 11:08:12,103 - src.ensemble - INFO - C=1.0: CV AUC=0.7726
+2025-11-28 11:08:12,212 - src.ensemble - INFO - C=10.0: CV AUC=0.7726
+2025-11-28 11:08:12,212 - src.ensemble - INFO - ✓ Best C=0.01 (CV AUC=0.7730)
+2025-11-28 11:08:12,266 - src.ensemble - INFO - Stacking classifier validated - AUC: 0.7637, F1: 0.8713

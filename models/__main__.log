@@ -383,3 +383,112 @@ fasting_insulin            0.042597
 internetaccess             0.039085
 diabetesprevalence         0.037938
 dtype: float64
+2025-11-28 11:06:47,774 - __main__ - INFO - ================================================================================
+2025-11-28 11:06:47,775 - __main__ - INFO - STARTING INSULIN RESISTANCE PREDICTION PIPELINE
+2025-11-28 11:06:47,776 - __main__ - INFO - ================================================================================
+2025-11-28 11:06:47,776 - __main__ - INFO - 
+[1/8] LOADING DATA...
+2025-11-28 11:06:47,845 - __main__ - ERROR - ✗ Pipeline failed: Data file not found: /mnt/data/all_datasets_merged.csv
+Traceback (most recent call last):
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\src\data_loader.py", line 40, in load_data
+    df = pd.read_csv(data_path)
+  File "C:\Users\rahul\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\parsers\readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "C:\Users\rahul\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\parsers\readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "C:\Users\rahul\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\parsers\readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\rahul\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\parsers\readers.py", line 1880, in _make_engine
+    self.handles = get_handle(
+                   ~~~~~~~~~~^
+        f,
+        ^^
+    ...<6 lines>...
+        storage_options=self.options.get("storage_options", None),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\rahul\AppData\Local\Programs\Python\Python313\Lib\site-packages\pandas\io\common.py", line 873, in get_handle
+    handle = open(
+        handle,
+    ...<3 lines>...
+        newline="",
+    )
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/data/all_datasets_merged.csv'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\src\train.py", line 286, in <module>
+    train_pipeline()
+    ~~~~~~~~~~~~~~^^
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\src\train.py", line 97, in train_pipeline
+    df = load_data(DATA_PATH)
+  File "C:\Users\rahul\Documents\code\projects\ir prediction\src\data_loader.py", line 43, in load_data
+    raise FileNotFoundError(f"Data file not found: {data_path}") from e
+FileNotFoundError: Data file not found: /mnt/data/all_datasets_merged.csv
+2025-11-28 11:07:07,949 - __main__ - INFO - ================================================================================
+2025-11-28 11:07:07,949 - __main__ - INFO - STARTING INSULIN RESISTANCE PREDICTION PIPELINE
+2025-11-28 11:07:07,949 - __main__ - INFO - ================================================================================
+2025-11-28 11:07:07,950 - __main__ - INFO - 
+[1/8] LOADING DATA...
+2025-11-28 11:07:08,385 - __main__ - INFO - Loaded 7090 records with 62 columns
+2025-11-28 11:07:08,386 - __main__ - INFO - 
+[2/8] ENGINEERING FEATURES...
+2025-11-28 11:07:08,400 - __main__ - INFO - Total features after engineering: 66
+2025-11-28 11:07:08,400 - __main__ - INFO - 
+[3/8] PREPROCESSING...
+2025-11-28 11:07:08,401 - __main__ - INFO - Dropping label and leakage features: ['ir_label', 'fasting_glucose', 'fasting_insulin', 'fasting_glucose_log', 'fasting_insulin_log', 'quicki']
+2025-11-28 11:07:10,315 - __main__ - INFO - 
+[3.5/8] CHECKING FOR LEAKAGE...
+2025-11-28 11:07:10,367 - __main__ - INFO - Selected 33 features
+2025-11-28 11:07:10,367 - __main__ - INFO - 
+[4/8] SPLITTING DATA...
+2025-11-28 11:07:10,390 - __main__ - INFO - Train: 4962, Val: 1064, Test: 1064
+2025-11-28 11:07:10,390 - __main__ - INFO - 
+[5/8] TRAINING BASE LEARNERS...
+2025-11-28 11:07:10,390 - __main__ - INFO - Training XGBoost...
+2025-11-28 11:07:11,883 - __main__ - INFO - ✓ XGBoost trained in 1.49s
+2025-11-28 11:07:11,884 - __main__ - INFO - Training LightGBM...
+2025-11-28 11:07:12,145 - __main__ - INFO - ✓ LightGBM trained in 0.26s
+2025-11-28 11:07:12,146 - __main__ - INFO - Training CatBoost...
+2025-11-28 11:07:13,149 - __main__ - INFO - ✓ CatBoost trained in 1.00s
+2025-11-28 11:07:13,149 - __main__ - INFO - Training GradientBoosting...
+2025-11-28 11:07:16,938 - __main__ - INFO - ✓ GradientBoosting trained in 3.79s
+2025-11-28 11:07:16,939 - __main__ - INFO - ✓ All 4 base models trained
+2025-11-28 11:07:17,268 - __main__ - INFO - xgboost - AUC: 0.7521, F1: 0.9201
+2025-11-28 11:07:17,295 - __main__ - INFO - lightgbm - AUC: 0.7583, F1: 0.9234
+2025-11-28 11:07:17,328 - __main__ - INFO - catboost - AUC: 0.7672, F1: 0.9214
+2025-11-28 11:07:17,357 - __main__ - INFO - gradboost - AUC: 0.7565, F1: 0.9207
+2025-11-28 11:07:17,393 - __main__ - INFO - Appended base model metrics to C:\Users\rahul\Documents\code\projects\ir prediction\models\base_models_metrics.csv
+2025-11-28 11:07:17,393 - __main__ - INFO - 
+[5.5/8] COMPUTING CV METRICS...
+2025-11-28 11:07:24,055 - __main__ - INFO - xgboost CV AUC: 0.7687 (+/- 0.0125)
+2025-11-28 11:07:29,868 - __main__ - INFO - lightgbm CV AUC: 0.7697 (+/- 0.0179)
+2025-11-28 11:07:39,906 - __main__ - INFO - catboost CV AUC: 0.7707 (+/- 0.0145)
+2025-11-28 11:07:44,517 - __main__ - INFO - gradboost CV AUC: 0.7726 (+/- 0.0164)
+2025-11-28 11:07:44,517 - __main__ - INFO - 
+[5.6/8] GENERALIZATION GAP REPORT...
+2025-11-28 11:07:44,531 - __main__ - INFO - xgboost Gap: 0.1413 (Train: 0.8934, Val: 0.7521)
+2025-11-28 11:07:44,561 - __main__ - INFO - lightgbm Gap: 0.1957 (Train: 0.9540, Val: 0.7583)
+2025-11-28 11:07:44,576 - __main__ - INFO - catboost Gap: 0.0648 (Train: 0.8320, Val: 0.7672)
+2025-11-28 11:07:44,613 - __main__ - INFO - gradboost Gap: 0.1101 (Train: 0.8666, Val: 0.7565)
+2025-11-28 11:07:44,614 - __main__ - INFO - 
+[6/8] BUILDING STACKING ENSEMBLE...
+2025-11-28 11:08:12,267 - __main__ - INFO - Stacking - AUC: 0.7637, F1: 0.8713
+2025-11-28 11:08:12,268 - __main__ - INFO - 
+[7/8] CALIBRATING ENSEMBLE...
+2025-11-28 11:08:12,388 - __main__ - INFO - Calibration - Brier: 0.1091, ECE: 0.0092
+2025-11-28 11:08:12,389 - __main__ - INFO - 
+[8/8] OPTIMIZING THRESHOLDS...
+2025-11-28 11:08:13,176 - __main__ - INFO - Saved optimal threshold: 0.1300
+2025-11-28 11:08:13,224 - __main__ - INFO - Saved ensemble model to C:\Users\rahul\Documents\code\projects\ir prediction\models\ir_ensemble_best.pkl
+2025-11-28 11:08:15,446 - __main__ - INFO - Saved ROC curve to C:\Users\rahul\Documents\code\projects\ir prediction\results\ensemble\roc_curve.png
+2025-11-28 11:08:15,944 - __main__ - INFO - Saved PR curve to C:\Users\rahul\Documents\code\projects\ir prediction\results\ensemble\pr_curve.png
+2025-11-28 11:08:15,948 - __main__ - INFO - 
+================================================================================
+2025-11-28 11:08:15,948 - __main__ - INFO - TRAINING COMPLETE in 68.00s
+2025-11-28 11:08:15,949 - __main__ - INFO - ================================================================================
+
+2025-11-28 11:08:15,956 - __main__ - INFO - ✓ Training pipeline completed successfully

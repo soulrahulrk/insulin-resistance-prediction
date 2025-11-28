@@ -18,7 +18,7 @@ _DEFAULT_DATA_PATH = "/mnt/data/all_datasets_merged.csv"
 DATA_PATH = os.environ.get("IR_DATA_PATH", _DEFAULT_DATA_PATH)
 # Fallback to project root CSV if specified path missing
 if not Path(DATA_PATH).exists():
-    local_candidate = PROJECT_ROOT / "all_datasets_merged.csv"
+    local_candidate = PROJECT_ROOT / "data" / "all_datasets_merged.csv"
     if local_candidate.exists():
         DATA_PATH = str(local_candidate)
 

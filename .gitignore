@@ -42,8 +42,8 @@ metrics/
 results/
 
 # ML Artifacts (optional: comment out if versioning models)
-models/*.pkl
-models/*.pickle
+# models/*.pkl
+# models/*.pickle
 models/catboost_info/
 
 # Notebooks
