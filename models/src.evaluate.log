@@ -1,9 +1,0 @@
-2025-11-23 22:48:04,350 - src.evaluate - INFO - sigmoid: Brier=0.0003, ECE=0.2003
-2025-11-23 22:48:04,391 - src.evaluate - INFO - isotonic: Brier=0.0002, ECE=0.0022
-2025-11-23 22:48:04,391 - src.evaluate - INFO - ✓ Selected calibration method: isotonic
-2025-11-23 22:48:04,865 - src.evaluate - INFO - Optimal thresholds: F1=0.09, Youden=0.37, SensFirst=0.09
-2025-11-27 22:35:41,717 - src.evaluate - INFO - Optimal thresholds: F1=0.13, Youden=0.52, SensFirst=0.45
-2025-11-28 11:08:12,341 - src.evaluate - INFO - sigmoid: Brier=0.1107, ECE=0.0812
-2025-11-28 11:08:12,386 - src.evaluate - INFO - isotonic: Brier=0.1091, ECE=0.0092
-2025-11-28 11:08:12,388 - src.evaluate - INFO - ✓ Selected calibration method: isotonic
-2025-11-28 11:08:13,174 - src.evaluate - INFO - Optimal thresholds: F1=0.13, Youden=0.52, SensFirst=0.45

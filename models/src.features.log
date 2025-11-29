@@ -1,4 +1,0 @@
-2025-11-23 22:46:01,409 - src.features - INFO - ✓ Computed HOMA-IR (raw & log) and QUICKI
-2025-11-23 22:46:01,412 - src.features - INFO - ✓ Computed age_bmi interaction
-2025-11-28 11:07:08,394 - src.features - INFO - ✓ Computed QUICKI (HOMA-IR excluded for leakage prevention)
-2025-11-28 11:07:08,397 - src.features - INFO - ✓ Computed age_bmi interaction

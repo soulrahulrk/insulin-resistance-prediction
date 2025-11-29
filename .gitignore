@@ -45,6 +45,7 @@ results/
 # models/*.pkl
 # models/*.pickle
 models/catboost_info/
+models_notebook/
 
 # Notebooks
 .ipynb_checkpoints/

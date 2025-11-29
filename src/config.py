@@ -24,7 +24,7 @@ if not Path(DATA_PATH).exists():
 
 MODELS_DIR = PROJECT_ROOT / "models"
 RESULTS_DIR = PROJECT_ROOT / "results" / "ensemble"
-LOGS_DIR = PROJECT_ROOT / "models"  # log file stored with artifacts per spec
+LOGS_DIR = PROJECT_ROOT / "logs"  # Separate logs from artifacts
 
 for d in (MODELS_DIR, RESULTS_DIR, LOGS_DIR):
     d.mkdir(parents=True, exist_ok=True)
