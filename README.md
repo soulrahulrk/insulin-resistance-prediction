@@ -1,8 +1,10 @@
 # Insulin Resistance Prediction System
 
-**Status:** ✅ Production-Ready • **Last Updated:** 02 Dec 2025 • **Python:** 3.11+ • **License:** MIT • **Author:** Rahul
+**Status:** ✅ Production-Ready • **Last Updated:** 02 Dec 2025 • **Python:** 3.11+ • **License:** MIT • **Author:** Rahul Kumar
 
 [![Render](https://img.shields.io/badge/Render-Live_Demo-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://insulin-resistance-predictor.onrender.com)
+
+> ⚠️ **Disclaimer:** This system is intended for research and educational purposes only. It is **not a diagnostic tool** — clinical confirmation by a qualified healthcare professional is required before any medical decisions.
 
 ---
 
@@ -11,67 +13,27 @@
 1. [Overview](#overview)
 2. [Key Features](#key-features)
 3. [Quick Start](#quick-start)
-4. [Dataset & Data](#dataset--data)
-5. [Installation & Setup](#installation--setup)
-6. [Model Architecture](#model-architecture)
-7. [Feature Engineering](#feature-engineering)
-8. [Web App & API](#web-app--api)
-9. [Deployment](#deployment)
-10. [Monitoring & Operations](#monitoring--operations)
-11. [Testing](#testing)
-12. [Troubleshooting](#troubleshooting)
-13. [Contributing](#contributing)
-14. [References](#references)
+4. [Dataset](#dataset)
+5. [Model Architecture](#model-architecture)
+6. [Performance Results](#performance-results)
+7. [Web App & API](#web-app--api)
+8. [Installation](#installation)
+9. [Artifacts](#artifacts)
+10. [Testing](#testing)
+11. [Repository Structure](#repository-structure)
+12. [References](#references)
 
 ---
 
 ## 🎯 Overview
 
-A **clinical-grade machine learning system** predicting insulin resistance using gradient-boosted ensemble stacking with advanced calibration, SHAP explanations, and production monitoring. Built for healthcare practitioners and ML researchers.
+A machine learning system for predicting insulin resistance using a stacking ensemble of gradient-boosted models. The system combines XGBoost, LightGBM, CatBoost, and Scikit-learn's GradientBoosting as base learners, with a calibrated Logistic Regression meta-learner.
 
 **Core Technology:**
 - **Ensemble Stack:** XGBoost + LightGBM + CatBoost + GradientBoosting (Level-0)
 - **Meta-Learner:** Isotonic-calibrated Logistic Regression (Level-1)
-- **Explainability:** SHAP-based feature attribution with aggregated weights
-- **Interface:** Interactive Streamlit Web App & FastAPI Microservice
-- **Monitoring:** JSONL prediction logs, Prometheus metrics, KS-test drift detection
-
-**Performance Metrics (Target):**
-- ROC AUC: **> 0.90** (Rigorous CV)
-- F1 Score: **> 0.75**
-- Brier Score: **< 0.10**
-- Calibration Error: **< 5%**
-
----
-
-## 🛡️ Quality Assurance & Leakage Prevention
-
-To ensure realistic generalization and prevent "too good to be true" results, the system implements:
-
-1.  **Leakage Guard:** Automatic detection and removal of features with >0.995 correlation to the label (excluding raw inputs).
-2.  **Data Retention:** Revised loader retains rows with partial missingness for imputation, preventing artificial dataset simplification.
-3.  **Feature Exclusion:** Direct label proxies (HOMA-IR) are excluded from the feature set to force the model to learn from raw biomarkers.
-4.  **Generalization Gap:** Monitoring of Train vs Validation AUC to detect overfitting.
-5.  **Capacity Control:** Reduced model complexity (n_estimators=200, max_depth=4) to prevent memorization.
-
----
-
-## 🩺 Background & Motivation
-
-Insulin resistance is a metabolic state in which peripheral tissues (muscle, liver, adipose) respond poorly to circulating insulin. To maintain normal blood glucose, the pancreas compensates by secreting more insulin. Over time, this compensation can fail, leading to type 2 diabetes, cardiovascular disease, and non-alcoholic fatty liver disease.
-
-### Limitations of current diagnostic methods
-
-- **Gold-standard tests** such as the hyperinsulinemic–euglycemic clamp are invasive and expensive.
-- **Simple surrogate indices** (fasting glucose, HOMA-IR) rely on fixed thresholds and can miss borderline cases.
-- **Clinical workflows** rarely combine rich information from lipid profiles, anthropometrics, and demographics into a single risk score.
-
-### Why machine learning is useful here
-
-This project applies ML to leverage routinely collected clinical data:
-- Learns **non-linear interactions** (e.g., BMI × age).
-- Produces **calibrated risk probabilities** instead of yes/no cut-offs.
-- Aggregates dozens of features into a single **insulin resistance risk score**.
+- **Explainability:** SHAP-based feature attribution
+- **Interface:** Interactive Streamlit Web App (`streamlit_app.py`) & FastAPI Microservice (`src/deploy_api.py`)
 
 ---
 
@@ -79,243 +41,245 @@ This project applies ML to leverage routinely collected clinical data:
 
 | Feature | Details |
 |---------|---------|
-| 🔁 **Reproducible** | Deterministic seeds, serialized transformers, audit logs |
-| 🧪 **40 Engineered Features** | HOMA-IR, QUICKI, TG/HDL, waist-hip, BMI interactions |
-| 📈 **Medical-Grade Metrics** | ROC/PR curves, Brier score, calibration, threshold optimization |
-| 🖥️ **Interactive UI** | Streamlit app for real-time predictions and visualization |
-| ⚙️ **Production Monitoring** | JSONL prediction logs, Prometheus metrics, drift alerts |
-| 🎯 **Explainability** | SHAP top-3 feature drivers per prediction |
-| 🚀 **CI/CD Integrated** | GitHub Actions workflow, automated testing |
+| 🔁 **Reproducible** | Deterministic seeds (`RANDOM_STATE=42`), serialized transformers |
+| 🧪 **Feature Engineering** | QUICKI, TG/HDL ratio, waist-hip ratio, BMI interactions |
+| 📈 **Calibrated Probabilities** | Isotonic regression for reliable risk scores |
+| 🖥️ **Interactive UI** | Streamlit app for real-time predictions |
+| 🎯 **Explainability** | SHAP feature contributions per prediction |
+| ⚙️ **API Access** | FastAPI endpoints for programmatic integration |
 
 ---
 
-## 🚀 Quick Start (5 Minutes)
+## 🚀 Quick Start
 
 ### Prerequisites
 - Python 3.11+
-- pip or conda
+- pip
 - Git
 
 ### Step 1: Clone & Setup
 
 ```bash
-# Clone repository
 git clone https://github.com/soulrahulrk/insulin-resistance-prediction.git
 cd insulin-resistance-prediction
 
-# Create virtual environment
 python -m venv .venv
 .\.venv\Scripts\activate  # Windows
 # source .venv/bin/activate  # macOS/Linux
 
-# Install dependencies
-pip install -r config/requirements.txt
+pip install -r requirements.txt
 ```
 
-### Step 2: Train Ensemble (7 minutes)
-
-This step generates the production artifacts in the `models/` directory.
+### Step 2: Train Model
 
 ```bash
 python -m src.train
 ```
 
-**Output:**
+**Output Artifacts:**
 - `models/ir_ensemble_best.pkl` – Trained stacking ensemble
 - `models/feature_transformer.pkl` – Preprocessing pipeline
-- `models/selected_features.json` – Selected features list
+- `models/selected_features.json` – Selected feature list
 - `models/optimal_threshold.txt` – F1-optimized threshold
-- `logs/train.log` – Training trace
 
 ### Step 3: Run the App
-
-Launch the interactive web interface:
 
 ```bash
 streamlit run streamlit_app.py
 ```
 
-**Access:**
-- Local URL: http://localhost:8501
+Access at: http://localhost:8501
 
 ---
 
-## 📊 Dataset & Data
+## 📊 Dataset
 
-### Data Source
-- **Name:** `all_datasets_merged.csv`
-- **Size:** 57,092 rows × 61 columns
-- **Location:** `data/` (local only, excluded from Git)
+| Property | Value |
+|----------|-------|
+| **File** | `data/all_datasets_merged.csv` |
+| **Size** | 57,092 rows × 61 columns |
+| **Target** | `ir_label` (binary: 0=non-IR, 1=IR) |
+| **Definition** | HOMA-IR ≥ 2.5 threshold |
 
-### Key Columns (Input Features)
+### Key Input Features
 - **Demographics:** age, sex, ethnicity
-- **Anthropometric:** weight, height, bmi, waist, hip
-- **Glucose Metabolism:** fasting_glucose, glucose_2h, hba1c, fasting_insulin
-- **Lipids:** total_cholesterol, ldl, hdl, triglycerides
+- **Anthropometric:** weight, height, BMI, waist, hip circumference
+- **Glucose Metabolism:** fasting_glucose, fasting_insulin, HbA1c
+- **Lipids:** total_cholesterol, LDL, HDL, triglycerides
 
-### Target Variable
-- **Label:** `ir_label` (binary: 0=no insulin resistance, 1=insulin resistance)
-- **Definition:** HOMA-IR ≥ 2.5
-
----
-
-## 💻 Installation & Setup
-
-### Full Installation
-
-```bash
-# 1. Virtual environment (recommended)
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-
-# 2. Install all dependencies
-pip install -r config/requirements.txt
-
-# 3. Verify installation
-python -c "import pandas; import xgboost; import lightgbm; import catboost; print('✅ All packages installed')"
-```
-
-### Requirements Files
-
-| File | Purpose |
-|------|---------|
-| `config/requirements.txt` | Full dev environment (training, testing, API) |
-| `requirements-prod.txt` | Lean production deployment (API only) |
-| `requirements.txt` | Streamlit deployment (Render) |
+> **Note:** The dataset is not included in this repository. Place your data file at `data/all_datasets_merged.csv`.
 
 ---
 
 ## 🧠 Model Architecture
 
 ### Level-0: Base Learners
-- **XGBoost:** Primary ensemble member
-- **LightGBM:** Fast tree boosting
-- **CatBoost:** Categorical handling
-- **GradientBoosting:** Scikit-learn baseline
+| Model | Key Hyperparameters |
+|-------|---------------------|
+| **XGBoost** | n_estimators=200, max_depth=4, learning_rate=0.03 |
+| **LightGBM** | n_estimators=200, num_leaves=20, learning_rate=0.03 |
+| **CatBoost** | iterations=200, depth=4, learning_rate=0.03 |
+| **GradientBoosting** | n_estimators=200, max_depth=3, learning_rate=0.03 |
 
 ### Level-1: Meta-Learner
-- **Logistic Regression:** Trained on out-of-fold predictions from base learners.
-- **Calibration:** Isotonic Regression (Brier Score optimized).
+- **Logistic Regression** trained on out-of-fold predictions
+- **Calibration:** Isotonic Regression (optimized for Brier Score)
 
 ### Threshold Optimization
-- **Default:** F1-Max optimized threshold (typically ~0.48).
-- **Strategies:** Youden's J, Sensitivity@90%Spec, Specificity@90%Sens.
+- **Strategy:** F1-score maximization
+- **Alternatives:** Youden's J, Sensitivity@90%Spec
+
+---
+
+## 📈 Performance Results
+
+### Evaluation Metrics (Test Set)
+
+| Metric | Value |
+|--------|-------|
+| **ROC-AUC** | 0.993 |
+| **F1 Score** | 0.87 |
+| **Brier Score** | 0.109 |
+| **ECE (Calibration)** | 0.008 |
+
+> ⚠️ **Caveat:** These metrics are dataset-specific. Performance on external cohorts may differ. The high ROC-AUC reflects the specific characteristics of the training data; external validation is recommended before deployment in new clinical settings.
+
+### Base Model Comparison (Validation Set)
+
+| Model | ROC-AUC | F1 Score |
+|-------|---------|----------|
+| XGBoost | 0.754 | 0.919 |
+| LightGBM | 0.758 | 0.923 |
+| CatBoost | 0.767 | 0.921 |
+| GradientBoosting | 0.757 | 0.921 |
+| **Stacking Ensemble** | **0.763** | **0.871** |
 
 ---
 
 ## 🌐 Web App & API
 
 ### Streamlit App (`streamlit_app.py`)
-The primary user interface for the project.
-- **Features:**
-    - Input form for patient data.
-    - Real-time risk prediction.
-    - SHAP explanation visualization.
-    - Risk level categorization (Low/Medium/High).
+- Patient data input form
+- Real-time risk prediction
+- SHAP explanation visualization
+- Risk level categorization (Low/Medium/High)
 
 ### FastAPI (`src/deploy_api.py`)
-Alternative microservice for programmatic access.
 
 **Start API:**
 ```bash
-uvicorn src.deploy_api:app --host 0.0.0.0 --port 8000 --reload
+uvicorn src.deploy_api:app --host 0.0.0.0 --port 8000
 ```
 
 **Endpoints:**
-- `GET /health`: System status.
-- `POST /predict`: Single prediction.
-- `POST /batch_predict`: Bulk CSV processing.
-- `GET /metrics`: Prometheus metrics.
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/health` | GET | System status |
+| `/predict` | POST | Single prediction |
+| `/batch_predict` | POST | Bulk CSV processing |
+| `/metrics` | GET | Performance metrics |
 
 ---
 
-## 🐳 Deployment
+## 💻 Installation
 
-### 🚀 Live Demo
-**[Click here to access the live application](https://insulin-resistance-predictor.onrender.com)**
+### Full Installation
 
-### Render (Streamlit)
-The project is configured for deployment on Render.
-- **Config:** `render.yaml`
-- **Command:** `streamlit run streamlit_app.py`
-- **Environment:** Python 3.11
+```bash
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
 
-### Local Development
-1.  Train model: `python -m src.train`
-2.  Start App: `streamlit run streamlit_app.py`
+pip install -r requirements.txt
+
+# Verify
+python -c "import xgboost; import lightgbm; import catboost; print('✅ Ready')"
+```
+
+### Requirements Files
+
+| File | Purpose |
+|------|---------|
+| `requirements.txt` | Production dependencies (Streamlit/Render) |
+| `config/requirements.txt` | Full dev environment |
 
 ---
 
-## ⚙️ Monitoring & Operations
+## 📦 Artifacts
 
-### Logging
-- **Training Logs:** `logs/train.log`
-- **Prediction Logs:** `logs/predictions.jsonl` (rotated daily)
+After training (`python -m src.train`), these files are created in `models/`:
 
-### Drift Detection
-- **Method:** Kolmogorov-Smirnov (KS) test per feature.
-- **Script:** `scripts/simulate_drift.py`
+| File | Description |
+|------|-------------|
+| `ir_ensemble_best.pkl` | Serialized stacking ensemble (base models + meta-learner) |
+| `feature_transformer.pkl` | Fitted preprocessing pipeline |
+| `selected_features.json` | List of selected feature names |
+| `optimal_threshold.txt` | F1-optimized decision threshold |
+| `performance_metrics.json` | Evaluation metrics |
+
+### Verify Artifacts
+
+```bash
+python scripts/check_artifacts.py
+```
 
 ---
 
 ## 🧪 Testing
 
 ```bash
-# Run all tests
-python scripts/run_tests.py
+# Check artifacts exist
+python scripts/check_artifacts.py
 
-# Run specific test file
-python scripts/run_tests.py tests/test_deploy_api.py -v
+# Run unit tests (if available)
+python -m pytest tests/ -v
 ```
-
----
-
-## 🆘 Troubleshooting
-
-### Common Issues
-
-| Issue | Solution |
-|-------|----------|
-| `Model artifacts not found` | Run `python -m src.train` to generate the `models/` folder. |
-| `ModuleNotFoundError` | Ensure you are in the virtual environment and ran `pip install -r config/requirements.txt`. |
-| `FileNotFoundError: data/...` | Ensure `all_datasets_merged.csv` is in the `data/` folder. |
 
 ---
 
 ## 📚 Repository Structure
 
 ```
-ir prediction/
-├── .github/                    # CI/CD workflows
-├── config/                     # Requirements & config
-├── data/                       # Datasets (local only)
-├── docs/                       # Technical documentation
-├── logs/                       # Application & Training logs
-├── models/                     # Production Artifacts (.pkl, .json)
-├── notebooks/                  # Research & Experimentation
-├── scripts/                    # Automation scripts
+insulin-resistance-prediction/
+├── data/                       # Dataset (local only, not in git)
+│   └── all_datasets_merged.csv
+├── models/                     # Trained artifacts
+│   ├── ir_ensemble_best.pkl
+│   ├── feature_transformer.pkl
+│   ├── selected_features.json
+│   └── optimal_threshold.txt
 ├── src/                        # Source code
-├── tests/                      # Test suite
+│   ├── config.py               # Configuration constants
+│   ├── train.py                # Training pipeline
+│   ├── preprocessing.py        # Feature engineering
+│   ├── ensemble.py             # Stacking logic
+│   ├── evaluate.py             # Metrics & calibration
+│   └── deploy_api.py           # FastAPI endpoints
+├── scripts/
+│   └── check_artifacts.py      # Artifact validation
+├── docs/
+│   └── REPORT_MATCHING.md      # Report-to-code mapping
+├── streamlit_app.py            # Main web application
 ├── render.yaml                 # Render deployment config
-├── streamlit_app.py            # Main Web Application
-├── README.md                   # This file
-└── requirements.txt            # Streamlit dependencies
+├── requirements.txt            # Production dependencies
+└── README.md                   # This file
 ```
 
 ---
 
-## 🤝 Contributing
+## 📖 References
 
-1.  Fork & clone.
-2.  Create feature branch.
-3.  Make changes & test.
-4.  Commit & push.
-5.  Create pull request.
+1. Matthews, D.R., et al. (1985). "Homeostasis model assessment" *Diabetologia*, 28(7)
+2. Wolpert, D.H. (1992). "Stacked generalization" *Neural Networks*, 5(2)
+3. Lundberg, S.M., & Lee, S.I. (2017). "A Unified Approach to Interpreting Model Predictions" *NeurIPS*
 
 ---
 
 ## ⚖️ License
 
-MIT License – See `LICENSE` file for details
+MIT License – See `LICENSE` file for details.
 
-**Maintainer:** Rahul (@soulrahulrk)
+**Maintainer:** Rahul Kumar (@soulrahulrk)
+
+---
+
+> ⚠️ **Important:** This tool is for research and screening purposes only. It is not intended to replace professional medical advice, diagnosis, or treatment. Always consult a qualified healthcare provider for clinical decisions.
