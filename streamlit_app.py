@@ -13,6 +13,7 @@ from src.config import (
     SELECTED_FEATURES_PATH,
     PERFORMANCE_METRICS_PATH,
     RANDOM_STATE,
+    MODELS_DIR,
 )
 from src.preprocessing import add_engineered_features, Preprocessor
 from src.utils import load_json
@@ -35,12 +36,18 @@ def load_artifacts():
 
     # Primary paths (standard training pipeline)
     try:
+        if not FEATURE_TRANSFORMER_PATH.exists():
+            print(f"DEBUG: Preprocessor not found at {FEATURE_TRANSFORMER_PATH}")
         preprocessor = joblib.load(FEATURE_TRANSFORMER_PATH)
-    except Exception:
+    except Exception as e:
+        print(f"DEBUG: Error loading preprocessor: {e}")
         pass
     try:
+        if not ENSEMBLE_MODEL_PATH.exists():
+            print(f"DEBUG: Ensemble model not found at {ENSEMBLE_MODEL_PATH}")
         ensemble = joblib.load(ENSEMBLE_MODEL_PATH)
-    except Exception:
+    except Exception as e:
+        print(f"DEBUG: Error loading ensemble: {e}")
         pass
 
     # Fallback to notebook artifacts if primary not found
@@ -85,7 +92,8 @@ def load_artifacts():
         pass
 
     if preprocessor is None or ensemble is None:
-        st.warning("Model artifacts not found. Please run training (python -m src.train) or the notebook to generate artifacts.")
+        st.error(f"Model artifacts not found at {MODELS_DIR}. Please run training (python -m src.train) to generate artifacts.")
+        st.stop()
 
     return preprocessor, ensemble, threshold, selected, perf
 
