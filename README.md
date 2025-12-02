@@ -2,6 +2,8 @@
 
 **Status:** ✅ Production-Ready • **Last Updated:** 02 Dec 2025 • **Python:** 3.11+ • **License:** MIT • **Author:** Rahul
 
+[![Render](https://img.shields.io/badge/Render-Live_Demo-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://insulin-resistance-predictor.onrender.com)
+
 ---
 
 ## 📋 Table of Contents
@@ -228,6 +230,9 @@ uvicorn src.deploy_api:app --host 0.0.0.0 --port 8000 --reload
 ---
 
 ## 🐳 Deployment
+
+### 🚀 Live Demo
+**[Click here to access the live application](https://insulin-resistance-predictor.onrender.com)**
 
 ### Render (Streamlit)
 The project is configured for deployment on Render.
