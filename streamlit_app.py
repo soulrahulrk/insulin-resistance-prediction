@@ -158,7 +158,8 @@ if st.button("Predict Risk"):
     col3.metric("Risk Level", risk_bucket(prob))
 
     st.subheader("Raw Inputs")
-    st.dataframe(pd.DataFrame([input_dict]).T, use_container_width=True)
+    input_display = pd.DataFrame({"Feature": list(input_dict.keys()), "Value": [str(v) for v in input_dict.values()]})
+    st.dataframe(input_display, use_container_width=True)
 
     if show_shap:
         try:
