@@ -28,7 +28,7 @@ from src.utils import load_json
 st.set_page_config(
     page_title="Insulin Resistance Predictor",
     page_icon="🩺",
-    layout="wide",
+    layout="centered",
     initial_sidebar_state="expanded"
 )
 
@@ -40,22 +40,28 @@ st.markdown("""
         font-weight: bold;
         color: #1E88E5;
         margin-bottom: 0.5rem;
+        text-align: center;
     }
     .sub-header {
         font-size: 1.1rem;
         color: #666;
         margin-bottom: 2rem;
+        text-align: center;
     }
-    .metric-card {
+    .stNumberInput > div > div > input {
+        font-size: 16px;
+    }
+    .result-box {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 1rem;
-        border-radius: 10px;
+        padding: 2rem;
+        border-radius: 15px;
         color: white;
+        text-align: center;
+        margin: 2rem 0;
     }
-    .stMetric {
-        background-color: #f8f9fa;
-        padding: 1rem;
-        border-radius: 10px;
+    .result-box h2 {
+        color: white;
+        margin: 0;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -65,38 +71,38 @@ st.markdown('<p class="sub-header">Powered by Stacking Ensemble ML Model</p>', u
 
 # Define feature ranges for validation and randomization
 FEATURE_RANGES = {
-    "age": {"min": 18, "max": 90, "default": 45, "step": 1, "type": "int", "label": "Age (years)"},
-    "bmi": {"min": 15.0, "max": 50.0, "default": 28.0, "step": 0.1, "type": "float", "label": "BMI (kg/m²)"},
-    "blood_pressure": {"min": 60.0, "max": 180.0, "default": 80.0, "step": 1.0, "type": "float", "label": "Blood Pressure (mmHg)"},
-    "skin_thickness": {"min": 5.0, "max": 100.0, "default": 25.0, "step": 1.0, "type": "float", "label": "Skin Thickness (mm)"},
-    "pregnancies": {"min": 0, "max": 17, "default": 1, "step": 1, "type": "int", "label": "Pregnancies"},
-    "diabetes_pedigree": {"min": 0.05, "max": 2.5, "default": 0.5, "step": 0.01, "type": "float", "label": "Diabetes Pedigree"},
-    "hba1c": {"min": 4.0, "max": 14.0, "default": 5.5, "step": 0.1, "type": "float", "label": "HbA1c (%)"},
-    "stress_level": {"min": 1, "max": 10, "default": 5, "step": 1, "type": "int", "label": "Stress Level (1-10)"},
-    "stresslevel": {"min": 1, "max": 10, "default": 5, "step": 1, "type": "int", "label": "Stress Level"},
-    "alcohol": {"min": 0.0, "max": 20.0, "default": 2.0, "step": 0.5, "type": "float", "label": "Alcohol (drinks/wk)"},
-    "smoking": {"min": 0, "max": 40, "default": 0, "step": 1, "type": "int", "label": "Smoking (cigs/day)"},
-    "exercisehours": {"min": 0.0, "max": 20.0, "default": 3.0, "step": 0.5, "type": "float", "label": "Exercise (hrs/wk)"},
-    "exercise_hours_week": {"min": 0.0, "max": 20.0, "default": 3.0, "step": 0.5, "type": "float", "label": "Exercise Hrs/Week"},
-    "sleep_hours": {"min": 3.0, "max": 12.0, "default": 7.0, "step": 0.5, "type": "float", "label": "Sleep (hrs/night)"},
-    "sleepquality": {"min": 1, "max": 10, "default": 7, "step": 1, "type": "int", "label": "Sleep Quality (1-10)"},
-    "dietscore": {"min": 0, "max": 100, "default": 60, "step": 1, "type": "int", "label": "Diet Score (0-100)"},
-    "health_literacy": {"min": 0, "max": 100, "default": 60, "step": 1, "type": "int", "label": "Health Literacy"},
-    "nutrition_quality": {"min": 0, "max": 100, "default": 60, "step": 1, "type": "int", "label": "Nutrition Quality"},
-    "educationyears": {"min": 0, "max": 25, "default": 12, "step": 1, "type": "int", "label": "Education (years)"},
-    "healthcareaccess": {"min": 0, "max": 100, "default": 70, "step": 1, "type": "int", "label": "Healthcare Access"},
-    "healthcare_access": {"min": 0, "max": 100, "default": 70, "step": 1, "type": "int", "label": "Healthcare Access %"},
-    "healthcare_spend_usd": {"min": 0, "max": 10000, "default": 500, "step": 50, "type": "int", "label": "Healthcare Spend ($)"},
-    "internetaccess": {"min": 0, "max": 100, "default": 80, "step": 1, "type": "int", "label": "Internet Access %"},
-    "electricityaccess": {"min": 0, "max": 100, "default": 99, "step": 1, "type": "int", "label": "Electricity Access %"},
-    "mobilephone": {"min": 0, "max": 100, "default": 90, "step": 1, "type": "int", "label": "Mobile Phone %"},
-    "medical_equipment_index": {"min": 0, "max": 100, "default": 70, "step": 1, "type": "int", "label": "Medical Equipment"},
-    "prevention_access": {"min": 0, "max": 100, "default": 60, "step": 1, "type": "int", "label": "Prevention Access %"},
-    "specialist_availability": {"min": 0, "max": 100, "default": 50, "step": 1, "type": "int", "label": "Specialist Avail. %"},
-    "diabetesprevalence": {"min": 0.0, "max": 30.0, "default": 8.0, "step": 0.5, "type": "float", "label": "Diabetes Prevalence %"},
-    "diabetes_risk_factor": {"min": 0.0, "max": 10.0, "default": 3.0, "step": 0.1, "type": "float", "label": "Diabetes Risk Factor"},
-    "outcome": {"min": 0, "max": 1, "default": 0, "step": 1, "type": "int", "label": "Prior Diabetes (0/1)"},
-    "source_index": {"min": 0, "max": 10, "default": 1, "step": 1, "type": "int", "label": "Source Index"},
+    "age": {"min": 18, "max": 90, "default": 45, "step": 1, "type": "int", "label": "Age", "unit": "years"},
+    "bmi": {"min": 15.0, "max": 50.0, "default": 28.0, "step": 0.1, "type": "float", "label": "BMI", "unit": "kg/m²"},
+    "blood_pressure": {"min": 60.0, "max": 180.0, "default": 80.0, "step": 1.0, "type": "float", "label": "Blood Pressure", "unit": "mmHg"},
+    "skin_thickness": {"min": 5.0, "max": 100.0, "default": 25.0, "step": 1.0, "type": "float", "label": "Skin Thickness", "unit": "mm"},
+    "pregnancies": {"min": 0, "max": 17, "default": 1, "step": 1, "type": "int", "label": "Pregnancies", "unit": ""},
+    "diabetes_pedigree": {"min": 0.05, "max": 2.5, "default": 0.5, "step": 0.01, "type": "float", "label": "Diabetes Pedigree", "unit": ""},
+    "hba1c": {"min": 4.0, "max": 14.0, "default": 5.5, "step": 0.1, "type": "float", "label": "HbA1c", "unit": "%"},
+    "stress_level": {"min": 1, "max": 10, "default": 5, "step": 1, "type": "int", "label": "Stress Level", "unit": ""},
+    "stresslevel": {"min": 1, "max": 10, "default": 5, "step": 1, "type": "int", "label": "Stress Level", "unit": ""},
+    "alcohol": {"min": 0.0, "max": 20.0, "default": 2.0, "step": 0.5, "type": "float", "label": "Alcohol", "unit": "drinks/wk"},
+    "smoking": {"min": 0, "max": 40, "default": 0, "step": 1, "type": "int", "label": "Smoking", "unit": "cigs/day"},
+    "exercisehours": {"min": 0.0, "max": 20.0, "default": 3.0, "step": 0.5, "type": "float", "label": "Exercise", "unit": "hrs/wk"},
+    "exercise_hours_week": {"min": 0.0, "max": 20.0, "default": 3.0, "step": 0.5, "type": "float", "label": "Exercise", "unit": "hrs/wk"},
+    "sleep_hours": {"min": 3.0, "max": 12.0, "default": 7.0, "step": 0.5, "type": "float", "label": "Sleep", "unit": "hrs/night"},
+    "sleepquality": {"min": 1, "max": 10, "default": 7, "step": 1, "type": "int", "label": "Sleep Quality", "unit": ""},
+    "dietscore": {"min": 0, "max": 100, "default": 60, "step": 5, "type": "int", "label": "Diet Score", "unit": ""},
+    "health_literacy": {"min": 0, "max": 100, "default": 60, "step": 5, "type": "int", "label": "Health Literacy", "unit": ""},
+    "nutrition_quality": {"min": 0, "max": 100, "default": 60, "step": 5, "type": "int", "label": "Nutrition Quality", "unit": ""},
+    "educationyears": {"min": 0, "max": 25, "default": 12, "step": 1, "type": "int", "label": "Education", "unit": "years"},
+    "healthcareaccess": {"min": 0, "max": 100, "default": 70, "step": 5, "type": "int", "label": "Healthcare Access", "unit": "%"},
+    "healthcare_access": {"min": 0, "max": 100, "default": 70, "step": 5, "type": "int", "label": "Healthcare Access", "unit": "%"},
+    "healthcare_spend_usd": {"min": 0, "max": 10000, "default": 500, "step": 100, "type": "int", "label": "Healthcare Spend", "unit": "USD"},
+    "internetaccess": {"min": 0, "max": 100, "default": 80, "step": 5, "type": "int", "label": "Internet Access", "unit": "%"},
+    "electricityaccess": {"min": 0, "max": 100, "default": 99, "step": 5, "type": "int", "label": "Electricity Access", "unit": "%"},
+    "mobilephone": {"min": 0, "max": 100, "default": 90, "step": 5, "type": "int", "label": "Mobile Phone", "unit": "%"},
+    "medical_equipment_index": {"min": 0, "max": 100, "default": 70, "step": 5, "type": "int", "label": "Medical Equipment", "unit": ""},
+    "prevention_access": {"min": 0, "max": 100, "default": 60, "step": 5, "type": "int", "label": "Prevention Access", "unit": "%"},
+    "specialist_availability": {"min": 0, "max": 100, "default": 50, "step": 5, "type": "int", "label": "Specialist Availability", "unit": "%"},
+    "diabetesprevalence": {"min": 0.0, "max": 30.0, "default": 8.0, "step": 0.5, "type": "float", "label": "Diabetes Prevalence", "unit": "%"},
+    "diabetes_risk_factor": {"min": 0.0, "max": 10.0, "default": 3.0, "step": 0.1, "type": "float", "label": "Diabetes Risk Factor", "unit": ""},
+    "outcome": {"min": 0, "max": 1, "default": 0, "step": 1, "type": "int", "label": "Prior Diabetes", "unit": "0=No, 1=Yes"},
+    "source_index": {"min": 0, "max": 10, "default": 1, "step": 1, "type": "int", "label": "Data Source", "unit": ""},
 }
 
 
@@ -190,7 +196,7 @@ input_features = [f for f in selected_features if f != "age_bmi"]
 if "random_counter" not in st.session_state:
     st.session_state.random_counter = 0
 
-# Group features by category
+# Group features by category (remove duplicates)
 FEATURE_GROUPS = {
     "👤 Demographics": ["age", "pregnancies", "educationyears"],
     "📏 Biometrics & Labs": ["bmi", "blood_pressure", "skin_thickness", "diabetes_pedigree", "hba1c"],
@@ -198,9 +204,8 @@ FEATURE_GROUPS = {
                     "exercise_hours_week", "sleep_hours", "sleepquality", "dietscore", 
                     "health_literacy", "nutrition_quality"],
     "🏥 Health System": ["healthcareaccess", "healthcare_access", "healthcare_spend_usd",
-                        "internetaccess", "electricityaccess", "mobilephone",
                         "medical_equipment_index", "prevention_access", "specialist_availability"],
-    "🩸 Diabetes Factors": ["diabetesprevalence", "diabetes_risk_factor", "outcome"],
+    "🩸 Diabetes": ["diabetesprevalence", "diabetes_risk_factor", "outcome"],
 }
 
 # ============= SIDEBAR =============
@@ -209,7 +214,7 @@ st.sidebar.header("📊 Patient Data Input")
 # Randomize button with counter to force refresh
 col_rand1, col_rand2 = st.sidebar.columns([3, 1])
 with col_rand1:
-    randomize_clicked = st.button("🎲 Randomize All", type="secondary", use_container_width=True)
+    randomize_clicked = st.button("🎲 Randomize All", type="secondary", width="stretch")
 with col_rand2:
     reset_clicked = st.button("↺", help="Reset to defaults")
 
@@ -246,28 +251,33 @@ for group_name, group_features in FEATURE_GROUPS.items():
         
         if feature in FEATURE_RANGES:
             info = FEATURE_RANGES[feature]
+            label_text = f"{info['label']} ({info['unit']})" if info['unit'] else info['label']
+            
             if info["type"] == "int":
                 input_dict[feature] = st.sidebar.number_input(
-                    info["label"],
+                    label_text,
                     min_value=int(info["min"]),
                     max_value=int(info["max"]),
                     value=int(current_val),
                     step=int(info["step"]),
+                    format="%d",
                     key=f"{feature}_{st.session_state.random_counter}"
                 )
             else:
                 input_dict[feature] = st.sidebar.number_input(
-                    info["label"],
+                    label_text,
                     min_value=float(info["min"]),
                     max_value=float(info["max"]),
                     value=float(current_val),
                     step=float(info["step"]),
+                    format="%.1f",
                     key=f"{feature}_{st.session_state.random_counter}"
                 )
         else:
             input_dict[feature] = st.sidebar.number_input(
                 feature.replace('_', ' ').title(),
                 value=float(current_val),
+                format="%.1f",
                 key=f"{feature}_{st.session_state.random_counter}"
             )
 
@@ -287,53 +297,50 @@ if other_features:
         
         if feature in FEATURE_RANGES:
             info = FEATURE_RANGES[feature]
+            label_text = f"{info['label']} ({info['unit']})" if info['unit'] else info['label']
+            
             if info["type"] == "int":
                 input_dict[feature] = st.sidebar.number_input(
-                    info["label"],
+                    label_text,
                     min_value=int(info["min"]),
                     max_value=int(info["max"]),
                     value=int(current_val),
                     step=int(info["step"]),
+                    format="%d",
                     key=f"{feature}_{st.session_state.random_counter}"
                 )
             else:
                 input_dict[feature] = st.sidebar.number_input(
-                    info["label"],
+                    label_text,
                     min_value=float(info["min"]),
                     max_value=float(info["max"]),
                     value=float(current_val),
                     step=float(info["step"]),
+                    format="%.1f",
                     key=f"{feature}_{st.session_state.random_counter}"
                 )
         else:
             input_dict[feature] = st.sidebar.number_input(
                 feature.replace('_', ' ').title(),
                 value=float(current_val),
+                format="%.1f",
                 key=f"{feature}_{st.session_state.random_counter}"
             )
 
 # ============= MAIN CONTENT =============
 # Info section
-st.markdown("""
-### 🧠 About This Tool
+st.info("""
+**🧠 About This Tool**
 
-This system predicts **insulin resistance risk** using a **stacking ensemble** of 
-machine learning models:
+This system predicts insulin resistance risk using an ensemble of machine learning models (XGBoost, LightGBM, CatBoost, GradientBoosting) with {} features.
 
-- **Base Learners:** XGBoost, LightGBM, CatBoost, GradientBoosting
-- **Meta-Learner:** Calibrated Logistic Regression (Isotonic)
-- **Features:** {} input features + engineered interactions
-
-> ⚠️ **Disclaimer**: For educational/research purposes only. 
-> Not a diagnostic tool — consult a healthcare professional for medical decisions.
+⚠️ **For educational purposes only** — Not a diagnostic tool. Consult a healthcare professional for medical decisions.
 """.format(len(input_features)))
 
 st.markdown("---")
 
 # Prediction button
-predict_col1, predict_col2, predict_col3 = st.columns([1, 2, 1])
-with predict_col2:
-    predict_clicked = st.button("🔮 **Predict Risk**", type="primary", use_container_width=True)
+predict_clicked = st.button("🔮 Predict Insulin Resistance Risk", type="primary", width="stretch")
 
 if predict_clicked:
     with st.spinner("Analyzing..."):
@@ -375,25 +382,20 @@ if predict_clicked:
     
     # Display results
     st.markdown("---")
-    st.markdown("## 📊 Prediction Results")
+    st.markdown("## 📊 Results")
     
-    res_col1, res_col2, res_col3 = st.columns(3)
-    
-    with res_col1:
-        st.markdown(f"**Risk Probability**")
-        st.markdown(f"### {prob:.1%}")
-    
-    with res_col2:
-        prediction_text = "Insulin Resistant" if pred == 1 else "Not Insulin Resistant"
-        st.markdown(f"**Prediction**")
-        st.markdown(f"### {prediction_text}")
-    
-    with res_col3:
-        st.markdown(f"**Risk Level**")
-        st.markdown(f"### {risk_emoji} {risk_level}")
+    # Main result box
+    prediction_text = "Insulin Resistant" if pred == 1 else "Not Insulin Resistant"
+    st.markdown(f"""
+    <div class="result-box">
+        <h2>{risk_emoji} {risk_level} Risk</h2>
+        <h1 style="font-size: 3rem; margin: 1rem 0;">{prob:.1%}</h1>
+        <h3>{prediction_text}</h3>
+    </div>
+    """, unsafe_allow_html=True)
     
     # Progress bar
-    st.progress(prob)
+    st.progress(prob, text=f"Risk Score: {prob:.1%}")
     
     # Interpretation
     st.markdown("### 📝 Clinical Interpretation")
@@ -423,7 +425,7 @@ if predict_clicked:
             "Feature": [FEATURE_RANGES.get(k, {}).get("label", k.replace("_", " ").title()) for k in input_dict.keys()],
             "Value": list(input_dict.values())
         })
-        st.dataframe(display_df, use_container_width=True, hide_index=True)
+        st.dataframe(display_df, width="stretch", hide_index=True)
 
 # Footer
 st.markdown("---")
