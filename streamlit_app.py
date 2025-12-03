@@ -314,36 +314,19 @@ if other_features:
 
 # ============= MAIN CONTENT =============
 # Info section
-col1, col2 = st.columns([2, 1])
+st.markdown("""
+### 🧠 About This Tool
 
-with col1:
-    st.markdown("""
-    ### 🧠 About This Tool
-    
-    This system predicts **insulin resistance risk** using a **stacking ensemble** of 
-    machine learning models:
-    
-    - **Base Learners:** XGBoost, LightGBM, CatBoost, GradientBoosting
-    - **Meta-Learner:** Calibrated Logistic Regression (Isotonic)
-    - **Features:** {} input features + engineered interactions
-    
-    > ⚠️ **Disclaimer**: For educational/research purposes only. 
-    > Not a diagnostic tool — consult a healthcare professional for medical decisions.
-    """.format(len(input_features)))
+This system predicts **insulin resistance risk** using a **stacking ensemble** of 
+machine learning models:
 
-with col2:
-    st.markdown("### 📈 Model Performance")
-    if perf_metrics:
-        stacking = perf_metrics.get("stacking", {})
-        calibration = perf_metrics.get("calibration", {})
-        
-        metrics_col1, metrics_col2 = st.columns(2)
-        with metrics_col1:
-            st.metric("Val AUC", f"{stacking.get('val_auc', 0):.3f}")
-            st.metric("Threshold", f"{threshold:.3f}")
-        with metrics_col2:
-            st.metric("Val F1", f"{stacking.get('val_f1', 0):.3f}")
-            st.metric("Brier", f"{calibration.get('brier_score', 0):.3f}")
+- **Base Learners:** XGBoost, LightGBM, CatBoost, GradientBoosting
+- **Meta-Learner:** Calibrated Logistic Regression (Isotonic)
+- **Features:** {} input features + engineered interactions
+
+> ⚠️ **Disclaimer**: For educational/research purposes only. 
+> Not a diagnostic tool — consult a healthcare professional for medical decisions.
+""".format(len(input_features)))
 
 st.markdown("---")
 
