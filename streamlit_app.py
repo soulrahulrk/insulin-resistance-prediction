@@ -380,17 +380,20 @@ if predict_clicked:
     res_col1, res_col2, res_col3 = st.columns(3)
     
     with res_col1:
-        st.metric("🎯 Risk Probability", f"{prob:.1%}")
+        st.markdown(f"**Risk Probability**")
+        st.markdown(f"### {prob:.1%}")
     
     with res_col2:
         prediction_text = "Insulin Resistant" if pred == 1 else "Not Insulin Resistant"
-        st.metric("📋 Prediction", prediction_text)
+        st.markdown(f"**Prediction**")
+        st.markdown(f"### {prediction_text}")
     
     with res_col3:
-        st.metric("⚡ Risk Level", f"{risk_emoji} {risk_level}")
+        st.markdown(f"**Risk Level**")
+        st.markdown(f"### {risk_emoji} {risk_level}")
     
     # Progress bar
-    st.progress(prob, text=f"Risk Score: {prob:.1%}")
+    st.progress(prob)
     
     # Interpretation
     st.markdown("### 📝 Clinical Interpretation")
