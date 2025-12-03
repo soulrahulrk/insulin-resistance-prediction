@@ -421,22 +421,6 @@ if predict_clicked:
             "Value": list(input_dict.values())
         })
         st.dataframe(display_df, use_container_width=True, hide_index=True)
-    
-    with st.expander("🔬 Base Model Predictions", expanded=False):
-        base_probs = [float(p[0]) for p in meta_features]
-        
-        # Create chart data
-        chart_df = pd.DataFrame({
-            "Model": model_order,
-            "Probability": base_probs
-        }).set_index("Model")
-        
-        st.bar_chart(chart_df, color="#1E88E5")
-        
-        # Also show as table
-        st.markdown("**Individual Model Predictions:**")
-        for name, prob_val in zip(model_order, base_probs):
-            st.write(f"- **{name}**: {prob_val:.4f}")
 
 # Footer
 st.markdown("---")
